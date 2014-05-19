@@ -1,9 +1,5 @@
 package DungeonDemolition;
 
-import DungeonDemolition.gameObjects.players.Player;
-import DungeonDemolition.graphics.Display;
-import DungeonDemolition.util.ObjectController;
-
 import java.awt.*;
 
 public class Main {

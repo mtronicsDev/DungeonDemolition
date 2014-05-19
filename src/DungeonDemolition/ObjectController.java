@@ -1,7 +1,4 @@
-package DungeonDemolition.util;
-
-import DungeonDemolition.gameObjects.DungeonMap;
-import DungeonDemolition.gameObjects.players.Player;
+package DungeonDemolition;
 
 import java.util.ArrayList;
 import java.util.List;

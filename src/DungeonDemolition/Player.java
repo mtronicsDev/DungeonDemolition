@@ -1,4 +1,4 @@
-package DungeonDemolition.gameObjects.players;
+package DungeonDemolition;
 
 import java.awt.*;
 
