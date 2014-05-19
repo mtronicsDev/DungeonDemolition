@@ -1,4 +1,8 @@
-package DungeonDemolition;
+package DungeonDemolition.util;
+
+import DungeonDemolition.gameObjects.rooms.Room;
+import DungeonDemolition.gameObjects.rooms.RoomType;
+import DungeonDemolition.gameObjects.DungeonMap;
 
 public class DungeonGenerator {
 

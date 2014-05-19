@@ -1,4 +1,7 @@
-package DungeonDemolition;
+package DungeonDemolition.graphics;
+
+import DungeonDemolition.gameObjects.DungeonMap;
+import DungeonDemolition.util.ObjectController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +17,7 @@ public class Display extends JFrame {
 
         super(title);
 
-       size = new Point(width, height);
+        size = new Point(width, height);
 
         createDisplay();
         createBufferStrategy();
@@ -58,7 +61,13 @@ public class Display extends JFrame {
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
-        //render code here
+        for (DungeonMap dungeonMap : ObjectController.dungeons) {
+
+            //dungeon render code
+
+        }
+
+        //player render code
 
         contentPane.setSize(size.x, size.y);
         contentPane.update(graphics);

@@ -1,4 +1,4 @@
-package DungeonDemolition;
+package DungeonDemolition.gameObjects.rooms;
 
 public enum RoomType {
 

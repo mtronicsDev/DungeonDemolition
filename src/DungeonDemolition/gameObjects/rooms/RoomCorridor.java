@@ -1,4 +1,6 @@
-package DungeonDemolition;
+package DungeonDemolition.gameObjects.rooms;
+
+import DungeonDemolition.gameObjects.rooms.Room;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package DungeonDemolition;
+package DungeonDemolition.gameObjects;
 
 public class DungeonMap {
 
