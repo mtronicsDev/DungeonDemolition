@@ -1,3 +1,5 @@
+package DungeonDemolition;
+
 public class Point {
 
     public int x;

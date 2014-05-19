@@ -1,3 +1,5 @@
+package DungeonDemolition;
+
 public class Dungeon {
 
     private Rectangle[] rooms;

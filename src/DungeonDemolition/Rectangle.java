@@ -1,3 +1,7 @@
+package DungeonDemolition;
+
+import DungeonDemolition.Point;
+
 public class Rectangle {
 
     public Point a;
