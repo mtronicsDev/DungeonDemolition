@@ -47,6 +47,9 @@ public class Display extends JFrame {
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
+        graphics.setColor(Color.cyan);
+        graphics.fillRect(0, 0, size.x, size.y);
+
         for (DungeonMap dungeonMap : ObjectController.dungeons) {
 
             //dungeon render code
