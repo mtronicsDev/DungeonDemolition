@@ -1,7 +1,7 @@
-dungeonDemolition
+Dungeon Demolition
 =================
 
-A school project.
+A fun little dungeon crawling and bashing game.
 
 Tile indices
 ------------
@@ -19,7 +19,7 @@ Index | Tile name
 8     | SE corner
 9     | SW corner
 10    | Player spawn
-11    | Monster spawn [Not defined yet]
+11    | Monster spawn
 12    | Treasure chest
 13    | Door
 14    | Ladder
