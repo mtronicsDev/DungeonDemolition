@@ -50,7 +50,7 @@ public class Vector2D {
 
     public Vector2D sumWithFloat(float addend) {
 
-        multiplyByVector(new Vector2D(addend, addend));
+        sumWithVector(new Vector2D(addend, addend));
 
         return this;
 
@@ -58,7 +58,7 @@ public class Vector2D {
 
     public Vector2D subtractWithFloat(float subtrahend) {
 
-        multiplyByVector(new Vector2D(subtrahend, subtrahend));
+        subtractWithVector(new Vector2D(subtrahend, subtrahend));
 
         return this;
 
@@ -74,7 +74,7 @@ public class Vector2D {
 
     public Vector2D divideByFloat(float dividend) {
 
-        multiplyByVector(new Vector2D(dividend, dividend));
+        divideByVector(new Vector2D(dividend, dividend));
 
         return this;
 

@@ -1,4 +1,4 @@
-DungeonDemolition
+dungeonDemolition
 =================
 
 A school project.
