@@ -22,10 +22,10 @@ public class RoomStart extends Room {
         for (int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[0].length; y++) {
 
-                if(x == 0 && y == 0) tiles[x][y] = 6;
-                else if(x == 0 && y == size.y - 1) tiles[x][y] = 9;
-                else if(x == size.x - 1 && y == 0) tiles[x][y] = 7;
-                else if(x == size.x - 1 && y == size.y - 1) tiles[x][y] = 8;
+                if (x == 0 && y == 0) tiles[x][y] = 6;
+                else if (x == 0 && y == size.y - 1) tiles[x][y] = 9;
+                else if (x == size.x - 1 && y == 0) tiles[x][y] = 7;
+                else if (x == size.x - 1 && y == size.y - 1) tiles[x][y] = 8;
                 else if (x == 0) tiles[x][y] = 2;
                 else if (y == 0) tiles[x][y] = 5;
                 else if (x == size.x - 1) tiles[x][y] = 4;
@@ -34,12 +34,12 @@ public class RoomStart extends Room {
 
             }
         }
-        
+
         int spawnX = Randomizer.getRandomInt(1, size.x - 2);
         int spawnY = Randomizer.getRandomInt(1, size.y - 2);
 
         tiles[spawnX][spawnY] = 10; //Player spawn
 
     }
-    
+
 }

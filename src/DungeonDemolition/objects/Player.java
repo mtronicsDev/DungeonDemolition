@@ -13,7 +13,7 @@ public class Player {
 
     public Player(Point position, Point rotation) {
 
-        this.position = new float[] {position.x, position.y};
+        this.position = new float[]{position.x, position.y};
         this.rotation = rotation;
 
     }
@@ -25,10 +25,10 @@ public class Player {
         if (Input.isKeyPressed(KeyEvent.VK_A)) position[0] -= 50 * TimeHelper.deltaTime;
         if (Input.isKeyPressed(KeyEvent.VK_D)) position[0] += 50 * TimeHelper.deltaTime;
 
-        if (position[0] < 0 ) position[0] = 0;
+        if (position[0] < 0) position[0] = 0;
         else if (position[0] > ObjectController.display.size.x) position[0] = ObjectController.display.size.x;
 
-        if (position[1] < 0 ) position[1] = 0;
+        if (position[1] < 0) position[1] = 0;
         else if (position[1] > ObjectController.display.size.y) position[1] = ObjectController.display.size.y;
 
     }

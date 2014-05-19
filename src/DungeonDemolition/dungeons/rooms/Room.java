@@ -1,7 +1,7 @@
 package dungeonDemolition.dungeons.rooms;
 
-import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.dungeons.RoomType;
+import dungeonDemolition.util.Randomizer;
 
 import java.awt.*;
 

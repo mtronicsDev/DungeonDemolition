@@ -23,10 +23,10 @@ public class DungeonGenerator {
 
         for (int i = 0; i < iterations; i++) {
 
-            if(previousRoom == null) currentRoom = new RoomStart();
+            if (previousRoom == null) currentRoom = new RoomStart();
             else currentRoom = Room.getRoomFromType(Room.getRandomRoomType());
 
-            if(previousRoom == null) currentRoom.generate(new Point(), new Point(), map);
+            if (previousRoom == null) currentRoom.generate(new Point(), new Point(), map);
             else currentRoom.generate(
                     previousRoom.getNextStartingConditions()[0],
                     previousRoom.getNextStartingConditions()[1],
