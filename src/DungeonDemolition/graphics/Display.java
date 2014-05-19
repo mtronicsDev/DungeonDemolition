@@ -1,4 +1,8 @@
-package DungeonDemolition;
+package dungeonDemolition.graphics;
+
+import dungeonDemolition.dungeons.DungeonMap;
+import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.util.Input;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package DungeonDemolition;
+package dungeonDemolition.util;
 
 public class TimeHelper {
 

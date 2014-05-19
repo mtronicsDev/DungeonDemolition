@@ -1,4 +1,6 @@
-package DungeonDemolition;
+package dungeonDemolition.dungeons.rooms;
+
+import dungeonDemolition.util.Randomizer;
 
 import java.awt.*;
 
@@ -21,9 +23,9 @@ public class RoomStart extends Room {
             for (int y = 0; y < tiles[0].length; y++) {
 
                 if(x == 0 && y == 0) tiles[x][y] = 6;
-                else if(x == 0 && y == 1) tiles[x][y] = 9;
-                else if(x == 1 && y == 0) tiles[x][y] = 7;
-                else if(x == 1 && y == 1) tiles[x][y] = 8;
+                else if(x == 0 && y == size.y - 1) tiles[x][y] = 9;
+                else if(x == size.x - 1 && y == 0) tiles[x][y] = 7;
+                else if(x == size.x - 1 && y == size.y - 1) tiles[x][y] = 8;
                 else tiles[x][y] = 1;
 
             }

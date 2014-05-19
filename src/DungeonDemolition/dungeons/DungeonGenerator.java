@@ -1,8 +1,19 @@
-package DungeonDemolition;
+package dungeonDemolition.dungeons;
+
+import dungeonDemolition.dungeons.rooms.Room;
+import dungeonDemolition.dungeons.rooms.RoomStart;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class DungeonGenerator {
+
+    public static void main(String[] args) {
+
+        generateDungeonMap(500, 500, 7);
+
+    }
 
     public static DungeonMap generateDungeonMap(int sizeX, int sizeY, int iterations) {
 
@@ -31,6 +42,20 @@ public class DungeonGenerator {
             previousRoom = currentRoom;
 
         }
+
+        try {
+            PrintWriter out = new PrintWriter("dungeon.map");
+            for (int i = 0; i < map[0].length; i++) {
+                for (int j = 0; j < map.length; j++) {
+                    out.print(map[j][i]);
+                }
+                out.println();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
         return null;
 
     }

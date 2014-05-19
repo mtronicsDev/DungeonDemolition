@@ -1,4 +1,7 @@
-package DungeonDemolition;
+package dungeonDemolition.objects;
+
+import dungeonDemolition.util.Input;
+import dungeonDemolition.util.TimeHelper;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

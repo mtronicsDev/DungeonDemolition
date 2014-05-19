@@ -20,3 +20,7 @@ Index | Tile name
 9     | SW corner
 10    | Player spawn
 11    | Monster spawn [Not defined yet]
+12    | Treasure chest
+13    | Door
+14    | Ladder
+15    | Trapdoor

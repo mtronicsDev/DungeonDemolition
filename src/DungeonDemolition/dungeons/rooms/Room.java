@@ -1,16 +1,19 @@
-package DungeonDemolition;
+package dungeonDemolition.dungeons.rooms;
+
+import dungeonDemolition.util.Randomizer;
+import dungeonDemolition.dungeons.RoomType;
 
 import java.awt.*;
 
 public abstract class Room {
 
-    protected Point position; //Upper left corner
-    protected Point size;
-    protected byte[][] tiles; //All tiles that this room consists of
+    public Point position = new Point(); //Upper left corner
+    public Point size = new Point();
+    public byte[][] tiles; //All tiles that this room consists of
 
     public static RoomType getRandomRoomType() {
 
-        return RoomType.values()[Randomizer.getRandomInt(0, RoomType.values().length)]; //Gets a random room name
+        return RoomType.values()[Randomizer.getRandomInt(0, RoomType.values().length - 1)]; //Gets a random room name
 
     }
 
@@ -30,10 +33,6 @@ public abstract class Room {
         }
 
     }
-
-    public Point getPosition() { return position; }
-
-    public Point getSize() { return  size; }
 
     public Point[] getNextStartingConditions() {
 

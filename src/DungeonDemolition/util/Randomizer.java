@@ -1,4 +1,4 @@
-package DungeonDemolition;
+package dungeonDemolition.util;
 
 import java.util.Random;
 

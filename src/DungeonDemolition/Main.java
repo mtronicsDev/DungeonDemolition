@@ -1,4 +1,9 @@
-package DungeonDemolition;
+package dungeonDemolition;
+
+import dungeonDemolition.graphics.Display;
+import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.Player;
+import dungeonDemolition.util.TimeHelper;
 
 import java.awt.*;
 

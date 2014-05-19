@@ -1,4 +1,7 @@
-package DungeonDemolition;
+package dungeonDemolition.objects;
+
+import dungeonDemolition.graphics.Display;
+import dungeonDemolition.dungeons.DungeonMap;
 
 import java.util.ArrayList;
 import java.util.List;
