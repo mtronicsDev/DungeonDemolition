@@ -1,1 +1,3 @@
-test
+public class Main {
+  
+}
