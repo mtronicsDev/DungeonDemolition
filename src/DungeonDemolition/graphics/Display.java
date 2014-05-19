@@ -10,7 +10,7 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
     public Point size;
-    public JPanel contentPane;
+    //public JPanel contentPane;
     public BufferStrategy bufferStrategy;
 
     public Display(String title, int width, int height) {
@@ -30,10 +30,6 @@ public class Display extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        contentPane = new JPanel(true);
-        setContentPane(contentPane);
-        contentPane.setSize(size.x, size.y);
-
         setEnabled(true);
         setVisible(true);
 
@@ -43,14 +39,6 @@ public class Display extends JFrame {
 
         createBufferStrategy(2);
         bufferStrategy = getBufferStrategy();
-
-    }
-
-    public Display setBackgroundColor(Color background) {
-
-        contentPane.setBackground(background);
-
-        return this;
 
     }
 
@@ -67,10 +55,12 @@ public class Display extends JFrame {
 
         }
 
-        //player render code
+        if (ObjectController.player != null) {
 
-        contentPane.setSize(size.x, size.y);
-        contentPane.update(graphics);
+            graphics.setColor(Color.red);
+            graphics.fillRect(ObjectController.player.position.x, ObjectController.player.position.y, 50, 50);
+
+        }
 
         graphics.dispose();
         bufferStrategy.show();

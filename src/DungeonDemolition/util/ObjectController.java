@@ -17,7 +17,7 @@ public class ObjectController {
 
     }
 
-    public void setPlayer(Player player) {
+    public static void setPlayer(Player player) {
 
         ObjectController.player = player;
 
