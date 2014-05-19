@@ -1,5 +1,7 @@
 package DungeonDemolition;
 
+import DungeonDemolition.graphics.Display;
+
 import java.awt.*;
 
 public class Main {

@@ -1,4 +1,6 @@
-package DungeonDemolition;
+package DungeonDemolition.dungeons;
+
+import DungeonDemolition.Rectangle;
 
 public class Dungeon {
 

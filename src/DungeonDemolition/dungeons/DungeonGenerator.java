@@ -1,4 +1,7 @@
-package DungeonDemolition;
+package DungeonDemolition.dungeons;
+
+import DungeonDemolition.Rectangle;
+import DungeonDemolition.dungeons.Dungeon;
 
 import java.util.ArrayList;
 import java.util.Random;
