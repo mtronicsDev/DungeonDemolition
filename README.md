@@ -7,7 +7,7 @@ Tile indices
 ------------
 
 Index | Tile name
------:|:---------
+:-----|:---------
 0     | Void
 1     | Floor
 2     | North wall
