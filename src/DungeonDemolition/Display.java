@@ -1,4 +1,4 @@
-package DungeonDemolition.graphics;
+package DungeonDemolition;
 
 import javax.swing.*;
 import java.awt.*;
