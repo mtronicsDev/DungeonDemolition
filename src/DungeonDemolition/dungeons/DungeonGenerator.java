@@ -1,8 +1,6 @@
 package DungeonDemolition.dungeons;
 
-import DungeonDemolition.Rectangle;
-import DungeonDemolition.dungeons.Dungeon;
-
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,10 +33,10 @@ public class DungeonGenerator {
 
                 //Generates a room within the map boundaries
                 rooms.add(new Rectangle(
-                        random.nextInt(mapSize.b.x - maxRoomSize.b.x),
-                        random.nextInt(mapSize.b.y - maxRoomSize.b.y),
-                        random.nextInt(maxRoomSize.b.x),
-                        random.nextInt(maxRoomSize.b.y)));
+                        random.nextInt((mapSize.x + mapSize.width) - (maxRoomSize.x + maxRoomSize.width)),
+                        random.nextInt((mapSize.y + mapSize.height) - (maxRoomSize.y + maxRoomSize.height)),
+                        random.nextInt(maxRoomSize.width),
+                        random.nextInt(maxRoomSize.height)));
 
             }
 

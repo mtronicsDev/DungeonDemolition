@@ -1,6 +1,6 @@
 package DungeonDemolition.dungeons;
 
-import DungeonDemolition.Rectangle;
+import java.awt.*;
 
 public class Dungeon {
 

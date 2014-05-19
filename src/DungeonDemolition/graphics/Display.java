@@ -6,8 +6,7 @@ import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
 
-    public int width;
-    public int height;
+    public Point size;
     public JPanel contentPane;
     public BufferStrategy bufferStrategy;
 
@@ -15,8 +14,7 @@ public class Display extends JFrame {
 
         super(title);
 
-        this.width = width;
-        this.height = height;
+       size = new Point(width, height);
 
         createDisplay();
         createBufferStrategy();
@@ -25,13 +23,13 @@ public class Display extends JFrame {
 
     private void createDisplay() {
 
-        setSize(width, height);
+        setSize(size.x, size.y);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         contentPane = new JPanel(true);
         setContentPane(contentPane);
-        contentPane.setSize(width, height);
+        contentPane.setSize(size.x, size.y);
 
         setEnabled(true);
         setVisible(true);
@@ -55,11 +53,14 @@ public class Display extends JFrame {
 
     public void update() {
 
+        size.x = getWidth();
+        size.y = getHeight();
+
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
         //render code here
 
-        contentPane.setSize(width, height);
+        contentPane.setSize(size.x, size.y);
         contentPane.update(graphics);
 
         graphics.dispose();
