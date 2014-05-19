@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Code
+        Display display = new Display("Dungeon Demolition", 1070, 600);
 
     }
   
