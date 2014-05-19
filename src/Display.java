@@ -4,6 +4,7 @@ public class Display extends JFrame {
 
     public int width;
     public int height;
+    public JPanel contentPane;
 
     public Display(String title, int width, int height) {
 
@@ -16,11 +17,15 @@ public class Display extends JFrame {
 
     }
 
-    public void createDisplay() {
+    private void createDisplay() {
 
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        contentPane = new JPanel(true);
+        setContentPane(contentPane);
+
         setEnabled(true);
         setVisible(true);
 
