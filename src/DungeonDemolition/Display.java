@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 public class Display extends JFrame {
 
     public Point size;
-    //public JPanel contentPane;
     public BufferStrategy bufferStrategy;
 
     public Display(String title, int width, int height) {
@@ -18,6 +17,8 @@ public class Display extends JFrame {
 
         createDisplay();
         createBufferStrategy();
+
+        addKeyListener(new Input());
 
     }
 
