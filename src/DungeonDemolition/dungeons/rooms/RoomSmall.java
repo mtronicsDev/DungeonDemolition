@@ -32,6 +32,10 @@ public class RoomSmall extends Room {
                 else if(x == 0 && y == size.y - 1) tiles[x][y] = 9;
                 else if(x == size.x - 1 && y == 0) tiles[x][y] = 7;
                 else if(x == size.x - 1 && y == size.y - 1) tiles[x][y] = 8;
+                else if (x == 0) tiles[x][y] = 2;
+                else if (y == 0) tiles[x][y] = 5;
+                else if (x == size.x - 1) tiles[x][y] = 4;
+                else if (y == size.y - 1) tiles[x][y] = 3;
                 else tiles[x][y] = 1;
 
             }

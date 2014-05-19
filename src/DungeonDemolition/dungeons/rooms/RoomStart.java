@@ -26,13 +26,17 @@ public class RoomStart extends Room {
                 else if(x == 0 && y == size.y - 1) tiles[x][y] = 9;
                 else if(x == size.x - 1 && y == 0) tiles[x][y] = 7;
                 else if(x == size.x - 1 && y == size.y - 1) tiles[x][y] = 8;
+                else if (x == 0) tiles[x][y] = 2;
+                else if (y == 0) tiles[x][y] = 5;
+                else if (x == size.x - 1) tiles[x][y] = 4;
+                else if (y == size.y - 1) tiles[x][y] = 3;
                 else tiles[x][y] = 1;
 
             }
         }
         
-        int spawnX = Randomizer.getRandomInt(1, size.x - 1);
-        int spawnY = Randomizer.getRandomInt(1, size.y - 1);
+        int spawnX = Randomizer.getRandomInt(1, size.x - 2);
+        int spawnY = Randomizer.getRandomInt(1, size.y - 2);
 
         tiles[spawnX][spawnY] = 10; //Player spawn
 
