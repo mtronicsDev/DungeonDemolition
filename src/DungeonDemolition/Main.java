@@ -4,6 +4,7 @@ import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.Player;
 import dungeonDemolition.util.TimeHelper;
+import dungeonDemolition.util.Vector2f;
 
 import java.awt.*;
 
@@ -15,7 +16,7 @@ public class Main {
         display.setBackground(Color.cyan);
         ObjectController.setDisplay(display);
 
-        ObjectController.setPlayer(new Player(new Point(100, 100), new Point()));
+        ObjectController.setPlayer(new Player(new Vector2f(100, 100), new Vector2f()));
 
         TimeHelper.initialize();
 

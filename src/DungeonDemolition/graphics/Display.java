@@ -63,7 +63,7 @@ public class Display extends JFrame {
         if (ObjectController.player != null) {
 
             graphics.setColor(Color.red);
-            graphics.fillRect((int) ObjectController.player.position[0], (int) ObjectController.player.position[1], 50, 50);
+            graphics.fillRect((int) ObjectController.player.position.x, (int) ObjectController.player.position.y, 50, 50);
 
         }
 
