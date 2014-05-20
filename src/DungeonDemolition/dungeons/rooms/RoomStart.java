@@ -1,20 +1,21 @@
 package dungeonDemolition.dungeons.rooms;
 
 import dungeonDemolition.util.Randomizer;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 
 public class RoomStart extends Room {
 
     @Override
-    public void generate(Point position, Point direction, byte[][] map) {
+    public void generate(Vector2i position, Vector2i direction, byte[][] map) {
 
         tiles = new byte[Randomizer.getRandomInt(12, 34)][Randomizer.getRandomInt(12, 34)];
 
         size.x = tiles.length;
         size.y = tiles[0].length;
 
-        this.position = new Point(
+        this.position = new Vector2i(
                 Randomizer.getRandomInt(0, map.length - 1 - size.x),
                 Randomizer.getRandomInt(0, map[0].length - 1 - size.y)
         );

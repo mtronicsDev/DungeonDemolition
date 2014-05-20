@@ -2,6 +2,7 @@ package dungeonDemolition.dungeons;
 
 import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.dungeons.rooms.RoomStart;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ public class DungeonGenerator {
             if (previousRoom == null) currentRoom = new RoomStart();
             else currentRoom = Room.getRoomFromType(Room.getRandomRoomType());
 
-            if (previousRoom == null) currentRoom.generate(new Point(), new Point(), map);
+            if (previousRoom == null) currentRoom.generate(new Vector2i(), new Vector2i(), map);
             else currentRoom.generate(
                     previousRoom.getNextStartingConditions()[0],
                     previousRoom.getNextStartingConditions()[1],
