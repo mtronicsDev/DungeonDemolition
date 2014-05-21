@@ -3,6 +3,7 @@ package dungeonDemolition.graphics;
 import dungeonDemolition.dungeons.DungeonMap;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.util.Input;
+import dungeonDemolition.util.Vector2i;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,14 +11,14 @@ import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
 
-    public Point size;
+    public Vector2i size;
     public BufferStrategy bufferStrategy;
 
     public Display(String title, int width, int height) {
 
         super(title);
 
-        size = new Point(width, height);
+        size = new Vector2i(width, height);
 
         createDisplay();
         createBufferStrategy();
@@ -63,7 +64,7 @@ public class Display extends JFrame {
         if (ObjectController.player != null) {
 
             graphics.setColor(Color.red);
-            graphics.fillRect((int) ObjectController.player.position.x, (int) ObjectController.player.position.y, 50, 50);
+            graphics.fillRect(size.x / 2 - 10, size.y / 2 - 10, 20, 20);
 
         }
 
