@@ -1,7 +1,5 @@
 package dungeonDemolition;
 
-import dungeonDemolition.dungeons.rooms.Room;
-import dungeonDemolition.dungeons.rooms.RoomBig;
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.Player;
@@ -24,11 +22,6 @@ public class Main {
 
         ObjectController.addGUIElement(new GUIRectangle(new Vector2i(10, 35), new Vector2i(30, 30), "halfRainbow"));
         ObjectController.addGUIElement(new GUIText(new Vector2i(10, 85), Color.blue, "The thing above is a colored gui rectangle."));
-
-        Room roomBig = new RoomBig();
-        roomBig.position = new Vector2i(50, 50);
-        roomBig.size = new Vector2i(300, 240);
-        ObjectController.addRoom(roomBig);
 
         TimeHelper.initialize();
 
