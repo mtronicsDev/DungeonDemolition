@@ -1,6 +1,6 @@
 package dungeonDemolition.objects;
 
-import dungeonDemolition.dungeons.DungeonMap;
+import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.graphics.Display;
 
 import java.util.ArrayList;
@@ -8,13 +8,13 @@ import java.util.List;
 
 public class ObjectController {
 
-    public static List<DungeonMap> dungeons = new ArrayList<DungeonMap>();
+    public static List<Room> rooms = new ArrayList<Room>();
     public static Player player;
     public static Display display;
 
-    public static void addDungeon(DungeonMap dungeonMap) {
+    public static void addRoom(Room room) {
 
-        dungeons.add(dungeonMap);
+        rooms.add(room);
 
     }
 

@@ -3,8 +3,6 @@ package dungeonDemolition.dungeons.rooms;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
 
-import java.awt.*;
-
 public class RoomStart extends Room {
 
     @Override

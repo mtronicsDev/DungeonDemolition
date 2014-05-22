@@ -4,7 +4,6 @@ import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.dungeons.rooms.RoomStart;
 import dungeonDemolition.util.Vector2i;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 

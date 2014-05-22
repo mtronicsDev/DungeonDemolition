@@ -4,8 +4,6 @@ import dungeonDemolition.util.MathHelper;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
 
-import java.awt.*;
-
 public class RoomCorridor extends Room {
 
     @Override

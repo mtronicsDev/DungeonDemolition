@@ -1,15 +1,15 @@
 package dungeonDemolition.dungeons.rooms;
 
 import dungeonDemolition.dungeons.RoomType;
+import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
-import dungeonDemolition.util.Vector2i;
-
-import java.awt.*;
+import dungeonDemolition.util.VectorHelper;
 
 public abstract class Room {
 
     public Vector2i position = new Vector2i(); //Upper left corner
+    public Vector2i relativePosition = new Vector2i(); //Relative to player's upper left corner
     public Vector2i size = new Vector2i();
     public byte[][] tiles; //All tiles that this room consists of
 
@@ -76,5 +76,12 @@ public abstract class Room {
     }
 
     public abstract void generate(Vector2i position, Vector2i direction, byte[][] map);
+
+    public void update() {
+
+        Vector2i playerPosition = new Vector2i((int) ObjectController.player.position.x, (int) ObjectController.player.position.y);
+        relativePosition = VectorHelper.subtractVectors(position, playerPosition);
+
+    }
 
 }

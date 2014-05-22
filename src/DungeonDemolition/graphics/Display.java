@@ -1,6 +1,6 @@
 package dungeonDemolition.graphics;
 
-import dungeonDemolition.dungeons.DungeonMap;
+import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2i;
@@ -55,16 +55,17 @@ public class Display extends JFrame {
         graphics.setColor(Color.cyan);
         graphics.fillRect(0, 0, size.x, size.y);
 
-        for (DungeonMap dungeonMap : ObjectController.dungeons) {
+        for (Room room : ObjectController.rooms) {
 
-            //dungeon render code
+            graphics.setColor(Color.black);
+            graphics.drawRect(size.x / 2 - 20 + room.relativePosition.x, size.y / 2 - 20 + room.relativePosition.y, room.size.x, room.size.y);
 
         }
 
         if (ObjectController.player != null) {
 
             graphics.setColor(Color.red);
-            graphics.fillRect(size.x / 2 - 10, size.y / 2 - 10, 20, 20);
+            graphics.fillRect(size.x / 2 - 20, size.y / 2 - 20, 40, 40);
 
         }
 
