@@ -3,8 +3,8 @@ package dungeonDemolition.util;
 public class Timer {
 
     public float endTime;
-    private float currentTime = 0;
     public boolean running;
+    private float currentTime = 0;
 
     public Timer(float endTime) {
 

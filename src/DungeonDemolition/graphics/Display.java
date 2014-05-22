@@ -55,7 +55,8 @@ public class Display extends JFrame {
         graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, size.x, size.y);
 
-        if (ObjectController.currentDungeonMap != -1) ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
+        if (ObjectController.currentDungeonMap != -1)
+            ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
 
         ObjectController.player.render(graphics);
 

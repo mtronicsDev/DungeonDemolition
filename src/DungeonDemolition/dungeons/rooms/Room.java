@@ -9,8 +9,6 @@ public abstract class Room {
     public Vector2i size = new Vector2i();
     public byte[][] tiles; //All tiles that this room consists of
 
-    public abstract void generate(Vector2i position, Vector2i direction, byte[][] map);
-
     public static Room getRandomRoom() {
 
         int rand = Randomizer.getRandomInt(0, 1);
@@ -27,6 +25,8 @@ public abstract class Room {
         }
 
     }
+
+    public abstract void generate(Vector2i position, Vector2i direction, byte[][] map);
 
     public abstract Vector2i[] getAvailableSpace(int direction, Vector2i start, byte[][] map);
 

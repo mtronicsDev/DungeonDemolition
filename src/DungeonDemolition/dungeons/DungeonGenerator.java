@@ -3,7 +3,6 @@ package dungeonDemolition.dungeons;
 import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.dungeons.rooms.RoomStart;
 import dungeonDemolition.util.Randomizer;
-import dungeonDemolition.util.Vector2i;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -48,7 +47,7 @@ public class DungeonGenerator {
         try {
             PrintWriter out = new PrintWriter("dungeon.map");
             char c;
-            
+
             for (int y = 0; y < map[0].length; y++) {
                 for (int x = 0; x < map.length; x++) {
 
@@ -113,7 +112,7 @@ public class DungeonGenerator {
                 }
 
                 out.println();
-                
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
