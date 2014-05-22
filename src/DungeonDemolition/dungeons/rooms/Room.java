@@ -19,7 +19,7 @@ public abstract class Room {
         switch (rand) {
 
             case 0:
-                return new RoomBig();
+                return new RoomGeneric();
             case 1:
                 return new RoomCorridor();
             default:

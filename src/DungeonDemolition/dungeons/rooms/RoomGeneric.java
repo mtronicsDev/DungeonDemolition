@@ -4,7 +4,7 @@ import dungeonDemolition.util.MathHelper;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
 
-public class RoomBig extends Room {
+public class RoomGeneric extends Room {
 
     @Override
     public void generate(Vector2i position, Vector2i direction, byte[][] map) {
