@@ -42,24 +42,4 @@ public class RoomGeneric extends Room {
 
     }
 
-    @Override
-    public Vector2i[] getAvailableSpace(int direction, Vector2i start, byte[][] map) {
-
-        switch (direction) {
-
-            case 0: //North
-                //(new Vector2i(0, 0), new Vector2i(map.length - 1, start.y), map);
-            case 1: //East
-                //(new Vector2i(start.x, 0), new Vector2i(0, start.y), map);
-            case 2: //South
-                //(new Vector2i(0, start.y), new Vector2i(map.length - 1, map[0].length - 1), map);
-            case 3: //West
-                //(new Vector2i(0, 0), new Vector2i(start.x, map[0].length - 1), map);
-
-        }
-
-        return null;
-
-    }
-
 }
