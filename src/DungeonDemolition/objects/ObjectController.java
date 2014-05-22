@@ -12,7 +12,7 @@ public class ObjectController {
 
     public static List<GUIElement> guiElements = new ArrayList<GUIElement>();
     public static List<DungeonMap> dungeonMaps = new ArrayList<DungeonMap>();
-    public static int currentDungeonMap = 0;
+    public static int currentDungeonMap = -1;
     public static Player player;
     public static Display display;
 
