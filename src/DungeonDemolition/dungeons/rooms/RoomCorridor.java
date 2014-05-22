@@ -43,7 +43,7 @@ public class RoomCorridor extends Room {
     }
 
     @Override
-    public Vector2i[] getAvailableSpace() {
+    public Vector2i[] getAvailableSpace(int direction, Vector2i start, byte[][] map) {
         return new Vector2i[0];
     }
 

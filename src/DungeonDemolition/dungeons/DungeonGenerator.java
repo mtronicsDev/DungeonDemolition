@@ -120,7 +120,7 @@ public class DungeonGenerator {
             System.exit(1);
         }
 
-        return null;
+        return new DungeonMap(map);
 
     }
 

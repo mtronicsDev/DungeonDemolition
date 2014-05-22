@@ -1,5 +1,7 @@
 package dungeonDemolition.graphics;
 
+import dungeonDemolition.dungeons.DungeonMap;
+import dungeonDemolition.objects.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.util.Input;
