@@ -1,7 +1,5 @@
 package dungeonDemolition.graphics;
 
-import dungeonDemolition.dungeons.DungeonMap;
-import dungeonDemolition.objects.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.util.Input;
@@ -59,12 +57,7 @@ public class Display extends JFrame {
 
         if (ObjectController.currentDungeonMap != -1) ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
 
-        if (ObjectController.player != null) {
-
-            graphics.setColor(Color.red);
-            graphics.fillRect(size.x / 2 - 20, size.y / 2 - 20, 40, 40);
-
-        }
+        ObjectController.player.render(graphics);
 
         for (GUIElement guiElement : ObjectController.guiElements) {
 

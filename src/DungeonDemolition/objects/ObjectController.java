@@ -1,7 +1,6 @@
 package dungeonDemolition.objects;
 
 import dungeonDemolition.dungeons.DungeonMap;
-import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.gui.GUIElement;
 
