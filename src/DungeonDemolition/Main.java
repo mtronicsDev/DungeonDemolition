@@ -38,12 +38,6 @@ public class Main {
 
             ObjectController.player.update();
 
-            for (Room room : ObjectController.rooms) {
-
-                room.update();
-
-            }
-
             display.update();
 
         }

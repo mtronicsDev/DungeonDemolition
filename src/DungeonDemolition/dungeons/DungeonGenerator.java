@@ -24,13 +24,10 @@ public class DungeonGenerator {
         for (int i = 0; i < iterations; i++) {
 
             if (previousRoom == null) currentRoom = new RoomStart();
-            else currentRoom = Room.getRoomFromType(Room.getRandomRoomType());
+            else currentRoom = Room.getRandomRoom();
 
             if (previousRoom == null) currentRoom.generate(new Vector2i(), new Vector2i(), map);
-            else currentRoom.generate(
-                    previousRoom.getNextStartingConditions()[0],
-                    previousRoom.getNextStartingConditions()[1],
-                    map);
+            else currentRoom.generate(new Vector2i(), new Vector2i(), map);
 
             for (int x = 0; x < currentRoom.size.x; x++) {
                 for (int y = 0; y < currentRoom.size.y; y++) {
