@@ -1,6 +1,8 @@
 package dungeonDemolition;
 
+import dungeonDemolition.dungeons.DungeonGenerator;
 import dungeonDemolition.graphics.Display;
+import dungeonDemolition.objects.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.Player;
 import dungeonDemolition.objects.gui.GUIRectangle;
@@ -22,15 +24,17 @@ public class Main {
 
         ObjectController.addGUIElement(new GUIRectangle(new Vector2i(10, 35), new Vector2i(30, 30), "halfRainbow"));
         ObjectController.addGUIElement(new GUIText(new Vector2i(10, 85), Color.blue, "The thing above is a colored gui rectangle."));
+        ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
+        ObjectController.currentDungeonMap = 0;
+        for(DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
+        if(tile.id == 10) ObjectController.player.position = tile.position;
 
         TimeHelper.initialize();
 
         while (true) {
 
             TimeHelper.update();
-
             ObjectController.player.update();
-
             display.update();
 
         }
