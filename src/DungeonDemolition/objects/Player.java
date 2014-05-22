@@ -20,10 +20,10 @@ public class Player {
 
     public void update() {
 
-        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= 50 * TimeHelper.deltaTime;
-        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += 50 * TimeHelper.deltaTime;
-        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= 50 * TimeHelper.deltaTime;
-        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += 50 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += 100 * TimeHelper.deltaTime;
 
     }
 

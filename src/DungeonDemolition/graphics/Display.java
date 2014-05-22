@@ -2,6 +2,7 @@ package dungeonDemolition.graphics;
 
 import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2i;
 
@@ -52,7 +53,7 @@ public class Display extends JFrame {
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
-        graphics.setColor(Color.cyan);
+        graphics.setColor(Color.gray);
         graphics.fillRect(0, 0, size.x, size.y);
 
         for (Room room : ObjectController.rooms) {
@@ -66,6 +67,12 @@ public class Display extends JFrame {
 
             graphics.setColor(Color.red);
             graphics.fillRect(size.x / 2 - 20, size.y / 2 - 20, 40, 40);
+
+        }
+
+        for (GUIElement guiElement : ObjectController.guiElements) {
+
+            guiElement.render(graphics);
 
         }
 
