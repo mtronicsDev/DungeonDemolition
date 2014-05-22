@@ -6,7 +6,6 @@ import dungeonDemolition.util.Vector2i;
 public abstract class Room {
 
     public Vector2i position = new Vector2i(); //Upper left corner
-    public Vector2i relativePosition = new Vector2i(); //Relative to player's upper left corner
     public Vector2i size = new Vector2i();
     public byte[][] tiles; //All tiles that this room consists of
 
@@ -28,5 +27,7 @@ public abstract class Room {
         }
 
     }
+
+    public abstract Vector2i[] getAvailableSpace(int direction, Vector2i start, byte[][] map);
 
 }

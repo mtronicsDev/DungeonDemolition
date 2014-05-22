@@ -42,4 +42,9 @@ public class RoomCorridor extends Room {
 
     }
 
+    @Override
+    public Vector2i[] getAvailableSpace() {
+        return new Vector2i[0];
+    }
+
 }

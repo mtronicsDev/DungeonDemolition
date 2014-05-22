@@ -2,6 +2,7 @@ package dungeonDemolition.dungeons;
 
 import dungeonDemolition.dungeons.rooms.Room;
 import dungeonDemolition.dungeons.rooms.RoomStart;
+import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
 
 import java.io.FileNotFoundException;
@@ -26,8 +27,12 @@ public class DungeonGenerator {
             if (previousRoom == null) currentRoom = new RoomStart();
             else currentRoom = Room.getRandomRoom();
 
-            if (previousRoom == null) currentRoom.generate(new Vector2i(), new Vector2i(), map);
-            else currentRoom.generate(new Vector2i(), new Vector2i(), map);
+            if (previousRoom == null) currentRoom.generate(null, null, map);
+            else {
+
+                int randomDirection = Randomizer.getRandomInt(0, 3); //0:N / 1:E / 2:S / 3:W
+
+            }
 
             for (int x = 0; x < currentRoom.size.x; x++) {
                 for (int y = 0; y < currentRoom.size.y; y++) {
