@@ -22,7 +22,6 @@ public class Main {
 
         ObjectController.setPlayer(new Player(new Vector2f(100, 100), new Vector2f(), "player"));
 
-        ObjectController.addGUIElement(new GUIRectangle(new Vector2i(10, 35), new Vector2i(30, 30), "halfRainbow"));
         ObjectController.addGUIElement(new GUIText(new Vector2i(10, 85), Color.blue, "The thing above is a colored gui rectangle."));
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
         ObjectController.currentDungeonMap = 0;

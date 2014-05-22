@@ -1,9 +1,6 @@
 package dungeonDemolition.objects;
 
-import dungeonDemolition.util.Input;
-import dungeonDemolition.util.TimeHelper;
-import dungeonDemolition.util.Timer;
-import dungeonDemolition.util.Vector2f;
+import dungeonDemolition.util.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -60,35 +57,17 @@ public class Player {
 
     public void update() {
 
-        moving = false;
+        Vector2f currentPosition = new Vector2f(position);
 
-        if (Input.isKeyPressed(KeyEvent.VK_W)) {
+        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= 100 * TimeHelper.deltaTime;
 
-            position.y -= 100 * TimeHelper.deltaTime;
-            moving = true;
+        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += 100 * TimeHelper.deltaTime;
 
-        }
+        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= 100 * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_S)) {
+        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += 100 * TimeHelper.deltaTime;
 
-            position.y += 100 * TimeHelper.deltaTime;
-            moving = true;
-
-        }
-
-        if (Input.isKeyPressed(KeyEvent.VK_A)) {
-
-            position.x -= 100 * TimeHelper.deltaTime;
-            moving = true;
-
-        }
-
-        if (Input.isKeyPressed(KeyEvent.VK_D)) {
-
-            position.x += 100 * TimeHelper.deltaTime;
-            moving = true;
-
-        }
+        moving = !VectorHelper.areEqual(currentPosition, position);
 
         if (moving) {
 

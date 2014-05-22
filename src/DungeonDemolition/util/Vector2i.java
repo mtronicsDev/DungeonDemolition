@@ -18,6 +18,13 @@ public class Vector2i {
 
     }
 
+    public Vector2i(Vector2i source) {
+
+        x = source.x;
+        y = source.y;
+
+    }
+
     public String toString() {
 
         return getClass().getName() + "[x=" + x + ",y=" + y + "]";

@@ -106,4 +106,16 @@ public class VectorHelper {
 
     }
 
+    public static boolean areEqual(Vector2f vectorA, Vector2f vectorB) {
+
+        return vectorA.x == vectorB.x && vectorA.y == vectorB.y;
+
+    }
+
+    public static boolean areEqual(Vector2i vectorA, Vector2i vectorB) {
+
+        return vectorA.x == vectorB.x && vectorA.y == vectorB.y;
+
+    }
+
 }
