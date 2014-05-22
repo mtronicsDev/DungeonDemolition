@@ -2,8 +2,12 @@ package dungeonDemolition.objects.gui;
 
 import dungeonDemolition.util.Vector2i;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class GUIRectangle extends GUIElement {
 
@@ -12,11 +16,28 @@ public class GUIRectangle extends GUIElement {
     public Color color;
     public boolean filled;
 
+    public GUIRectangle(Vector2i position, String textureName) {
+
+        this(position, null, textureName);
+
+    }
+
     public GUIRectangle(Vector2i position, Vector2i size, String textureName) {
 
         super(position);
 
         this.size = size;
+
+        try {
+
+            texture = ImageIO.read(new File("res/textures/" + textureName + ".png"));
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
 
     }
 
@@ -42,7 +63,9 @@ public class GUIRectangle extends GUIElement {
 
         } else {
 
+            if (size == null) graphics.drawImage(texture, position.x, position.y, null);
 
+            else graphics.drawImage(texture, position.x, position.y, size.x, size.y, null);
 
         }
 
