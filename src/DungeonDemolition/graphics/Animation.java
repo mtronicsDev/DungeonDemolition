@@ -14,6 +14,7 @@ public class Animation {
     public List<BufferedImage> frames = new ArrayList<BufferedImage>();
     public int currentFrame = 0;
     public Timer timer;
+    public float frameTimeModifier = 1;
 
     public Animation(String animationName) {
 
@@ -30,7 +31,7 @@ public class Animation {
 
             }
 
-            timer = new Timer(animationFrameTimes.get(0));
+            timer = new Timer(animationFrameTimes.get(0) * frameTimeModifier);
 
         } catch (FileNotFoundException e) {
 
@@ -59,7 +60,7 @@ public class Animation {
 
                 if (currentFrame == frames.size()) currentFrame = 0;
 
-                timer.endTime = animationFrameTimes.get(currentFrame);
+                timer.endTime = animationFrameTimes.get(currentFrame) * frameTimeModifier;
                 timer.restart();
 
             }

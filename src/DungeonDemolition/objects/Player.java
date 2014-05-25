@@ -27,15 +27,24 @@ public class Player {
 
     public void update() {
 
+        float speed = 100;
+
+        if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
+
+            speed = 200;
+            animation.frameTimeModifier = 0.5f;
+
+        } else animation.frameTimeModifier = 1;
+
         Vector2f currentPosition = new Vector2f(position);
 
-        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += 100 * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += speed * TimeHelper.deltaTime;
 
 
         if (VectorHelper.areEqual(currentPosition, position)) animation.update(false);
