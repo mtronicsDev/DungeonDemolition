@@ -24,6 +24,7 @@ public class Display extends JFrame {
         createBufferStrategy();
 
         addKeyListener(new Input());
+        addMouseListener(new Input());
 
     }
 
@@ -58,7 +59,7 @@ public class Display extends JFrame {
         if (ObjectController.currentDungeonMap != -1)
             ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
 
-        ObjectController.player.render(graphics);
+        ObjectController.entities.get("player").render(graphics);
 
         for (GUIElement guiElement : ObjectController.guiElements) {
 

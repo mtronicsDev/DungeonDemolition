@@ -40,14 +40,14 @@ public class DungeonTile {
 
     public void render(Graphics graphics) {
 
-        if (!(((position.x - ObjectController.player.position.x) + ObjectController.display.size.x / 2 - 20 < -40 )
-                || ((position.x - ObjectController.player.position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
-                || ((position.y - ObjectController.player.position.y) + ObjectController.display.size.y / 2 - 20) < -40
-                || ((position.y - ObjectController.player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y))
+        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40 )
+                || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
+                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
+                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y))
 
             graphics.drawImage(textures.get(id),
-                    (int) (position.x - ObjectController.player.position.x) + ObjectController.display.size.x / 2 - 20,
-                    (int) (position.y - ObjectController.player.position.y) + ObjectController.display.size.y / 2 - 20,
+                    (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20,
+                    (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20,
                     40, 40, null);
 
     }
