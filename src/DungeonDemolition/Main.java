@@ -4,9 +4,10 @@ import dungeonDemolition.dungeons.DungeonGenerator;
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.Player;
+import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
+import dungeonDemolition.util.Input;
 import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.Vector2i;
@@ -28,15 +29,15 @@ public class Main {
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
         ObjectController.currentDungeonMap = 0;
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
-            if (tile.id == 10)  ObjectController.player.position = new Vector2f(tile.position);
+            if (tile.id == 10)  ObjectController.entities.get("player").position = new Vector2f(tile.position);
 
         TimeHelper.initialize();
 
         while (true) {
 
             TimeHelper.update();
-            ObjectController.player.update();
-            display.update();
+            Input.update();
+            ObjectController.updateAll();
 
         }
 

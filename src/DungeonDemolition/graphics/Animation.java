@@ -15,8 +15,12 @@ public class Animation {
     public int currentFrame = 0;
     public Timer timer;
     public float frameTimeModifier = 1;
+    public boolean repeatAfterOneLoop;
+    public boolean oneLoopPassed = false;
 
-    public Animation(String animationName) {
+    public Animation(String animationName, boolean repeatAfterOneLoop) {
+
+        this.repeatAfterOneLoop = repeatAfterOneLoop;
 
         try {
 
@@ -49,29 +53,35 @@ public class Animation {
 
     public void update(boolean animationNeeded) {
 
-        if (animationNeeded) {
+        if (!oneLoopPassed || repeatAfterOneLoop) {
 
-            timer.running = true;
-            timer.update();
+            if (animationNeeded) {
 
-            if (timer.hasFinished()) {
+                timer.running = true;
+                timer.update();
 
-                currentFrame++;
+                if (timer.hasFinished()) {
 
-                if (currentFrame == frames.size()) currentFrame = 0;
+                    oneLoopPassed = true;
 
-                timer.endTime = animationFrameTimes.get(currentFrame) * frameTimeModifier;
+                    currentFrame++;
+
+                    if (currentFrame == frames.size()) currentFrame = 0;
+
+                    timer.endTime = animationFrameTimes.get(currentFrame) * frameTimeModifier;
+                    timer.restart();
+
+                }
+
+            } else {
+
+                currentFrame = 0;
+
+                timer.endTime = 0.01f;
                 timer.restart();
+                timer.running = false;
 
             }
-
-        } else {
-
-            currentFrame = 0;
-
-            timer.endTime = 0.01f;
-            timer.restart();
-            timer.running = false;
 
         }
 
