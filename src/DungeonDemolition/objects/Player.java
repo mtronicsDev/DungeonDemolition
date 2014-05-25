@@ -98,11 +98,9 @@ public class Player {
 
     public void render(Graphics graphics) {
 
-        if (moving)
-            graphics.drawImage(frames.get(currentFrame), ObjectController.display.size.x / 2 - 20, ObjectController.display.size.y / 2 - 20, 40, 40, null);
+        if (moving) graphics.drawImage(frames.get(currentFrame), ObjectController.display.size.x / 2 - 20, ObjectController.display.size.y / 2 - 20, 40, 40, null);
 
-        else
-            graphics.drawImage(frames.get(0), ObjectController.display.size.x / 2 - 20, ObjectController.display.size.y / 2 - 20, 40, 40, null);
+        else graphics.drawImage(frames.get(0), ObjectController.display.size.x / 2 - 20, ObjectController.display.size.y / 2 - 20, 40, 40, null);
 
     }
 

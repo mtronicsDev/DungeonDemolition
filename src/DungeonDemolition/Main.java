@@ -28,10 +28,7 @@ public class Main {
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
         ObjectController.currentDungeonMap = 0;
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
-            if (tile.id == 10) {
-                ObjectController.player.position.x = tile.position.x;
-                ObjectController.player.position.y = tile.position.y;
-            }
+            if (tile.id == 10)  ObjectController.player.position = new Vector2f(tile.position);
 
         TimeHelper.initialize();
 
