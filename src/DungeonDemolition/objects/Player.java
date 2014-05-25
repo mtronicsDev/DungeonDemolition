@@ -1,27 +1,17 @@
-package dungeonDemolition.objects;
+package dungeonDemolition.objects.entities;
 
-import dungeonDemolition.graphics.Animation;
+import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.util.*;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Player {
-
-    public Vector2f position;
-    public Vector2f percentRotation = new Vector2f();
-    public float rotation = 0;
-    public Animation animation;
+public class Player extends Entity {
 
     public Player(String animationName) {
 
-        animation = new Animation(animationName);
+        super(animationName);
 
     }
 
@@ -55,11 +45,14 @@ public class Player {
 
             Vector2f direction = VectorHelper.normalizeVector(VectorHelper.subtractVectors(currentPosition, position));
 
-            if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) >= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+            if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
             else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
         }
+
+        percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
+                VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));
 
     }
 
@@ -67,7 +60,7 @@ public class Player {
 
         AffineTransform transform = new AffineTransform();
         transform.translate(ObjectController.display.size.x / 2, ObjectController.display.size.y / 2);
-        transform.rotate(-rotation);
+        transform.rotate(rotation);
         transform.translate(-20, -20);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
