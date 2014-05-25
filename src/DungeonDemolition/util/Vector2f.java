@@ -25,6 +25,13 @@ public class Vector2f {
 
     }
 
+    public Vector2f(Vector2i source) {
+
+        x = source.x;
+        y = source.y;
+
+    }
+
     public String toString() {
 
         return "Vector2f(x = " + x + ", y = " + y + ")";
