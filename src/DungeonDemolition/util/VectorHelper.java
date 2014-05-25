@@ -2,6 +2,30 @@ package dungeonDemolition.util;
 
 public class VectorHelper {
 
+    public static float getAngle(Vector2f vectorA, Vector2f vectorB) {
+
+        return (float) Math.acos(getScalarProduct(normalizeVector(vectorA), normalizeVector(vectorB)));
+
+    }
+
+    public static Vector2f normalizeVector(Vector2f vector) {
+
+        return divideVectorByFloat(vector, getLength(vector));
+
+    }
+
+    public static float getLength(Vector2f vector) {
+
+        return (float) Math.sqrt(getScalarProduct(vector, vector));
+
+    }
+
+    public static float getScalarProduct(Vector2f vectorA, Vector2f vectorB) {
+
+        return vectorA.x * vectorB.x + vectorA.y * vectorB.y;
+
+    }
+
     public static Vector2f sumVectors(Vector2f[] vectors) {
 
         Vector2f sum = new Vector2f();
@@ -103,6 +127,18 @@ public class VectorHelper {
         quotient.y = vectorA.y / vectorB.y;
 
         return quotient;
+
+    }
+
+    public static Vector2f multiplyVectorByFloat(Vector2f vector, float multiplier) {
+
+        return multiplyVectors(new Vector2f[] {vector, new Vector2f(multiplier, multiplier)});
+
+    }
+
+    public static Vector2f divideVectorByFloat(Vector2f vector, float dividend) {
+
+        return divideVectors(vector, new Vector2f(dividend, dividend));
 
     }
 

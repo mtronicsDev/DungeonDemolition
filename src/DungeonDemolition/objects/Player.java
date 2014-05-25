@@ -6,6 +6,7 @@ import dungeonDemolition.util.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -14,13 +15,15 @@ import java.util.List;
 public class Player {
 
     public Vector2f position;
-    public Vector2f rotation;
+    public Vector2f percentRotation;
+    public float rotation;
     public Animation animation;
 
-    public Player(Vector2f position, Vector2f rotation, String animationName) {
+    public Player(Vector2f position, String animationName) {
 
         this.position = position;
-        this.rotation = rotation;
+        percentRotation = new Vector2f();
+        rotation = 0;
 
         animation = new Animation(animationName);
 
@@ -38,13 +41,32 @@ public class Player {
 
         if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += 100 * TimeHelper.deltaTime;
 
-        animation.update(!VectorHelper.areEqual(currentPosition, position));
+
+        if (VectorHelper.areEqual(currentPosition, position)) animation.update(false);
+
+        else {
+
+            animation.update(true);
+
+            Vector2f direction = VectorHelper.normalizeVector(VectorHelper.subtractVectors(currentPosition, position));
+
+            if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) >= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+
+            else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
+
+        }
 
     }
 
     public void render(Graphics graphics) {
 
-        graphics.drawImage(animation.getCurrentFrame(), ObjectController.display.size.x / 2 - 20, ObjectController.display.size.y / 2 - 20, 40, 40, null);
+        AffineTransform transform = new AffineTransform();
+        transform.translate(ObjectController.display.size.x / 2, ObjectController.display.size.y / 2);
+        transform.rotate(-rotation);
+        transform.translate(-20, -20);
+
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.drawImage(animation.getCurrentFrame(), transform, null);
 
     }
 
