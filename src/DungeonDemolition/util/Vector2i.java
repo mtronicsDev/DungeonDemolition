@@ -27,7 +27,7 @@ public class Vector2i {
 
     public String toString() {
 
-        return getClass().getName() + "[x=" + x + ",y=" + y + "]";
+        return "Vector2i(x = " + x + ", y = " + y + ")";
 
     }
 

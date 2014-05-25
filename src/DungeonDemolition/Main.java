@@ -20,7 +20,7 @@ public class Main {
         Display display = new Display("Dungeon Demolition", 1070, 600);
         ObjectController.setDisplay(display);
 
-        ObjectController.setPlayer(new Player(new Vector2f(100, 100), "player"));
+        ObjectController.setPlayer(new Player("player"));
 
         ObjectController.addGUIElement(new GUIRectangle(new Vector2i(10, 40), new Vector2i(30, 30), Color.red, true));
         ObjectController.addGUIElement(new GUIText(new Vector2i(10, 85), Color.blue, "The thing above is a colored gui rectangle."));

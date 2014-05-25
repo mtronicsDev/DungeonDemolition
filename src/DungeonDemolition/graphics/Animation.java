@@ -25,8 +25,8 @@ public class Animation {
 
             while ((line = reader.readLine()) != null) {
 
-                animationFrameTimes.add(Float.valueOf(line.split(" ")[1]));
                 frames.add(ImageIO.read(new File("res/textures/" + line.split(" ")[0] + ".png")));
+                animationFrameTimes.add(Float.valueOf(line.split(" ")[1]));
 
             }
 

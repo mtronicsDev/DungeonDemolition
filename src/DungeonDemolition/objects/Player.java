@@ -15,15 +15,11 @@ import java.util.List;
 public class Player {
 
     public Vector2f position;
-    public Vector2f percentRotation;
-    public float rotation;
+    public Vector2f percentRotation = new Vector2f();
+    public float rotation = 0;
     public Animation animation;
 
-    public Player(Vector2f position, String animationName) {
-
-        this.position = position;
-        percentRotation = new Vector2f();
-        rotation = 0;
+    public Player(String animationName) {
 
         animation = new Animation(animationName);
 
