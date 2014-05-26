@@ -1,15 +1,15 @@
-package dungeonDemolition.dungeons.rooms;
+package dungeonDemolition.objects.dungeons.rooms;
 
 import dungeonDemolition.util.MathHelper;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;
 
-public class RoomGeneric extends Room {
+public class RoomCorridor extends Room {
 
     @Override
     public void generate(Vector2i position, Vector2i direction, byte[][] map) {
 
-        tiles = new byte[Randomizer.getRandomInt(24, 54)][Randomizer.getRandomInt(24, 54)];
+        tiles = new byte[Randomizer.getRandomInt(2, 4)][Randomizer.getRandomInt(2, 4)];
 
         size.x = tiles.length;
         size.y = tiles[0].length;

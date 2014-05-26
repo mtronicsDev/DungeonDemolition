@@ -1,8 +1,8 @@
 package dungeonDemolition;
 
-import dungeonDemolition.dungeons.DungeonGenerator;
+import dungeonDemolition.objects.dungeons.DungeonGenerator;
 import dungeonDemolition.graphics.Display;
-import dungeonDemolition.objects.DungeonTile;
+import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.GUIRectangle;

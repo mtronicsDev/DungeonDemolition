@@ -2,6 +2,12 @@ package dungeonDemolition.util;
 
 public class VectorHelper {
 
+    public static Vector2f negateVector(Vector2f vector) {
+
+        return multiplyVectorByFloat(vector, -1);
+
+    }
+
     public static float getAngle(Vector2f vectorA, Vector2f vectorB) {
 
         return (float) Math.acos(getScalarProduct(normalizeVector(vectorA), normalizeVector(vectorB)));

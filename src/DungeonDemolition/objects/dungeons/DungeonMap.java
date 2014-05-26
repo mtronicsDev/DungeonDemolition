@@ -1,6 +1,5 @@
-package dungeonDemolition.dungeons;
+package dungeonDemolition.objects.dungeons;
 
-import dungeonDemolition.objects.DungeonTile;
 import dungeonDemolition.util.Vector2f;
 
 import java.awt.*;

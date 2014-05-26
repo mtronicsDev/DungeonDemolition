@@ -1,5 +1,6 @@
-package dungeonDemolition.objects;
+package dungeonDemolition.objects.dungeons;
 
+import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.util.Vector2f;
 
 import javax.imageio.ImageIO;
@@ -12,8 +13,10 @@ import java.util.List;
 public class DungeonTile {
 
     private static List<BufferedImage> textures = new ArrayList<BufferedImage>();
-    public byte id;
     public Vector2f position;
+    public List<Vector2f> normals = new ArrayList<Vector2f>();
+    public byte id;
+    public boolean passable;
 
     public DungeonTile(byte id, Vector2f position) {
 
@@ -33,8 +36,40 @@ public class DungeonTile {
 
         }
 
-        this.id = id;
         this.position = position;
+        this.id = id;
+
+        switch (id) {
+
+            case 2: passable = false;
+                normals.add(new Vector2f(0, 1));
+                break;
+
+            case 3: passable = false;
+                normals.add(new Vector2f(-1, 0));
+                break;
+
+            case 4: passable = false;
+                normals.add(new Vector2f(0, -1));
+                break;
+
+            case 5: passable = false;
+                normals.add(new Vector2f(1, 0));
+                break;
+
+            case 12: passable = false;
+                normals.add(new Vector2f(0, 1));
+                normals.add(new Vector2f(0, -1));
+                normals.add(new Vector2f(1, 0));
+                normals.add(new Vector2f(-1, 0));
+                break;
+
+            case 13: passable = false;
+                break;
+
+            default: passable = true;
+
+        }
 
     }
 

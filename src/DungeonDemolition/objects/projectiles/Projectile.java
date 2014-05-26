@@ -2,8 +2,8 @@ package dungeonDemolition.objects.projectiles;
 
 import dungeonDemolition.graphics.Animation;
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
+import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
@@ -33,7 +33,7 @@ public abstract class Projectile {
 
             position = VectorHelper.sumVectors(new Vector2f[] {position, VectorHelper.multiplyVectorByFloat(speed, TimeHelper.deltaTime)});
 
-            /*if (collidingWithSomething) {
+            /*if (Collider.collidingWithSomething(this)) {
 
                 boolean hitEntity = collidingObject instanceof Entity;
 

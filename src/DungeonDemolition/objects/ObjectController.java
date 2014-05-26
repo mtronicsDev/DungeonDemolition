@@ -1,6 +1,6 @@
 package dungeonDemolition.objects;
 
-import dungeonDemolition.dungeons.DungeonMap;
+import dungeonDemolition.objects.dungeons.DungeonMap;
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;

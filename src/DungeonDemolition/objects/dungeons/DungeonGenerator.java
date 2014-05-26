@@ -1,7 +1,7 @@
-package dungeonDemolition.dungeons;
+package dungeonDemolition.objects.dungeons;
 
-import dungeonDemolition.dungeons.rooms.Room;
-import dungeonDemolition.dungeons.rooms.RoomStart;
+import dungeonDemolition.objects.dungeons.rooms.Room;
+import dungeonDemolition.objects.dungeons.rooms.RoomStart;
 import dungeonDemolition.util.Randomizer;
 
 import java.io.FileNotFoundException;

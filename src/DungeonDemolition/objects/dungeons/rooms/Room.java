@@ -1,4 +1,4 @@
-package dungeonDemolition.dungeons.rooms;
+package dungeonDemolition.objects.dungeons.rooms;
 
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2i;

@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
 import java.awt.*;
@@ -26,30 +27,34 @@ public class Player extends Entity {
 
         } else animation.frameTimeModifier = 1;
 
-        Vector2f currentPosition = new Vector2f(position);
+        Vector2f movedSpace = new Vector2f();
 
-        if (Input.isKeyPressed(KeyEvent.VK_W)) position.y -= speed * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_W)) movedSpace.y -= speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_S)) position.y += speed * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_S)) movedSpace.y += speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_A)) position.x -= speed * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_A)) movedSpace.x -= speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_D)) position.x += speed * TimeHelper.deltaTime;
+        if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
 
 
-        if (VectorHelper.areEqual(currentPosition, position)) animation.update(false);
+        movedSpace = Collider.getMovedSpace(this, movedSpace);
+
+        if (VectorHelper.areEqual(movedSpace, new Vector2f())) animation.update(false);
 
         else {
 
             animation.update(true);
 
-            Vector2f direction = VectorHelper.normalizeVector(VectorHelper.subtractVectors(currentPosition, position));
+            Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
             if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
             else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
         }
+
+        position = VectorHelper.sumVectors(new Vector2f[] {position, movedSpace});
 
         percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
                 VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));
