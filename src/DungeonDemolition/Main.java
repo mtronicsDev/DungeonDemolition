@@ -24,7 +24,7 @@ public class Main {
 
         ObjectController.setPlayer(new Player("player"));
 
-        ObjectController.addEnemy(new Enemy("player"));
+        ObjectController.addEnemy(new Enemy("enemy"));
 
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[] {
