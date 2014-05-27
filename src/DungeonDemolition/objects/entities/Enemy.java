@@ -4,15 +4,21 @@ import java.awt.*;
 
 public class Enemy extends Entity {
 
-    public Enemy(String animationName) {
+    public Enemy(String movementAnimationName) {
 
-        super(animationName);
+        super(movementAnimationName);
+
+    }
+
+    public Enemy(String movementAnimationName, String deathAnimationName) {
+
+        super(movementAnimationName, deathAnimationName);
 
     }
 
     public void update() {
 
-
+        super.update();
 
     }
 

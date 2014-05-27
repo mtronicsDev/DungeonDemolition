@@ -10,22 +10,30 @@ import java.awt.geom.AffineTransform;
 
 public class Player extends Entity {
 
-    public Player(String animationName) {
+    public Player(String movementAnimationName) {
 
-        super(animationName);
+        super(movementAnimationName);
+
+    }
+
+    public Player(String movementAnimationName, String deathAnimationName) {
+
+        super(movementAnimationName, deathAnimationName);
 
     }
 
     public void update() {
+
+        super.update();
 
         float speed = 100;
 
         if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
 
             speed = 200;
-            animation.frameTimeModifier = 0.5f;
+            movementAnimation.frameTimeModifier = 0.5f;
 
-        } else animation.frameTimeModifier = 1;
+        } else movementAnimation.frameTimeModifier = 1;
 
         Vector2f movedSpace = new Vector2f();
 
@@ -38,13 +46,13 @@ public class Player extends Entity {
         if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
 
 
-        movedSpace = Collider.getMovedSpace(this, movedSpace);
+        if (!VectorHelper.areEqual(movedSpace, new Vector2f())) movedSpace = Collider.getMovedSpace(this, movedSpace);
 
-        if (VectorHelper.areEqual(movedSpace, new Vector2f())) animation.update(false);
+        if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
 
         else {
 
-            animation.update(true);
+            movementAnimation.update(true);
 
             Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
@@ -69,7 +77,7 @@ public class Player extends Entity {
         transform.translate(-20, -20);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.drawImage(animation.getCurrentFrame(), transform, null);
+        graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
 
     }
 

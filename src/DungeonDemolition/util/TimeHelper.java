@@ -19,17 +19,6 @@ public class TimeHelper {
         deltaTime = (thisTime - lastTime) / 1000f;
         lastTime = thisTime;
 
-        try {
-
-            Thread.sleep(16);
-
-        } catch (InterruptedException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
-
     }
 
 }
