@@ -42,7 +42,7 @@ public class Main {
                 false
         ));
 
-        ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
+        ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
         ObjectController.currentDungeonMap = 0;
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
