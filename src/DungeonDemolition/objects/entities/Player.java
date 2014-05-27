@@ -14,11 +14,15 @@ public class Player extends Entity {
 
         super(movementAnimationName);
 
+        health = 100;
+
     }
 
     public Player(String movementAnimationName, String deathAnimationName) {
 
         super(movementAnimationName, deathAnimationName);
+
+        health = 100;
 
     }
 
@@ -26,46 +30,50 @@ public class Player extends Entity {
 
         super.update();
 
-        float speed = 100;
+        if (health > 0) {
 
-        if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
+            float speed = 100;
 
-            speed = 200;
-            movementAnimation.frameTimeModifier = 0.5f;
+            if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
 
-        } else movementAnimation.frameTimeModifier = 1;
+                speed = 200;
+                movementAnimation.frameTimeModifier = 0.5f;
 
-        Vector2f movedSpace = new Vector2f();
+            } else movementAnimation.frameTimeModifier = 1;
 
-        if (Input.isKeyPressed(KeyEvent.VK_W)) movedSpace.y -= speed * TimeHelper.deltaTime;
+            Vector2f movedSpace = new Vector2f();
 
-        if (Input.isKeyPressed(KeyEvent.VK_S)) movedSpace.y += speed * TimeHelper.deltaTime;
+            if (Input.isKeyPressed(KeyEvent.VK_W)) movedSpace.y -= speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_A)) movedSpace.x -= speed * TimeHelper.deltaTime;
+            if (Input.isKeyPressed(KeyEvent.VK_S)) movedSpace.y += speed * TimeHelper.deltaTime;
 
-        if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
+            if (Input.isKeyPressed(KeyEvent.VK_A)) movedSpace.x -= speed * TimeHelper.deltaTime;
+
+            if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
 
 
-        if (!VectorHelper.areEqual(movedSpace, new Vector2f())) movedSpace = Collider.getMovedSpace(this, movedSpace);
+            if (!VectorHelper.areEqual(movedSpace, new Vector2f())) movedSpace = Collider.getMovedSpace(this, movedSpace);
 
-        if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
+            if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
 
-        else {
+            else {
 
-            movementAnimation.update(true);
+                movementAnimation.update(true);
 
-            Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
+                Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
-            if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
-            else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
+                else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
+
+            }
+
+            position = VectorHelper.sumVectors(new Vector2f[] {position, movedSpace});
+
+            percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
+                    VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));
 
         }
-
-        position = VectorHelper.sumVectors(new Vector2f[] {position, movedSpace});
-
-        percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
-                VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));
 
     }
 

@@ -8,17 +8,27 @@ public class Enemy extends Entity {
 
         super(movementAnimationName);
 
+        health = 80;
+
     }
 
     public Enemy(String movementAnimationName, String deathAnimationName) {
 
         super(movementAnimationName, deathAnimationName);
 
+        health = 80;
+
     }
 
     public void update() {
 
         super.update();
+
+        if (health > 0) {
+
+
+
+        }
 
     }
 

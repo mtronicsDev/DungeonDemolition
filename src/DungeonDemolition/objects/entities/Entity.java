@@ -8,7 +8,7 @@ import java.awt.*;
 
 public abstract class Entity {
 
-    public Vector2f position;
+    public Vector2f position = new Vector2f();
     public Vector2f percentRotation = new Vector2f();
     public float rotation = 0;
     public Animation movementAnimation;

@@ -8,6 +8,8 @@ import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Collider {
 
@@ -18,9 +20,33 @@ public class Collider {
 
     }
 
-    public static boolean collidingWithSomething(Projectile projectile) {
+    public static Object[] getCollisionData(Projectile projectile) {
 
-        return false;
+        boolean colliding = false;
+        List<Entity> collidingEntities = new ArrayList<Entity>();
+
+        for (Entity entity : ObjectController.entities.values()) {
+
+            if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)),
+                    new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())))) {
+
+                colliding = true;
+                collidingEntities.add(entity);
+
+            }
+
+        }
+
+        for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
+
+            if (areBoxesColliding(new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())),
+                    new Box(dungeonTile.position, new Vector2f(40, 40))))
+
+                colliding = true;
+
+        }
+
+        return new Object[] {colliding, collidingEntities};
 
     }
 
