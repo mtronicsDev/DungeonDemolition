@@ -33,7 +33,7 @@ public class Enemy extends Entity {
 
         if (health > 0) {
 
-            float speed = 120 * TimeHelper.deltaTime;
+            float speed = 150 * TimeHelper.deltaTime;
 
             Vector2f movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
 

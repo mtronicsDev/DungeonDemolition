@@ -28,16 +28,16 @@ public class Main {
 
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[] {
-                    new GUIText(new Vector2i(10, 55), Color.blue, "This is the in-game gui panel,"),
-                    new GUIText(new Vector2i(10, 75), Color.blue, "where weapons and health points will be shown later.")
+                    new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the in-game gui panel,"),
+                    new GUIText(new Vector2i(10, 75), Color.blue, 15, "where weapons and health points will be shown later.")
                 },
                 true
         ));
 
         ObjectController.addGUIPanel("menu", new GUIPanel(
                 new GUIElement[] {
-                        new GUIText(new Vector2i(10, 55), Color.blue, "This is the menu gui panel,"),
-                        new GUIText(new Vector2i(10, 75), Color.blue, "where settings and other things will be shown later.")
+                        new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the menu gui panel,"),
+                        new GUIText(new Vector2i(10, 75), Color.blue, 15, "where settings and other things will be shown later.")
                 },
                 false
         ));
