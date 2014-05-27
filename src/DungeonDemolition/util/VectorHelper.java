@@ -138,7 +138,7 @@ public class VectorHelper {
 
     public static Vector2f multiplyVectorByFloat(Vector2f vector, float multiplier) {
 
-        return multiplyVectors(new Vector2f[] {vector, new Vector2f(multiplier, multiplier)});
+        return multiplyVectors(new Vector2f[]{vector, new Vector2f(multiplier, multiplier)});
 
     }
 

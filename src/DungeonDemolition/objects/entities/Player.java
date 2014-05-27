@@ -2,7 +2,10 @@ package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.physics.Collider;
-import dungeonDemolition.util.*;
+import dungeonDemolition.util.Input;
+import dungeonDemolition.util.TimeHelper;
+import dungeonDemolition.util.Vector2f;
+import dungeonDemolition.util.VectorHelper;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -52,7 +55,8 @@ public class Player extends Entity {
             if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
 
 
-            if (!VectorHelper.areEqual(movedSpace, new Vector2f())) movedSpace = Collider.getMovedSpace(this, movedSpace);
+            if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
+                movedSpace = Collider.getMovedSpace(this, movedSpace);
 
             if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
 
@@ -62,13 +66,14 @@ public class Player extends Entity {
 
                 Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
-                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0)
+                    rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
                 else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
             }
 
-            position = VectorHelper.sumVectors(new Vector2f[] {position, movedSpace});
+            position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
             percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
                     VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));

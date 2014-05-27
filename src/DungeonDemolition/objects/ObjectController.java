@@ -1,11 +1,10 @@
 package dungeonDemolition.objects;
 
-import dungeonDemolition.objects.dungeons.DungeonMap;
 import dungeonDemolition.graphics.Display;
+import dungeonDemolition.objects.dungeons.DungeonMap;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
-import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.projectiles.Projectile;
 

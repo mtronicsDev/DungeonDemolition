@@ -2,10 +2,8 @@ package dungeonDemolition.graphics;
 
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
-import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.util.Input;
-import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.Vector2i;
 
 import javax.swing.*;

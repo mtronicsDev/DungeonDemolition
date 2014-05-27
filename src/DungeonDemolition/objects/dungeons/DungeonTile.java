@@ -24,7 +24,7 @@ public class DungeonTile {
 
             try {
 
-                for (int i = 0; i < 11; i++)
+                for (int i = 0; i < 13; i++)
                     textures.add(ImageIO.read(new File("res/textures/" + i + ".png")));
 
             } catch (Exception e) {
@@ -41,40 +41,48 @@ public class DungeonTile {
 
         switch (id) {
 
-            case 2: passable = false;
+            case 2:
+                passable = false;
                 normals.add(new Vector2f(0, 1));
                 break;
 
-            case 3: passable = false;
+            case 3:
+                passable = false;
                 normals.add(new Vector2f(-1, 0));
                 break;
 
-            case 4: passable = false;
+            case 4:
+                passable = false;
                 normals.add(new Vector2f(0, -1));
                 break;
 
-            case 5: passable = false;
+            case 5:
+                passable = false;
                 normals.add(new Vector2f(1, 0));
                 break;
 
-            case 10: passable = false;
-                normals.add(new Vector2f(0, 1));
-                normals.add(new Vector2f(0, -1));
-                normals.add(new Vector2f(1, 0));
-                normals.add(new Vector2f(-1, 0));
-                break;
-
-            case 12: passable = false;
+            case 10:
+                passable = false;
                 normals.add(new Vector2f(0, 1));
                 normals.add(new Vector2f(0, -1));
                 normals.add(new Vector2f(1, 0));
                 normals.add(new Vector2f(-1, 0));
                 break;
 
-            case 13: passable = false;
+            case 12:
+                passable = false;
+                normals.add(new Vector2f(0, 1));
+                normals.add(new Vector2f(0, -1));
+                normals.add(new Vector2f(1, 0));
+                normals.add(new Vector2f(-1, 0));
                 break;
 
-            default: passable = true;
+            case 13:
+                passable = false;
+                break;
+
+            default:
+                passable = true;
 
         }
 
@@ -82,7 +90,7 @@ public class DungeonTile {
 
     public void render(Graphics graphics) {
 
-        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40 )
+        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
                 || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y))

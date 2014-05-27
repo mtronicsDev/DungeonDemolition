@@ -49,7 +49,7 @@ public abstract class Projectile {
 
         if (alive) {
 
-            position = VectorHelper.sumVectors(new Vector2f[] {position, VectorHelper.multiplyVectorByFloat(speed, TimeHelper.deltaTime)});
+            position = VectorHelper.sumVectors(new Vector2f[]{position, VectorHelper.multiplyVectorByFloat(speed, TimeHelper.deltaTime)});
 
             Object[] collisionData = Collider.getCollisionData(this);
 

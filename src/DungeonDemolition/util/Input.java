@@ -4,14 +4,16 @@ import dungeonDemolition.objects.ObjectController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Input implements KeyListener, MouseListener {
 
+    public static Vector2f mousePosition = new Vector2f();
     private static boolean[] keyStats = new boolean[1024];
     private static boolean[] buttonStats = new boolean[1024];
-
-    public static Vector2f mousePosition = new Vector2f();
 
     public static void update() {
 

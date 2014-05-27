@@ -39,7 +39,8 @@ public class Enemy extends Entity {
 
             Vector2f movedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
 
-            if (!VectorHelper.areEqual(movedSpace, new Vector2f())) movedSpace = Collider.getMovedSpace(this, movedSpace);
+            if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
+                movedSpace = Collider.getMovedSpace(this, movedSpace);
 
             if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
 
@@ -49,13 +50,14 @@ public class Enemy extends Entity {
 
                 Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
-                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0) rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0)
+                    rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
                 else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
             }
 
-            position = VectorHelper.sumVectors(new Vector2f[] {position, movedSpace});
+            position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
         }
 
@@ -63,7 +65,7 @@ public class Enemy extends Entity {
 
     public void render(Graphics graphics) {
 
-        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40 )
+        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
                 || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {

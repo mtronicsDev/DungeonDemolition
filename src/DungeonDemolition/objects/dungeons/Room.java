@@ -17,7 +17,7 @@ public class Room {
     public void generate(Vector2i position, Vector2i size, Direction direction) {
 
         boolean isSpawn = false;
-        if(position == null || size == null || direction == null) {
+        if (position == null || size == null || direction == null) {
             size = new Vector2i(
                     Randomizer.getRandomInt(minSize.x, maxSize.x),
                     Randomizer.getRandomInt(minSize.y, maxSize.y)
@@ -43,13 +43,13 @@ public class Room {
                 else if (x == localMap.length - 1 && y == localMap[0].length - 1) localMap[x][y] = 8;
                 else if (x == 0 && y == localMap[0].length - 1) localMap[x][y] = 9;
 
-                //Walls
+                    //Walls
                 else if (y == 0) localMap[x][y] = 2;
                 else if (x == localMap.length - 1) localMap[x][y] = 3;
                 else if (y == localMap[0].length - 1) localMap[x][y] = 4;
                 else if (x == 0) localMap[x][y] = 5;
 
-                //Floor
+                    //Floor
                 else localMap[x][y] = 1;
 
             }
@@ -67,7 +67,7 @@ public class Room {
         }
 
         //Generate spawn point if necessary
-        if(isSpawn) {
+        if (isSpawn) {
 
             Vector2i spawnPoint = new Vector2i(
                     Randomizer.getRandomInt(1, localMap.length - 2),

@@ -46,7 +46,7 @@ public class Collider {
 
         }
 
-        return new Object[] {colliding, collidingEntities};
+        return new Object[]{colliding, collidingEntities};
 
     }
 
@@ -60,21 +60,21 @@ public class Collider {
 
                 if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)), new Box(dungeonTile.position, new Vector2f(40, 40)))) {
 
-                    Vector2f[] entityBox = new Vector2f[] {
+                    Vector2f[] entityBox = new Vector2f[]{
                             entity.position,
                             new Vector2f(entity.position.x + 40, entity.position.y),
                             new Vector2f(entity.position.x, entity.position.y + 40),
                             new Vector2f(entity.position.x + 40, entity.position.y + 40)
                     };
 
-                    Vector2f[] tileBox = new Vector2f[] {
+                    Vector2f[] tileBox = new Vector2f[]{
                             dungeonTile.position,
                             new Vector2f(dungeonTile.position.x + 40, dungeonTile.position.y),
                             new Vector2f(dungeonTile.position.x, dungeonTile.position.y + 40),
                             new Vector2f(dungeonTile.position.x + 40, dungeonTile.position.y + 40)
                     };
 
-                    float[] differences = new float[] {
+                    float[] differences = new float[]{
                             VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[0], entityBox[2])) + VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[1], entityBox[3])),
                             VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[0], entityBox[1])) + VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[2], entityBox[3])),
                             VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[1], entityBox[0])) + VectorHelper.getLength(VectorHelper.subtractVectors(tileBox[3], entityBox[2])),
@@ -96,32 +96,40 @@ public class Collider {
 
                     switch (smallestDifferenceIndex) {
 
-                        case 0: idealNormal = new Vector2f(0, -1);
+                        case 0:
+                            idealNormal = new Vector2f(0, -1);
                             break;
 
-                        case 1: idealNormal = new Vector2f(-1, 0);
+                        case 1:
+                            idealNormal = new Vector2f(-1, 0);
                             break;
 
-                        case 2: idealNormal = new Vector2f(1, 0);
+                        case 2:
+                            idealNormal = new Vector2f(1, 0);
                             break;
 
-                        case 3: idealNormal = new Vector2f(0, 1);
+                        case 3:
+                            idealNormal = new Vector2f(0, 1);
                             break;
 
-                        default: idealNormal = new Vector2f();
+                        default:
+                            idealNormal = new Vector2f();
 
                     }
 
                     boolean ableToRespond = false;
 
                     for (Vector2f normal : dungeonTile.normals)
-                        if (VectorHelper.getScalarProduct(normal, movedSpace) < 0 && VectorHelper.areEqual(normal, idealNormal)) ableToRespond = true;
+                        if (VectorHelper.getScalarProduct(normal, movedSpace) < 0 && VectorHelper.areEqual(normal, idealNormal))
+                            ableToRespond = true;
 
                     if (ableToRespond) {
 
-                        if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))  movedSpace.y = 0;
+                        if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))
+                            movedSpace.y = 0;
 
-                        else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0))) movedSpace.x = 0;
+                        else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0)))
+                            movedSpace.x = 0;
 
                     }
 
@@ -141,21 +149,21 @@ public class Collider {
 
                     if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)), new Box(collisionEntity.position, new Vector2f(40, 40)))) {
 
-                        Vector2f[] entityBox = new Vector2f[] {
+                        Vector2f[] entityBox = new Vector2f[]{
                                 entity.position,
                                 new Vector2f(entity.position.x + 40, entity.position.y),
                                 new Vector2f(entity.position.x, entity.position.y + 40),
                                 new Vector2f(entity.position.x + 40, entity.position.y + 40)
                         };
 
-                        Vector2f[] collisionEntityBox = new Vector2f[] {
+                        Vector2f[] collisionEntityBox = new Vector2f[]{
                                 collisionEntity.position,
                                 new Vector2f(collisionEntity.position.x + 40, collisionEntity.position.y),
                                 new Vector2f(collisionEntity.position.x, collisionEntity.position.y + 40),
                                 new Vector2f(collisionEntity.position.x + 40, collisionEntity.position.y + 40)
                         };
 
-                        float[] differences = new float[] {
+                        float[] differences = new float[]{
                                 VectorHelper.getLength(VectorHelper.subtractVectors(collisionEntityBox[0], entityBox[2]))
                                         + VectorHelper.getLength(VectorHelper.subtractVectors(collisionEntityBox[1], entityBox[3])),
                                 VectorHelper.getLength(VectorHelper.subtractVectors(collisionEntityBox[0], entityBox[1]))
@@ -181,25 +189,30 @@ public class Collider {
 
                         switch (smallestDifferenceIndex) {
 
-                            case 0: idealNormal = new Vector2f(0, -1);
+                            case 0:
+                                idealNormal = new Vector2f(0, -1);
                                 break;
 
-                            case 1: idealNormal = new Vector2f(-1, 0);
+                            case 1:
+                                idealNormal = new Vector2f(-1, 0);
                                 break;
 
-                            case 2: idealNormal = new Vector2f(1, 0);
+                            case 2:
+                                idealNormal = new Vector2f(1, 0);
                                 break;
 
-                            case 3: idealNormal = new Vector2f(0, 1);
+                            case 3:
+                                idealNormal = new Vector2f(0, 1);
                                 break;
 
-                            default: idealNormal = new Vector2f();
+                            default:
+                                idealNormal = new Vector2f();
 
                         }
 
                         boolean ableToRespond = false;
 
-                        Vector2f[] normals = new Vector2f[] {
+                        Vector2f[] normals = new Vector2f[]{
                                 new Vector2f(0, -1),
                                 new Vector2f(-1, 0),
                                 new Vector2f(1, 0),
@@ -207,13 +220,16 @@ public class Collider {
                         };
 
                         for (Vector2f normal : normals)
-                            if (VectorHelper.getScalarProduct(normal, movedSpace) < 0 && VectorHelper.areEqual(normal, idealNormal)) ableToRespond = true;
+                            if (VectorHelper.getScalarProduct(normal, movedSpace) < 0 && VectorHelper.areEqual(normal, idealNormal))
+                                ableToRespond = true;
 
                         if (ableToRespond) {
 
-                            if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))  movedSpace.y = 0;
+                            if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))
+                                movedSpace.y = 0;
 
-                            else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0))) movedSpace.x = 0;
+                            else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0)))
+                                movedSpace.x = 0;
 
                         }
 
@@ -225,7 +241,7 @@ public class Collider {
 
         }
 
-        return  movedSpace;
+        return movedSpace;
 
     }
 
