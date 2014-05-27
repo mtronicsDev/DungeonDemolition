@@ -1,6 +1,7 @@
 package dungeonDemolition.graphics;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2f;
@@ -60,7 +61,11 @@ public class Display extends JFrame {
         if (ObjectController.currentDungeonMap != -1)
             ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
 
-        ObjectController.entities.get("player").render(graphics);
+        for (Entity entity : ObjectController.entities.values()) {
+
+            entity.render(graphics);
+
+        }
 
         for (GUIElement guiElement : ObjectController.guiElements) {
 
