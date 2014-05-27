@@ -6,6 +6,7 @@ import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.projectiles.Projectile;
 
 import java.util.ArrayList;
@@ -16,18 +17,42 @@ import java.util.Map;
 public class ObjectController {
 
     public static List<Projectile> projectiles = new ArrayList<Projectile>();
-    public static List<GUIElement> guiElements = new ArrayList<GUIElement>();
+    public static Map<String, GUIPanel> guiPanels = new HashMap<String, GUIPanel>();
     public static List<DungeonMap> dungeonMaps = new ArrayList<DungeonMap>();
     public static int currentDungeonMap = -1;
     public static Map<String, Entity> entities = new HashMap<String, Entity>();
     public static int enemyCounter = 0;
     public static Display display;
 
+    public static boolean running = true;
+
+    public static void pause() {
+
+        running = false;
+
+        guiPanels.get("inGame").active = false;
+        guiPanels.get("menu").active = true;
+
+    }
+
+    public static void run() {
+
+        running = true;
+
+        guiPanels.get("inGame").active = true;
+        guiPanels.get("menu").active = false;
+
+    }
+
     public static void updateAll() {
 
-        for (Projectile projectile : projectiles) projectile.update();
+        if (running) {
 
-        for (Entity entity : entities.values()) entity.update();
+            for (Projectile projectile : projectiles) projectile.update();
+
+            for (Entity entity : entities.values()) entity.update();
+
+        }
 
         display.update();
 
@@ -39,9 +64,9 @@ public class ObjectController {
 
     }
 
-    public static void addGUIElement(GUIElement element) {
+    public static void addGUIPanel(String key, GUIPanel panel) {
 
-        guiElements.add(element);
+        guiPanels.put(key, panel);
 
     }
 

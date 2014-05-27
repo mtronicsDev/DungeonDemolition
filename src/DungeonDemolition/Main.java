@@ -6,11 +6,14 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
+import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.util.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Main {
 
@@ -23,8 +26,21 @@ public class Main {
 
         ObjectController.addEnemy(new Enemy("player"));
 
-        ObjectController.addGUIElement(new GUIRectangle(new Vector2i(10, 40), new Vector2i(30, 30), Color.red, true));
-        ObjectController.addGUIElement(new GUIText(new Vector2i(10, 85), Color.blue, "The thing above is a colored gui rectangle."));
+        ObjectController.addGUIPanel("inGame", new GUIPanel(
+                new GUIElement[] {
+                    new GUIText(new Vector2i(10, 55), Color.blue, "This is the in-game gui panel,"),
+                    new GUIText(new Vector2i(10, 75), Color.blue, "where weapons and health points will be shown later.")
+                },
+                true
+        ));
+
+        ObjectController.addGUIPanel("menu", new GUIPanel(
+                new GUIElement[] {
+                        new GUIText(new Vector2i(10, 55), Color.blue, "This is the menu gui panel,"),
+                        new GUIText(new Vector2i(10, 75), Color.blue, "where settings and other things will be shown later.")
+                },
+                false
+        ));
 
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, 20));
         ObjectController.currentDungeonMap = 0;
@@ -37,6 +53,10 @@ public class Main {
         TimeHelper.initialize();
 
         while (true) {
+
+            if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_1)) ObjectController.pause();
+
+            else if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_2)) ObjectController.run();
 
             TimeHelper.update();
             Input.update();

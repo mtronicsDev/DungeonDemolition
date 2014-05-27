@@ -3,6 +3,7 @@ package dungeonDemolition.graphics;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.Vector2i;
@@ -67,9 +68,9 @@ public class Display extends JFrame {
 
         }
 
-        for (GUIElement guiElement : ObjectController.guiElements) {
+        for (GUIPanel panel : ObjectController.guiPanels.values()) {
 
-            guiElement.render(graphics);
+            panel.render(graphics);
 
         }
 
