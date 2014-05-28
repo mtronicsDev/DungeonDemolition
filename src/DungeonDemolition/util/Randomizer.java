@@ -1,6 +1,7 @@
 package dungeonDemolition.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class Randomizer {
 
@@ -9,6 +10,13 @@ public class Randomizer {
     public static int getRandomInt(int min, int max) {
 
         return random.nextInt(max + 1 - min) + min;
+
+    }
+
+    public static String getRandomUUID() {
+
+        UUID randomUUID = UUID.randomUUID();
+        return randomUUID.toString();
 
     }
 
