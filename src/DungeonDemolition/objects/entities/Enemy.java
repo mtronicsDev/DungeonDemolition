@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
@@ -37,7 +38,84 @@ public class Enemy extends Entity {
 
             Vector2f movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
 
-            Vector2f movedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
+            boolean blocked = false;
+            Object[] blockers = new Object[2];
+
+            Vector2f idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
+
+            for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
+
+                if (!dungeonTile.passable) {
+
+                    boolean theoreticallyBlocking = false;
+
+                    for (Vector2f normal : dungeonTile.normals)
+                        if (VectorHelper.getAngle(idealMovedSpace, normal) < Math.toRadians(45)) theoreticallyBlocking = true;
+
+                    if (theoreticallyBlocking) {
+
+                        Vector2f middleTilePosition = VectorHelper.sumVectors(new Vector2f[] {dungeonTile.position, new Vector2f(20, 20)});
+                        Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
+
+                        Vector2f target = VectorHelper.sumVectors(new Vector2f[] {VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)}), idealMovedSpace});
+
+                        Vector2f difference = VectorHelper.subtractVectors(middleTilePosition, middleEnemyPosition);
+
+                        if (VectorHelper.getLength(VectorHelper.subtractVectors(target, middleTilePosition)) <= 88
+                                && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(45)) {
+
+                            blocked = true;
+                            blockers[0] = dungeonTile;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            if (!blocked)
+                for (String key : ObjectController.entities.keySet()) {
+
+                    if (key.startsWith("enemy")) {
+
+                        Enemy enemy = (Enemy) ObjectController.entities.get(key);
+
+                        if (enemy != this) {
+
+                            Vector2f middleCollidingEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {enemy.position, new Vector2f(20, 20)});
+                            Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
+
+                            Vector2f target = VectorHelper.sumVectors(new Vector2f[] {VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)}), idealMovedSpace});
+
+                            Vector2f difference = VectorHelper.subtractVectors(middleCollidingEnemyPosition, middleEnemyPosition);
+
+                            if (VectorHelper.getLength(VectorHelper.subtractVectors(target, middleCollidingEnemyPosition)) <= 88
+                                    && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(30)) {
+
+                                blocked = true;
+                                blockers[1] = enemy;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            Vector2f movedSpace;
+
+            if (!blocked) movedSpace = idealMovedSpace;
+
+            else {
+
+                //System.out.println("not able to move forward");
+
+                movedSpace = idealMovedSpace;
+
+            }
 
             if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
                 movedSpace = Collider.getMovedSpace(this, movedSpace);

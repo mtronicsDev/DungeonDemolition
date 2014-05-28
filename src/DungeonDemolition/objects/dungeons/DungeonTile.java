@@ -61,14 +61,6 @@ public class DungeonTile {
                 normals.add(new Vector2f(1, 0));
                 break;
 
-            case 10:
-                passable = false;
-                normals.add(new Vector2f(0, 1));
-                normals.add(new Vector2f(0, -1));
-                normals.add(new Vector2f(1, 0));
-                normals.add(new Vector2f(-1, 0));
-                break;
-
             case 12:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
