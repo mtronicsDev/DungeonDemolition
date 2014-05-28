@@ -21,4 +21,17 @@ public class TimeHelper {
 
     }
 
+    public static void wait(float seconds) {
+
+        try {
+
+            Thread.sleep((long)(seconds * 1000));
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+    }
+
 }

@@ -6,6 +6,7 @@ import dungeonDemolition.objects.dungeons.DungeonGenerator;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
+import dungeonDemolition.objects.gui.GUIButton;
 import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.gui.GUIText;
@@ -21,21 +22,38 @@ public class Main {
         Display display = new Display("Dungeon Demolition", 1070, 600);
         ObjectController.setDisplay(display);
 
+        TimeHelper.initialize();
+
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the in-game gui panel,"),
                         new GUIText(new Vector2i(10, 75), Color.blue, 15, "where weapons and health points will be shown later.")
                 },
-                true
+                false
         ));
 
         ObjectController.addGUIPanel("menu", new GUIPanel(
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the menu gui panel,"),
-                        new GUIText(new Vector2i(10, 75), Color.blue, 15, "where settings and other things will be shown later.")
+                        new GUIText(new Vector2i(10, 75), Color.blue, 15, "where settings and other things will be shown later."),
+                        new GUIButton(new Vector2i(10, 95), new Vector2i(400, 150), Color.orange, Color.black, "Start the game!")
                 },
-                false
+                true
         ));
+
+        boolean isGameStarted;
+        GUIButton button = (GUIButton)ObjectController.guiPanels.get("menu").guiElements.get(2);
+
+        do {
+            isGameStarted = button.isPressed();
+
+            TimeHelper.update();
+            Input.update();
+            ObjectController.updateAll();
+        }
+        while (!isGameStarted);
+
+        ObjectController.run();
 
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
@@ -51,8 +69,6 @@ public class Main {
                 ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);
             }
-
-        TimeHelper.initialize();
 
         while (true) {
 

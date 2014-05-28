@@ -23,7 +23,7 @@ public class ObjectController {
     public static int enemyCounter = 0;
     public static Display display;
 
-    public static boolean running = true;
+    public static boolean running = false;
 
     public static void pause() {
 
@@ -48,7 +48,6 @@ public class ObjectController {
         if (running) {
 
             for (Projectile projectile : projectiles) projectile.update();
-
             for (Entity entity : entities.values()) entity.update();
 
         }
