@@ -5,6 +5,7 @@ import dungeonDemolition.util.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class GUIButton extends GUIElement{
         this.color = color;
         this.textColor = textColor;
         this.text = text;
-        textSize = size.y - 2;
+        textSize = 15;
 
     }
 
@@ -68,12 +69,13 @@ public class GUIButton extends GUIElement{
 
         graphics.setFont(new Font("Arial", Font.PLAIN, textSize));
         graphics.setColor(textColor);
-        graphics.drawString(text, position.x, position.y);
+        graphics.drawString(text, position.x, position.y + size.y / 2);
 
         pressed = Input.mousePosition.x >= position.x &&
                 Input.mousePosition.x <= position.x + size.x &&
                 Input.mousePosition.y >= position.y &&
-                Input.mousePosition.y <= position.y + size.y;
+                Input.mousePosition.y <= position.y + size.y &&
+                Input.isButtonPressed(MouseEvent.BUTTON1);
 
 
     }
