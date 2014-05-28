@@ -23,8 +23,6 @@ public class Main {
 
         ObjectController.setPlayer(new Player("player"));
 
-        ObjectController.addEnemy(new Enemy("enemy"));
-
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the in-game gui panel,"),
@@ -46,7 +44,13 @@ public class Main {
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
                 ObjectController.entities.get("player").position = new Vector2f(tile.position);
-                ObjectController.entities.get("enemy0").position = VectorHelper.subtractVectors(tile.position, new Vector2f(500, 500));
+            }
+
+        for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
+            if (tile.id == 11) {
+                Enemy enemy = new Enemy("enemy");
+                ObjectController.addEnemy(enemy);
+                enemy.position = new Vector2f(tile.position);
             }
 
         TimeHelper.initialize();

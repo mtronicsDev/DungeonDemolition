@@ -5,8 +5,8 @@ import dungeonDemolition.util.Vector2i;
 
 public class Room {
 
-    private static Vector2i minSize = new Vector2i(7, 7);
-    private static Vector2i maxSize = new Vector2i(24, 24);
+    private static Vector2i minSize = new Vector2i(5, 5);
+    private static Vector2i maxSize = new Vector2i(26, 26);
 
     public void generate() {
 
@@ -56,7 +56,7 @@ public class Room {
         }
 
         //Loot & stuff
-        int iterations = size.x * size.y / 50;
+        int iterations = Randomizer.getRandomInt(size.x * size.y / 200, size.x * size.y / 75);
         for (int i = 0; i < iterations; i++) {
             Vector2i featurePoint = new Vector2i(
                     Randomizer.getRandomInt(1, localMap.length - 2),
@@ -64,6 +64,17 @@ public class Room {
             );
 
             localMap[featurePoint.x][featurePoint.y] = 12;
+        }
+
+        //Monster spawners
+        int spawners = Randomizer.getRandomInt(size.x * size.y / 200, size.x * size.y / 75);
+        for (int i = 0; i < iterations; i++) {
+            Vector2i featurePoint = new Vector2i(
+                    Randomizer.getRandomInt(1, localMap.length - 2),
+                    Randomizer.getRandomInt(1, localMap[0].length - 2)
+            );
+
+            localMap[featurePoint.x][featurePoint.y] = 11;
         }
 
         //Generate spawn point if necessary
@@ -84,7 +95,7 @@ public class Room {
                 Randomizer.getRandomInt(minSize.x, maxSize.x),
                 Randomizer.getRandomInt(minSize.y, maxSize.y)
         );
-        /*boolean isDirectionAvailable;
+        boolean isDirectionAvailable;
 
         switch (nextDirection) {
 
@@ -92,7 +103,7 @@ public class Room {
                 int offset = Randomizer.getRandomInt(1, size.x - 2);
 
 
-        }*/
+        }
 
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
