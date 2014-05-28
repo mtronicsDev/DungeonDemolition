@@ -73,6 +73,8 @@ public class ObjectController {
 
         dungeonMaps.add(dungeonMap);
 
+        currentDungeonMap = dungeonMaps.size() - 1;
+
     }
 
     public static void addEnemy(Enemy enemy) {

@@ -60,23 +60,17 @@ public class Player extends Entity {
 
             if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
 
-            else {
-
-                movementAnimation.update(true);
-
-                Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
-
-                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0)
-                    rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
-
-                else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
-
-            }
+            else  movementAnimation.update(true);
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
-            percentRotation = VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
-                    VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)));
+            percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
+                    VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2))));
+
+            if (VectorHelper.getScalarProduct(percentRotation, new Vector2f(1, 0)) <= 0)
+                rotation = VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
+
+            else rotation = -VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
 
         }
 

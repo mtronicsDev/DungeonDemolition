@@ -7,6 +7,8 @@ import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -39,7 +41,7 @@ public class Enemy extends Entity {
             Vector2f movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
 
             boolean blocked = false;
-            Object[] blockers = new Object[2];
+            List<Vector2f> blockerPositions = new ArrayList<Vector2f>();
 
             Vector2f idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
 
@@ -65,7 +67,7 @@ public class Enemy extends Entity {
                                 && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(45)) {
 
                             blocked = true;
-                            blockers[0] = dungeonTile;
+                            blockerPositions.add(dungeonTile.position);
 
                         }
 
@@ -95,7 +97,7 @@ public class Enemy extends Entity {
                                     && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(30)) {
 
                                 blocked = true;
-                                blockers[1] = enemy;
+                                blockerPositions.add(enemy.position);
 
                             }
 
@@ -110,6 +112,8 @@ public class Enemy extends Entity {
             if (!blocked) movedSpace = idealMovedSpace;
 
             else {
+
+
 
                 //System.out.println("not able to move forward");
 

@@ -21,8 +21,6 @@ public class Main {
         Display display = new Display("Dungeon Demolition", 1070, 600);
         ObjectController.setDisplay(display);
 
-        ObjectController.setPlayer(new Player("player"));
-
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the in-game gui panel,"),
@@ -40,10 +38,11 @@ public class Main {
         ));
 
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
-        ObjectController.currentDungeonMap = 0;
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
-                ObjectController.entities.get("player").position = new Vector2f(tile.position);
+                Player player = new Player("player");
+                ObjectController.setPlayer(player);
+                player.position = new Vector2f(tile.position);
             }
 
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
