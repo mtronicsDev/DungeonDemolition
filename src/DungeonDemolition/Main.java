@@ -6,10 +6,7 @@ import dungeonDemolition.objects.dungeons.DungeonGenerator;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
-import dungeonDemolition.objects.gui.GUIButton;
-import dungeonDemolition.objects.gui.GUIElement;
-import dungeonDemolition.objects.gui.GUIPanel;
-import dungeonDemolition.objects.gui.GUIText;
+import dungeonDemolition.objects.gui.*;
 import dungeonDemolition.util.*;
 
 import java.awt.*;
@@ -61,6 +58,7 @@ public class Main {
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
                 Player player = new Player();
+                ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
                 ObjectController.setPlayer(player);
                 player.position = new Vector2f(tile.position);
             }
@@ -68,6 +66,7 @@ public class Main {
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 11) {
                 Enemy enemy = new Enemy("alligatorMovement");
+                ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
                 ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);
             }

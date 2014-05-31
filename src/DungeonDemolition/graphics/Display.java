@@ -55,7 +55,7 @@ public class Display extends JFrame {
 
         Graphics graphics = bufferStrategy.getDrawGraphics();
 
-        graphics.setColor(Color.green);
+        graphics.setColor(Color.black);
         graphics.fillRect(0, 0, size.x, size.y);
 
         if (ObjectController.currentDungeonMap != -1)

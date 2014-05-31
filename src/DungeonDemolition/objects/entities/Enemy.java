@@ -18,6 +18,7 @@ public class Enemy extends Entity {
 
         super(movementAnimationName);
 
+        maxHealth = 80;
         health = 80;
 
     }
@@ -26,6 +27,7 @@ public class Enemy extends Entity {
 
         super(movementAnimationName, deathAnimationName);
 
+        maxHealth = 80;
         health = 80;
 
     }

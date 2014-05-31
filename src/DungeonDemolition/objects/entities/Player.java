@@ -22,7 +22,16 @@ public class Player extends Entity {
     public Player() {
 
         super("playerMovement");
+        maxHealth = 100;
+        health = 100;
 
+    }
+
+    public Player(String movementAnimationName, String deathAnimationName) {
+
+        super(movementAnimationName, deathAnimationName);
+
+        maxHealth = 100;
         health = 100;
 
     }

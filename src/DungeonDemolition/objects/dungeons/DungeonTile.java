@@ -30,7 +30,7 @@ public class DungeonTile {
 
         switch (id) {
 
-            case 2:
+            /*case 2:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
                 break;
@@ -60,7 +60,7 @@ public class DungeonTile {
 
             case 13:
                 passable = false;
-                break;
+                break;*/
 
             default:
                 passable = true;

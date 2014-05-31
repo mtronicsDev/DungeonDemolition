@@ -12,6 +12,7 @@ public abstract class Entity {
     public Vector2f percentRotation = new Vector2f();
     public float rotation = 0;
     public Animation movementAnimation;
+    public float maxHealth = 10;
     public float health;
     public Animation deathAnimation;
 
