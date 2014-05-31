@@ -6,7 +6,7 @@ import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.GUIPanel;
-import dungeonDemolition.objects.projectiles.Projectile;
+import dungeonDemolition.objects.weapons.projectiles.Projectile;
 
 import java.util.ArrayList;
 import java.util.HashMap;

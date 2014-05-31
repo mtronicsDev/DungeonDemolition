@@ -12,69 +12,38 @@ import java.io.IOException;
 
 public class GUIButton extends GUIElement{
 
-    public Vector2i size;
-    public int textSize;
-    public BufferedImage texture;
-    public Color color;
-    public Color textColor;
-    public String text;
+    public GUIRectangle rectangle;
+    public GUIText text;
     private boolean pressed = false;
 
     public GUIButton(Vector2i position, Vector2i size, Color color, Color textColor, String text) {
 
         super(position);
-        this.size = size;
-        this.color = color;
-        this.textColor = textColor;
-        this.text = text;
-        textSize = 15;
+
+        this.rectangle = new GUIRectangle(position, size, color, true);
+        this.text = new GUIText(new Vector2i(position.x, position.y + size.y / 2), textColor, 15, text);
 
     }
 
     public GUIButton(Vector2i position, Vector2i size, String textureName, Color textColor, String text) {
 
         super(position);
-        this.size = size;
-        this.textColor = textColor;
-        this.text = text;
-        textSize = 15;
 
-        try {
-
-            texture = ImageIO.read(new File("res/textures/" + textureName + ".png"));
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
+        this.rectangle = new GUIRectangle(position, size, textureName);
+        this.text = new GUIText(new Vector2i(position.x, position.y + size.y / 2), textColor, 15, text);
 
     }
 
     @Override
     public void render(Graphics graphics) {
 
-        if (color != null) {
-
-            graphics.setColor(color);
-            graphics.fillRect(position.x, position.y, size.x, size.y);
-
-        } else {
-
-            if (size == null) graphics.drawImage(texture, position.x, position.y, null);
-            else graphics.drawImage(texture, position.x, position.y, size.x, size.y, null);
-
-        }
-
-        graphics.setFont(new Font("Arial", Font.PLAIN, textSize));
-        graphics.setColor(textColor);
-        graphics.drawString(text, position.x, position.y + size.y / 2);
+        rectangle.render(graphics);
+        text.render(graphics);
 
         pressed = Input.mousePosition.x >= position.x &&
-                Input.mousePosition.x <= position.x + size.x &&
+                Input.mousePosition.x <= position.x + rectangle.size.x &&
                 Input.mousePosition.y >= position.y &&
-                Input.mousePosition.y <= position.y + size.y &&
+                Input.mousePosition.y <= position.y + rectangle.size.y &&
                 Input.isButtonPressed(MouseEvent.BUTTON1);
 
 

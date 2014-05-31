@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.dungeons;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2f;
 
 import javax.imageio.ImageIO;
@@ -20,21 +21,9 @@ public class DungeonTile {
 
     public DungeonTile(byte id, Vector2f position) {
 
-        if (textures.size() == 0) {
-
-            try {
-
-                for (int i = 0; i < 13; i++)
-                    textures.add(ImageIO.read(new File("res/textures/" + i + ".png")));
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-                System.exit(1);
-
-            }
-
-        }
+        if (textures.size() == 0)
+            for (int i = 0; i < 13; i++)
+                textures.add(TextureHelper.loadImage(String.valueOf(i)));
 
         this.position = position;
         this.id = id;

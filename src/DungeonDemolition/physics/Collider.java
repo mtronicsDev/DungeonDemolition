@@ -3,7 +3,7 @@ package dungeonDemolition.physics;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Entity;
-import dungeonDemolition.objects.projectiles.Projectile;
+import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
 

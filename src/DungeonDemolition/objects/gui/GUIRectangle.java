@@ -1,5 +1,6 @@
 package dungeonDemolition.objects.gui;
 
+import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2i;
 
 import javax.imageio.ImageIO;
@@ -27,16 +28,7 @@ public class GUIRectangle extends GUIElement {
 
         this.size = size;
 
-        try {
-
-            texture = ImageIO.read(new File("res/textures/" + textureName + ".png"));
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-
-        }
+        texture = TextureHelper.loadImage(textureName);
 
     }
 

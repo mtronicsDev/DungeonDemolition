@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.weapons.Weapon;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.TimeHelper;
@@ -10,20 +11,17 @@ import dungeonDemolition.util.VectorHelper;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity {
 
-    public Player(String movementAnimationName) {
+    public List<Weapon> weapons = new ArrayList<Weapon>();
+    public int currentWeapon = -1;
 
-        super(movementAnimationName);
+    public Player() {
 
-        health = 100;
-
-    }
-
-    public Player(String movementAnimationName, String deathAnimationName) {
-
-        super(movementAnimationName, deathAnimationName);
+        super("playerMovement");
 
         health = 100;
 
@@ -64,13 +62,17 @@ public class Player extends Entity {
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
-            percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
-                    VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2))));
+            if (!VectorHelper.areEqual(VectorHelper.subtractVectors(Input.mousePosition, VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)), new Vector2f())) {
 
-            if (VectorHelper.getScalarProduct(percentRotation, new Vector2f(1, 0)) <= 0)
-                rotation = VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
+                percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
+                        VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2))));
 
-            else rotation = -VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
+                if (VectorHelper.getScalarProduct(percentRotation, new Vector2f(1, 0)) <= 0)
+                    rotation = VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
+
+                else rotation = -VectorHelper.getAngle(percentRotation, new Vector2f(0, 1));
+
+            }
 
         }
 

@@ -3,6 +3,7 @@ package dungeonDemolition.graphics;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIPanel;
+import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2i;
 
@@ -60,17 +61,14 @@ public class Display extends JFrame {
         if (ObjectController.currentDungeonMap != -1)
             ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).render(graphics);
 
-        for (Entity entity : ObjectController.entities.values()) {
+        for (Projectile projectile : ObjectController.projectiles)
+            projectile.render(graphics);
 
+        for (Entity entity : ObjectController.entities.values())
             entity.render(graphics);
 
-        }
-
-        for (GUIPanel panel : ObjectController.guiPanels.values()) {
-
+        for (GUIPanel panel : ObjectController.guiPanels.values())
             panel.render(graphics);
-
-        }
 
         graphics.dispose();
         bufferStrategy.show();

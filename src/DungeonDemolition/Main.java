@@ -27,7 +27,7 @@ public class Main {
         ObjectController.addGUIPanel("inGame", new GUIPanel(
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the in-game gui panel,"),
-                        new GUIText(new Vector2i(10, 75), Color.blue, 15, "where weapons and health points will be shown later.")
+                        new GUIText(new Vector2i(10, 75), Color.blue, 15, "where weapons and health points will be shown later."),
                 },
                 false
         ));
@@ -45,11 +45,13 @@ public class Main {
         GUIButton button = (GUIButton)ObjectController.guiPanels.get("menu").guiElements.get(2);
 
         do {
+
+            Input.update();
+            TimeHelper.update();
+            display.update();
+
             isGameStarted = button.isPressed();
 
-            TimeHelper.update();
-            Input.update();
-            ObjectController.updateAll();
         }
         while (!isGameStarted);
 
@@ -58,21 +60,22 @@ public class Main {
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
-                Player player = new Player("player");
+                Player player = new Player();
                 ObjectController.setPlayer(player);
                 player.position = new Vector2f(tile.position);
             }
 
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 11) {
-                Enemy enemy = new Enemy("alligator");
+                Enemy enemy = new Enemy("alligatorMovement");
                 ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);
             }
 
         while (true) {
 
-            if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_1)) ObjectController.pause();
+            if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_1))
+                ObjectController.pause();
 
             else if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_2))
                 ObjectController.run();

@@ -1,4 +1,4 @@
-package dungeonDemolition.objects.projectiles;
+package dungeonDemolition.objects.weapons.projectiles;
 
 import dungeonDemolition.util.Vector2f;
 

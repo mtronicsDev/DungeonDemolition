@@ -1,5 +1,6 @@
 package dungeonDemolition.graphics;
 
+import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Timer;
 
 import javax.imageio.ImageIO;
@@ -30,7 +31,7 @@ public class Animation {
 
             while ((line = reader.readLine()) != null) {
 
-                frames.add(ImageIO.read(new File("res/textures/" + line.split(" ")[0] + ".png")));
+                frames.add(TextureHelper.loadImage(line.split(" ")[0]));
                 animationFrameTimes.add(Float.valueOf(line.split(" ")[1]));
 
             }
