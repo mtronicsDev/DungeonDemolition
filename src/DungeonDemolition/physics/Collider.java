@@ -3,6 +3,7 @@ package dungeonDemolition.physics;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Entity;
+import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
@@ -27,19 +28,20 @@ public class Collider {
 
         for (Entity entity : ObjectController.entities.values()) {
 
-            if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)),
-                    new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())))) {
+            if (!(entity instanceof Player))
+                if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)),
+                        new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())))) {
 
-                colliding = true;
-                collidingEntities.add(entity);
+                    colliding = true;
+                    collidingEntities.add(entity);
 
-            }
+                }
 
         }
 
         for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
 
-            if (areBoxesColliding(new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())),
+            if (!dungeonTile.passable && areBoxesColliding(new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())),
                     new Box(dungeonTile.position, new Vector2f(40, 40))))
 
                 colliding = true;

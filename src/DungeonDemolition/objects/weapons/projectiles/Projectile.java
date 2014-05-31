@@ -41,7 +41,7 @@ public abstract class Projectile {
 
     public void update() {
 
-        if (!texturesFlipped) {
+        /*if (!texturesFlipped) {
 
             float angle;
 
@@ -51,10 +51,8 @@ public abstract class Projectile {
             else angle = -VectorHelper.getAngle(speed, new Vector2f(0, 1));
 
             AffineTransform transform = new AffineTransform();
-            transform.translate((int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2,
-                    (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2);
+            transform.translate(40, 40);
             transform.rotate(angle);
-            transform.translate(-20, -20);
 
             AffineTransformOp affineTransformOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 
@@ -66,7 +64,7 @@ public abstract class Projectile {
 
             texturesFlipped = true;
 
-        }
+        }*/
 
         if (alive) {
 
@@ -105,10 +103,10 @@ public abstract class Projectile {
 
             if (destructiveAnimation != null)
                 if (destructiveAnimation.oneLoopPassed)
-                    ObjectController.projectiles.remove(this);
+                    ObjectController.projectilesToRemove.add(this);
                 else destructiveAnimation.update(true);
 
-            else ObjectController.projectiles.remove(this);
+            else ObjectController.projectilesToRemove.add(this);
 
         }
 
@@ -124,13 +122,26 @@ public abstract class Projectile {
 
     public void render(Graphics graphics) {
 
-        if (alive) graphics.drawImage(texture, (int) (position.x - texture.getWidth() / 2), (int) (position.y - texture.getHeight()), null);
+        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
+                || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
+                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
+                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
-        else if (destructiveAnimation != null) {
+            if (alive) graphics.drawImage(texture,
+                    (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - texture.getWidth(),
+                    (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - texture.getHeight(),
+                    null);
 
-            BufferedImage currentFrame = destructiveAnimation.getCurrentFrame();
+            else if (destructiveAnimation != null) {
 
-            graphics.drawImage(currentFrame, (int) (position.x - currentFrame.getWidth() / 2), (int) (position.y - currentFrame.getHeight()), null);
+                BufferedImage currentFrame = destructiveAnimation.getCurrentFrame();
+
+                graphics.drawImage(currentFrame,
+                        (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - currentFrame.getWidth(),
+                        (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - currentFrame.getHeight(),
+                        null);
+
+            }
 
         }
 

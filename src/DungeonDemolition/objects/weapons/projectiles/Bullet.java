@@ -6,7 +6,7 @@ public class Bullet extends Projectile {
 
     public Bullet(Vector2f position, Vector2f speed) {
 
-        super(position, speed, 12, 0, null, "0");
+        super(position, speed, 4, 0, null, "10");
 
     }
 

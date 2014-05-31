@@ -7,10 +7,12 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.*;
+import dungeonDemolition.objects.weapons.projectiles.Bullet;
 import dungeonDemolition.util.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public class Main {
 
@@ -72,6 +74,10 @@ public class Main {
             }
 
         while (true) {
+
+            if (Input.isButtonPressed(MouseEvent.BUTTON1)) ObjectController.addProjectile(new Bullet(VectorHelper.subtractVectors(ObjectController.entities.get("player").position,
+                    new Vector2f(-20, -20)),
+                    VectorHelper.multiplyVectorByFloat(ObjectController.entities.get("player").percentRotation, -500)));
 
             if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_1))
                 ObjectController.pause();

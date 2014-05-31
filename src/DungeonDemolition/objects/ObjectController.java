@@ -16,6 +16,7 @@ import java.util.Map;
 public class ObjectController {
 
     public static List<Projectile> projectiles = new ArrayList<Projectile>();
+    public static List<Projectile> projectilesToRemove = new ArrayList<Projectile>();
     public static Map<String, GUIPanel> guiPanels = new HashMap<String, GUIPanel>();
     public static List<DungeonMap> dungeonMaps = new ArrayList<DungeonMap>();
     public static int currentDungeonMap = -1;
@@ -47,8 +48,13 @@ public class ObjectController {
 
         if (running) {
 
+            projectilesToRemove.clear();
+
             for (Projectile projectile : projectiles) projectile.update();
             for (Entity entity : entities.values()) entity.update();
+
+            for (Projectile projectile : projectilesToRemove)
+                projectiles.remove(projectile);
 
         }
 
