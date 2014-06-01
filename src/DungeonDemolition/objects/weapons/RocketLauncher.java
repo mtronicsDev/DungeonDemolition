@@ -9,15 +9,23 @@ public class RocketLauncher extends Weapon {
 
     public RocketLauncher() {
 
-        super("11", 1, 3);
+        super("11", 0, 3);
+
+        automaticallyShooting = false;
+        maxRemainingAmmoCount = 3;
+        remainingAmmoCount = 3;
+        maxCurrentAmmoCount = 1;
+        currentAmmoCount = 1;
 
     }
 
     public void shoot() {
 
+        super.shoot();
+
         ObjectController.projectiles.add(new Rocket(
                 new Vector2f(ObjectController.entities.get("player").position),
-                VectorHelper.multiplyVectorByFloat(ObjectController.entities.get("player").percentRotation, 10)
+                ObjectController.entities.get("player").percentRotation
         ));
 
     }

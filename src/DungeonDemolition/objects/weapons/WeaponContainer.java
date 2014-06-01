@@ -30,6 +30,12 @@ public class WeaponContainer {
 
     }
 
+    public void update() {
+
+        getCurrentWeapon().update();
+
+    }
+
     public Weapon getCurrentWeapon() {
 
         if (weapons.size() == 0) return null;

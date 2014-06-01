@@ -3,19 +3,18 @@ package dungeonDemolition.objects.weapons;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.weapons.projectiles.Bullet;
 import dungeonDemolition.util.Vector2f;
-import dungeonDemolition.util.VectorHelper;
 
-public class Pistol extends Weapon {
+public class MachineGun extends Weapon {
 
-    public Pistol() {
+    public MachineGun() {
 
-        super("10", 0.1f, 0.5f);
+        super("8", 0.1f, 2);
 
-        automaticallyShooting = false;
-        maxRemainingAmmoCount = 100;
-        remainingAmmoCount = 100;
-        maxCurrentAmmoCount = 10;
-        currentAmmoCount = 10;
+        automaticallyShooting = true;
+        maxRemainingAmmoCount = 500;
+        remainingAmmoCount = 500;
+        maxCurrentAmmoCount = 50;
+        currentAmmoCount = 50;
 
     }
 
