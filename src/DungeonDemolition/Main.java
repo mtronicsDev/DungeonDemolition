@@ -62,6 +62,7 @@ public class Main {
                 Player player = new Player();
                 player.weaponContainer.addWeapon(new RocketLauncher())
                         .addWeapon(new MachineGun())
+                        .addWeapon(new Shotgun())
                         .addWeapon(new Pistol());
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
                 ObjectController.setPlayer(player);
