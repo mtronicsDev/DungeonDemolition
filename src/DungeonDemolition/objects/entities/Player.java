@@ -1,20 +1,21 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
 import dungeonDemolition.objects.weapons.WeaponContainer;
 import dungeonDemolition.physics.Collider;
-import dungeonDemolition.util.Input;
 import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
+import dungeonDemolition.util.Vector2i;
 import dungeonDemolition.util.VectorHelper;
+import dungeonDemolition.util.input.Input;
+import dungeonDemolition.util.input.InputListener;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Player extends Entity {
 
@@ -36,7 +37,9 @@ public class Player extends Entity {
         if (health > 0) {
 
             for (int count = 0; count < weaponContainer.weapons.size(); count++)
-                if (Input.isKeyPressed(Input.getKeyCode(String.valueOf(count + 1)))) weaponContainer.currentWeapon = count;
+                if (Input.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) weaponContainer.currentWeapon = count;
+
+            weaponContainer.update();
 
             float speed = super.speed;
 
@@ -94,8 +97,24 @@ public class Player extends Entity {
 
         Weapon currentWeapon = weaponContainer.getCurrentWeapon();
 
-        if (currentWeapon != null)
+        if (currentWeapon != null) {
+
             if (!(currentWeapon instanceof RocketLauncher)) graphics2D.drawImage(currentWeapon.texture, transform, null);
+
+            if (currentWeapon.neededToBeReloaded)
+                new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 50, ObjectController.display.size.y - 100),
+                        Color.blue, 15,
+                        "R: reload").render(graphics);
+
+            new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 100),
+                    Color.blue, 15,
+                    currentWeapon.currentAmmoCount + " / " + currentWeapon.maxCurrentAmmoCount).render(graphics);
+
+            new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 80),
+                    Color.blue, 15,
+                    currentWeapon.remainingAmmoCount + " / " + currentWeapon.maxRemainingAmmoCount).render(graphics);
+
+        }
 
         graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
 
