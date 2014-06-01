@@ -10,8 +10,8 @@ import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.Vector2i;
 import dungeonDemolition.util.VectorHelper;
-import dungeonDemolition.util.input.InputInformation;
-import dungeonDemolition.util.input.InputListener;
+import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.InputListener;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
