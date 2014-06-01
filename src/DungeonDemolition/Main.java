@@ -7,16 +7,12 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.*;
-import dungeonDemolition.objects.weapons.Flamethrower;
-import dungeonDemolition.objects.weapons.Pistol;
-import dungeonDemolition.objects.weapons.RocketLauncher;
-import dungeonDemolition.objects.weapons.Shotgun;
-import dungeonDemolition.objects.weapons.projectiles.Bullet;
+import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.util.*;
+import dungeonDemolition.util.input.Input;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class Main {
 
@@ -65,8 +61,7 @@ public class Main {
             if (tile.id == 10) {
                 Player player = new Player();
                 player.weaponContainer.addWeapon(new RocketLauncher())
-                        .addWeapon(new Shotgun())
-                        .addWeapon(new Flamethrower())
+                        .addWeapon(new MachineGun())
                         .addWeapon(new Pistol());
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
                 ObjectController.setPlayer(player);
@@ -82,6 +77,14 @@ public class Main {
             }
 
         while (true) {
+
+            if (Input.isKeyDown(KeyEvent.VK_ESCAPE)) {
+
+                if (ObjectController.running) ObjectController.pause();
+
+                else ObjectController.run();
+
+            }
 
             TimeHelper.update();
             Input.update();
