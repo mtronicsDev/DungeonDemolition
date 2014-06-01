@@ -1,7 +1,7 @@
 package dungeonDemolition.objects.gui;
 
 import dungeonDemolition.util.Vector2i;
-import dungeonDemolition.util.input.InputInformation;
+import dungeonDemolition.util.InputInformation;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

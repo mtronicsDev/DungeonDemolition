@@ -4,9 +4,8 @@ import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
-import dungeonDemolition.util.input.InputListener;
+import dungeonDemolition.util.InputListener;
 import dungeonDemolition.util.Vector2i;
-import dungeonDemolition.util.input.InputListener;
 
 import javax.swing.*;
 import java.awt.*;

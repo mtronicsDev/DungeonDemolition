@@ -9,7 +9,7 @@ import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.*;
 import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.util.*;
-import dungeonDemolition.util.input.InputInformation;
+import dungeonDemolition.util.InputInformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

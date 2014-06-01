@@ -2,7 +2,7 @@ package dungeonDemolition.objects.weapons;
 
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Timer;
-import dungeonDemolition.util.input.InputInformation;
+import dungeonDemolition.util.InputInformation;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
