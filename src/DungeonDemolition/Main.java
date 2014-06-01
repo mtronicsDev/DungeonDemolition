@@ -7,6 +7,10 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.*;
+import dungeonDemolition.objects.weapons.Flamethrower;
+import dungeonDemolition.objects.weapons.Pistol;
+import dungeonDemolition.objects.weapons.RocketLauncher;
+import dungeonDemolition.objects.weapons.Shotgun;
 import dungeonDemolition.objects.weapons.projectiles.Bullet;
 import dungeonDemolition.util.*;
 
@@ -60,6 +64,10 @@ public class Main {
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 10) {
                 Player player = new Player();
+                player.weaponContainer.addWeapon(new RocketLauncher())
+                        .addWeapon(new Shotgun())
+                        .addWeapon(new Flamethrower())
+                        .addWeapon(new Pistol());
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
                 ObjectController.setPlayer(player);
                 player.position = new Vector2f(tile.position);
@@ -67,23 +75,13 @@ public class Main {
 
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 11) {
-                Enemy enemy = new Enemy("alligatorMovement");
+                Enemy enemy = new Enemy("alligatorMovement", 50);
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
                 ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);
             }
 
         while (true) {
-
-            if (Input.isButtonPressed(MouseEvent.BUTTON1)) ObjectController.addProjectile(new Bullet(VectorHelper.subtractVectors(ObjectController.entities.get("player").position,
-                    new Vector2f(-20, -20)),
-                    VectorHelper.multiplyVectorByFloat(ObjectController.entities.get("player").percentRotation, -500)));
-
-            if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_1))
-                ObjectController.pause();
-
-            else if (Input.isKeyPressed(KeyEvent.VK_ESCAPE) && Input.isKeyPressed(KeyEvent.VK_2))
-                ObjectController.run();
 
             TimeHelper.update();
             Input.update();

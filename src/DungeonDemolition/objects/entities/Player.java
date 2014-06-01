@@ -1,7 +1,9 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
+import dungeonDemolition.objects.weapons.WeaponContainer;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.Input;
 import dungeonDemolition.util.TimeHelper;
@@ -16,23 +18,14 @@ import java.util.List;
 
 public class Player extends Entity {
 
-    public List<Weapon> weapons = new ArrayList<Weapon>();
-    public int currentWeapon = -1;
+    public WeaponContainer weaponContainer;
 
     public Player() {
 
-        super("playerMovement");
+        super("playerMovement", 100);
         maxHealth = 100;
         health = 100;
-
-    }
-
-    public Player(String movementAnimationName, String deathAnimationName) {
-
-        super(movementAnimationName, deathAnimationName);
-
-        maxHealth = 100;
-        health = 100;
+        weaponContainer = new WeaponContainer(6);
 
     }
 
@@ -42,11 +35,14 @@ public class Player extends Entity {
 
         if (health > 0) {
 
-            float speed = 100;
+            for (int count = 0; count < weaponContainer.weapons.size(); count++)
+                if (Input.isKeyPressed(Input.getKeyCode(String.valueOf(count + 1)))) weaponContainer.currentWeapon = count;
+
+            float speed = super.speed;
 
             if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
 
-                speed = 200;
+                speed *= 2;
                 movementAnimation.frameTimeModifier = 0.5f;
 
             } else movementAnimation.frameTimeModifier = 1;
@@ -95,7 +91,16 @@ public class Player extends Entity {
         transform.translate(-20, -20);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
+
+        Weapon currentWeapon = weaponContainer.getCurrentWeapon();
+
+        if (currentWeapon != null)
+            if (!(currentWeapon instanceof RocketLauncher)) graphics2D.drawImage(currentWeapon.texture, transform, null);
+
         graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
+
+        if (currentWeapon != null)
+            if (currentWeapon instanceof RocketLauncher) graphics2D.drawImage(currentWeapon.texture, transform, null);
 
     }
 

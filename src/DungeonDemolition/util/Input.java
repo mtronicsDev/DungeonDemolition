@@ -4,12 +4,9 @@ import dungeonDemolition.objects.ObjectController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
-public class Input implements KeyListener, MouseListener {
+public class Input implements KeyListener, MouseListener, MouseWheelListener {
 
     public static Vector2f mousePosition = new Vector2f();
     private static boolean[] keyStats = new boolean[1024];
@@ -25,6 +22,17 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
+    public static int getKeyCode(String key) {
+
+        int keyCode = -1;
+
+        for (int count = 0; count < keyStats.length; count++)
+            if (key.equals(KeyEvent.getKeyText(count))) keyCode = count;
+
+        return keyCode;
+
+    }
+
     public static boolean isKeyPressed(int keyCode) {
 
         return keyStats[keyCode];
@@ -37,7 +45,6 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
-    @Override
     public void keyPressed(KeyEvent keyEvent) {
 
         int keyCode = keyEvent.getKeyCode();
@@ -46,7 +53,6 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
-    @Override
     public void keyReleased(KeyEvent keyEvent) {
 
         int keyCode = keyEvent.getKeyCode();
@@ -55,7 +61,6 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
-    @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
         int buttonCode = mouseEvent.getButton();
@@ -64,7 +69,6 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
-    @Override
     public void mouseReleased(MouseEvent mouseEvent) {
 
         int buttonCode = mouseEvent.getButton();
@@ -73,7 +77,16 @@ public class Input implements KeyListener, MouseListener {
 
     }
 
+    public void mouseWheelMoved(MouseWheelEvent e) {
+
+
+
+    }
+
     public void mouseClicked(MouseEvent mouseEvent) {
+
+
+
     }
 
     public void keyTyped(KeyEvent keyEvent) {
@@ -84,4 +97,5 @@ public class Input implements KeyListener, MouseListener {
 
     public void mouseExited(MouseEvent mouseEvent) {
     }
+
 }

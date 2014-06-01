@@ -21,6 +21,7 @@ public class ObjectController {
     public static List<DungeonMap> dungeonMaps = new ArrayList<DungeonMap>();
     public static int currentDungeonMap = -1;
     public static Map<String, Entity> entities = new HashMap<String, Entity>();
+    public static List<Entity> entitiesToRemove = new ArrayList<Entity>();
     public static int enemyCounter = 0;
     public static Display display;
 
@@ -49,12 +50,15 @@ public class ObjectController {
         if (running) {
 
             projectilesToRemove.clear();
+            entitiesToRemove.clear();
 
             for (Projectile projectile : projectiles) projectile.update();
             for (Entity entity : entities.values()) entity.update();
 
             for (Projectile projectile : projectilesToRemove)
                 projectiles.remove(projectile);
+            for (Entity entity : entitiesToRemove)
+                entities.remove(entity);
 
         }
 

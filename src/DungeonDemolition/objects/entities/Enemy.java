@@ -14,18 +14,18 @@ import java.awt.geom.AffineTransform;
 
 public class Enemy extends Entity {
 
-    public Enemy(String movementAnimationName) {
+    public Enemy(String movementAnimationName, float speed) {
 
-        super(movementAnimationName);
+        super(movementAnimationName, speed);
 
         maxHealth = 80;
         health = 80;
 
     }
 
-    public Enemy(String movementAnimationName, String deathAnimationName) {
+    public Enemy(String movementAnimationName, String deathAnimationName, float speed) {
 
-        super(movementAnimationName, deathAnimationName);
+        super(movementAnimationName, deathAnimationName, speed);
 
         maxHealth = 80;
         health = 80;
@@ -38,7 +38,7 @@ public class Enemy extends Entity {
 
         if (health > 0) {
 
-            float speed = 150 * TimeHelper.deltaTime;
+            float speed = super.speed * TimeHelper.deltaTime;
 
             Vector2f movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
 
@@ -80,11 +80,11 @@ public class Enemy extends Entity {
             }
 
             if (!blocked)
-                for (String key : ObjectController.entities.keySet()) {
+                for (Entity entity : ObjectController.entities.values()) {
 
-                    if (key.startsWith("enemy")) {
+                    if (entity instanceof Enemy) {
 
-                        Enemy enemy = (Enemy) ObjectController.entities.get(key);
+                        Enemy enemy = (Enemy) entity;
 
                         if (enemy != this) {
 
@@ -123,14 +123,7 @@ public class Enemy extends Entity {
 
             }
 
-            if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
-                movedSpace = Collider.getMovedSpace(this, movedSpace);
-
-            if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
-
-            else {
-
-                movementAnimation.update(true);
+            if (!VectorHelper.areEqual(movedSpace, new Vector2f())) {
 
                 Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
@@ -139,7 +132,11 @@ public class Enemy extends Entity {
 
                 else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
 
+                movedSpace = Collider.getMovedSpace(this, movedSpace);
+
             }
+
+            movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 

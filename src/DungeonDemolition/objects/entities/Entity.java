@@ -9,6 +9,7 @@ import java.awt.*;
 public abstract class Entity {
 
     public Vector2f position = new Vector2f();
+    public float speed;
     public Vector2f percentRotation = new Vector2f();
     public float rotation = 0;
     public Animation movementAnimation;
@@ -16,16 +17,20 @@ public abstract class Entity {
     public float health;
     public Animation deathAnimation;
 
-    public Entity(String movementAnimationName) {
+    public Entity(String movementAnimationName, float speed) {
 
         movementAnimation = new Animation(movementAnimationName, true);
+
+        this.speed = speed;
 
     }
 
-    public Entity(String movementAnimationName, String deathAnimationName) {
+    public Entity(String movementAnimationName, String deathAnimationName, float speed) {
 
         movementAnimation = new Animation(movementAnimationName, true);
         deathAnimation = new Animation(deathAnimationName, false);
+
+        this.speed = speed;
 
     }
 
@@ -34,10 +39,10 @@ public abstract class Entity {
         if (health <= 0) {
 
             if (deathAnimation != null)
-                if (deathAnimation.oneLoopPassed) ObjectController.entities.remove(this);
+                if (deathAnimation.oneLoopPassed) ObjectController.entitiesToRemove.add(this);
                 else deathAnimation.update(true);
 
-            else ObjectController.entities.remove(this);
+            else ObjectController.entitiesToRemove.add(this);
 
         }
 

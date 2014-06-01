@@ -9,7 +9,7 @@ public class Pistol extends Weapon {
 
     public Pistol() {
 
-        super("pistol", 0.1f, 0.5f);
+        super("10", 0.1f, 0.5f);
 
     }
 

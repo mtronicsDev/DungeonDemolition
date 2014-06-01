@@ -9,7 +9,7 @@ public class RocketLauncher extends Weapon {
 
     public RocketLauncher() {
 
-        super("rocketLauncher", 1, 3);
+        super("11", 1, 3);
 
     }
 
