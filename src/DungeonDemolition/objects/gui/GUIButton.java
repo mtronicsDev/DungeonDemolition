@@ -1,14 +1,10 @@
 package dungeonDemolition.objects.gui;
 
-import dungeonDemolition.util.Input;
 import dungeonDemolition.util.Vector2i;
+import dungeonDemolition.util.input.Input;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GUIButton extends GUIElement{
 
