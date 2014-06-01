@@ -9,7 +9,7 @@ import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.*;
 import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.util.*;
-import dungeonDemolition.util.input.Input;
+import dungeonDemolition.util.input.InputInformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -45,7 +45,7 @@ public class Main {
 
         do {
 
-            Input.update();
+            InputInformation.update();
             TimeHelper.update();
             display.update();
 
@@ -78,7 +78,7 @@ public class Main {
 
         while (true) {
 
-            if (Input.isKeyDown(KeyEvent.VK_ESCAPE)) {
+            if (InputInformation.isKeyDown(KeyEvent.VK_ESCAPE)) {
 
                 if (ObjectController.running) ObjectController.pause();
 
@@ -87,7 +87,7 @@ public class Main {
             }
 
             TimeHelper.update();
-            Input.update();
+            InputInformation.update();
             ObjectController.updateAll();
 
         }

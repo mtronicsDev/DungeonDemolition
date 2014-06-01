@@ -10,7 +10,7 @@ import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.Vector2i;
 import dungeonDemolition.util.VectorHelper;
-import dungeonDemolition.util.input.Input;
+import dungeonDemolition.util.input.InputInformation;
 import dungeonDemolition.util.input.InputListener;
 
 import java.awt.*;
@@ -37,13 +37,13 @@ public class Player extends Entity {
         if (health > 0) {
 
             for (int count = 0; count < weaponContainer.weapons.size(); count++)
-                if (Input.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) weaponContainer.currentWeapon = count;
+                if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) weaponContainer.currentWeapon = count;
 
             weaponContainer.update();
 
             float speed = super.speed;
 
-            if (Input.isKeyPressed(KeyEvent.VK_SHIFT)) {
+            if (InputInformation.isKeyPressed(KeyEvent.VK_SHIFT)) {
 
                 speed *= 2;
                 movementAnimation.frameTimeModifier = 0.5f;
@@ -52,13 +52,13 @@ public class Player extends Entity {
 
             Vector2f movedSpace = new Vector2f();
 
-            if (Input.isKeyPressed(KeyEvent.VK_W)) movedSpace.y -= speed * TimeHelper.deltaTime;
+            if (InputInformation.isKeyPressed(KeyEvent.VK_W)) movedSpace.y -= speed * TimeHelper.deltaTime;
 
-            if (Input.isKeyPressed(KeyEvent.VK_S)) movedSpace.y += speed * TimeHelper.deltaTime;
+            if (InputInformation.isKeyPressed(KeyEvent.VK_S)) movedSpace.y += speed * TimeHelper.deltaTime;
 
-            if (Input.isKeyPressed(KeyEvent.VK_A)) movedSpace.x -= speed * TimeHelper.deltaTime;
+            if (InputInformation.isKeyPressed(KeyEvent.VK_A)) movedSpace.x -= speed * TimeHelper.deltaTime;
 
-            if (Input.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
+            if (InputInformation.isKeyPressed(KeyEvent.VK_D)) movedSpace.x += speed * TimeHelper.deltaTime;
 
 
             if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
@@ -70,9 +70,9 @@ public class Player extends Entity {
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
-            if (!VectorHelper.areEqual(VectorHelper.subtractVectors(Input.mousePosition, VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)), new Vector2f())) {
+            if (!VectorHelper.areEqual(VectorHelper.subtractVectors(InputInformation.mousePosition, VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)), new Vector2f())) {
 
-                percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(Input.mousePosition,
+                percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(InputInformation.mousePosition,
                         VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2))));
 
                 if (VectorHelper.getScalarProduct(percentRotation, new Vector2f(1, 0)) <= 0)

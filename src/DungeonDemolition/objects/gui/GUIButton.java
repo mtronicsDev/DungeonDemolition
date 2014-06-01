@@ -1,7 +1,7 @@
 package dungeonDemolition.objects.gui;
 
 import dungeonDemolition.util.Vector2i;
-import dungeonDemolition.util.input.Input;
+import dungeonDemolition.util.input.InputInformation;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -36,11 +36,11 @@ public class GUIButton extends GUIElement{
         rectangle.render(graphics);
         text.render(graphics);
 
-        pressed = Input.mousePosition.x >= position.x &&
-                Input.mousePosition.x <= position.x + rectangle.size.x &&
-                Input.mousePosition.y >= position.y &&
-                Input.mousePosition.y <= position.y + rectangle.size.y &&
-                Input.isButtonPressed(MouseEvent.BUTTON1);
+        pressed = InputInformation.mousePosition.x >= position.x &&
+                InputInformation.mousePosition.x <= position.x + rectangle.size.x &&
+                InputInformation.mousePosition.y >= position.y &&
+                InputInformation.mousePosition.y <= position.y + rectangle.size.y &&
+                InputInformation.isButtonPressed(MouseEvent.BUTTON1);
 
 
     }

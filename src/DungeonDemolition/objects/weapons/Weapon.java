@@ -2,7 +2,7 @@ package dungeonDemolition.objects.weapons;
 
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Timer;
-import dungeonDemolition.util.input.Input;
+import dungeonDemolition.util.input.InputInformation;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -69,7 +69,7 @@ public abstract class Weapon {
 
             else neededToBeReloaded = false;
 
-            if (Input.isKeyDown(KeyEvent.VK_R)) {
+            if (InputInformation.isKeyDown(KeyEvent.VK_R)) {
 
                 reload();
                 return;
@@ -82,7 +82,7 @@ public abstract class Weapon {
 
                 if (automaticallyShooting) {
 
-                    if (Input.isButtonPressed(MouseEvent.BUTTON1)) {
+                    if (InputInformation.isButtonPressed(MouseEvent.BUTTON1)) {
 
                         shoot();
                         shootBreakTimer.restart();
@@ -91,7 +91,7 @@ public abstract class Weapon {
 
                 } else {
 
-                    if (Input.isButtonDown(MouseEvent.BUTTON1)) {
+                    if (InputInformation.isButtonDown(MouseEvent.BUTTON1)) {
 
                         shoot();
                         shootBreakTimer.restart();
