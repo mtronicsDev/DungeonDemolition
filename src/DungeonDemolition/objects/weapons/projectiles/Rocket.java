@@ -7,7 +7,7 @@ public class Rocket extends Projectile {
 
     public Rocket(Vector2f position, Vector2f direction) {
 
-        super(position, VectorHelper.multiplyVectorByFloat(direction, -100), 50, 50, null, "projectiles/rocket");
+        super(position, VectorHelper.multiplyVectorByFloat(direction, -100), 100, 160, null, "projectiles/rocket");
 
     }
 

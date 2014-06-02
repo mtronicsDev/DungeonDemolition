@@ -93,7 +93,9 @@ public abstract class Projectile {
 
                         }
 
-                        if (!alreadyHit && VectorHelper.getLength(VectorHelper.subtractVectors(entity.position, position)) <= radius) entity.health -= damage;
+                        float difference = VectorHelper.getLength(VectorHelper.subtractVectors(entity.position, position));
+
+                        if (!alreadyHit && difference <= radius) entity.health -= damage / difference * 80;
 
                     }
 
