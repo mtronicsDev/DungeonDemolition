@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
@@ -20,6 +21,7 @@ import java.awt.geom.AffineTransform;
 public class Player extends Entity {
 
     public WeaponContainer weaponContainer;
+    private GUIRectangle[] heartBar;
 
     public Player() {
 
@@ -27,6 +29,15 @@ public class Player extends Entity {
         maxHealth = 100;
         health = 100;
         weaponContainer = new WeaponContainer(6);
+        heartBar = new GUIRectangle[10];
+
+        for (int i = 0; i < heartBar.length; i++) {
+            heartBar[i] = new GUIRectangle(new Vector2i(
+                    (int)(ObjectController.display.size.x / 2 - 5 * 27 - 4.5 * 6 + i * 27 + i * 6),
+                    ObjectController.display.size.y - 27 - 20),
+                    "heart");
+            ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
+        }
 
     }
 
@@ -120,6 +131,14 @@ public class Player extends Entity {
 
         if (currentWeapon != null)
             if (currentWeapon instanceof RocketLauncher) graphics2D.drawImage(currentWeapon.texture, transform, null);
+
+        for (int i = heartBar.length - 1; i >= 0; i--) {
+
+            if(i * 10 > health) ObjectController.guiPanels.get("inGame").guiElements.remove(heartBar[i]);
+            else if(!ObjectController.guiPanels.get("inGame").guiElements.contains(heartBar[i]))
+                ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
+
+        }
 
     }
 
