@@ -29,6 +29,7 @@ public class Player extends Entity {
         maxHealth = 100;
         health = 100;
         weaponContainer = new WeaponContainer(6);
+
         heartBar = new GUIRectangle[10];
 
         for (int i = 0; i < heartBar.length; i++) {
@@ -75,13 +76,12 @@ public class Player extends Entity {
             if (!VectorHelper.areEqual(movedSpace, new Vector2f()))
                 movedSpace = Collider.getMovedSpace(this, movedSpace);
 
-            if (VectorHelper.areEqual(movedSpace, new Vector2f())) movementAnimation.update(false);
-
-            else  movementAnimation.update(true);
+            movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 
-            if (!VectorHelper.areEqual(VectorHelper.subtractVectors(InputInformation.mousePosition, VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)), new Vector2f())) {
+            if (!VectorHelper.areEqual(VectorHelper.subtractVectors(InputInformation.mousePosition, VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2)),
+                    new Vector2f())) {
 
                 percentRotation = VectorHelper.negateVector(VectorHelper.normalizeVector(VectorHelper.subtractVectors(InputInformation.mousePosition,
                         VectorHelper.divideVectorByFloat(new Vector2f(ObjectController.display.size), 2))));
@@ -131,6 +131,7 @@ public class Player extends Entity {
 
         if (currentWeapon != null)
             if (currentWeapon instanceof RocketLauncher) graphics2D.drawImage(currentWeapon.texture, transform, null);
+
 
         for (int i = heartBar.length - 1; i >= 0; i--) {
 

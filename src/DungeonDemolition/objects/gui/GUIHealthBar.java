@@ -11,7 +11,7 @@ public class GUIHealthBar extends GUIElement {
 
     private GUIRectangle maxHealthBar;
     private GUIRectangle healthBar;
-    private Entity entity;
+    public Entity entity;
 
     public GUIHealthBar(Entity entity) {
         super(new Vector2i((int)entity.position.x, (int)entity.position.y));

@@ -5,6 +5,8 @@ import dungeonDemolition.objects.dungeons.DungeonMap;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
+import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIHealthBar;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 
@@ -57,8 +59,29 @@ public class ObjectController {
 
             for (Projectile projectile : projectilesToRemove)
                 projectiles.remove(projectile);
-            for (Entity entity : entitiesToRemove)
-                entities.remove(entity);
+
+            for (Entity entityToRemove : entitiesToRemove) {
+
+                if (entityToRemove instanceof Enemy) {
+
+                    String removeKey = "";
+
+                    for (String key : entities.keySet())
+                        if (entities.get(key) == entityToRemove) removeKey = key;
+
+                    entities.remove(removeKey);
+
+                    GUIElement healthBar = null;
+
+                    for (GUIElement guiElement : guiPanels.get("inGame").guiElements)
+                        if (guiElement instanceof GUIHealthBar)
+                            if (((GUIHealthBar) guiElement).entity == entityToRemove) healthBar = guiElement;
+
+                    guiPanels.get("inGame").guiElements.remove(healthBar);
+
+                }
+
+            }
 
         }
 
