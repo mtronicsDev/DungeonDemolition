@@ -9,7 +9,7 @@ public class RocketLauncher extends Weapon {
 
     public RocketLauncher() {
 
-        super("11", 0, 6);
+        super("weapons/rpg", 0, 6);
 
         automaticallyShooting = false;
         maxRemainingAmmoCount = 3;

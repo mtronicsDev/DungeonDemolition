@@ -1,6 +1,8 @@
 package dungeonDemolition.objects.gui;
 
+import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
+import dungeonDemolition.util.MathHelper;
 import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
@@ -21,10 +23,12 @@ public class GUIHealthBar extends GUIElement {
     @Override
     public void render(Graphics graphics) {
 
-        maxHealthBar.position = new Vector2i((int)entity.position.x, (int)entity.position.y - 24);
-        healthBar.position = new Vector2i((int)entity.position.x, (int)entity.position.y - 24);
+        maxHealthBar.position = new Vector2i((int) (entity.position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20,
+                (int) (entity.position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 24);
+        healthBar.position = new Vector2i((int) (entity.position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20,
+                (int) (entity.position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 24);
 
-        healthBar.size.x = (int)(entity.health / entity.maxHealth * 40);
+        healthBar.size.x = MathHelper.clamp((int) (entity.health / entity.maxHealth * 40), 0, 40);
 
         if(entity.health / entity.maxHealth > 0.75f) healthBar.color = Color.green;
         else if(entity.health / entity.maxHealth > 0.5f) healthBar.color = Color.yellow;

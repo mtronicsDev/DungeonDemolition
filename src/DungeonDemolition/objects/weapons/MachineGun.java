@@ -8,7 +8,7 @@ public class MachineGun extends Weapon {
 
     public MachineGun() {
 
-        super("8", 0.1f, 3);
+        super("weapons/mg", 0.1f, 3);
 
         automaticallyShooting = true;
         maxRemainingAmmoCount = 500;

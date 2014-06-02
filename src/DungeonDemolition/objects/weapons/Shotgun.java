@@ -8,7 +8,7 @@ public class Shotgun extends Weapon {
 
     public Shotgun() {
 
-        super("12", 1, 10);
+        super("weapons/shotgun", 1, 10);
 
         automaticallyShooting = false;
         maxRemainingAmmoCount = 36;

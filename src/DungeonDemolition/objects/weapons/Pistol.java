@@ -9,7 +9,7 @@ public class Pistol extends Weapon {
 
     public Pistol() {
 
-        super("10", 0.1f, 0.5f);
+        super("weapons/gun", 0.1f, 0.5f);
 
         automaticallyShooting = false;
         maxRemainingAmmoCount = 100;
