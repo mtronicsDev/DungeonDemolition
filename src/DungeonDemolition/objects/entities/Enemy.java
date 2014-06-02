@@ -43,7 +43,11 @@ public class Enemy extends Entity {
 
         super.update();
 
-        if (health > 0) {
+        Vector2f differenceToPlayer = VectorHelper.subtractVectors(position, ObjectController.entities.get("player").position);
+
+        if (health > 0
+                && Math.abs(differenceToPlayer.x) <= ObjectController.display.size.x / 2 + 100
+                && Math.abs(differenceToPlayer.y) <= ObjectController.display.size.y / 2 + 100) {
 
             float speed = super.speed * TimeHelper.deltaTime;
 
