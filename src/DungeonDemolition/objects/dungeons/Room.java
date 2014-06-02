@@ -5,8 +5,8 @@ import dungeonDemolition.util.Vector2i;
 
 public class Room {
 
-    private static Vector2i minSize = new Vector2i(5, 5);
-    private static Vector2i maxSize = new Vector2i(26, 26);
+    private static Vector2i minSize = new Vector2i(26, 26);
+    private static Vector2i maxSize = new Vector2i(52, 52);
 
     public void generate() {
 
