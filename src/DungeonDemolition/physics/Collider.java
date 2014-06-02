@@ -21,6 +21,18 @@ public class Collider {
 
     }
 
+    public static Box getBoundingBox(Entity entity) {
+
+        return new Box(entity.position, new Vector2f(40, 40));
+
+    }
+
+    public static Box getBoundingBox(Projectile projectile) {
+
+        return new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight()));
+
+    }
+
     public static Object[] getCollisionData(Projectile projectile) {
 
         boolean colliding = false;

@@ -71,7 +71,7 @@ public class Main {
 
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 11) {
-                Enemy enemy = new Enemy("alligatorMovement", 50);
+                Enemy enemy = new Enemy("alligatorMovement", 50, 10, 1);
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
                 ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);

@@ -4,6 +4,7 @@ import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.TimeHelper;
+import dungeonDemolition.util.Timer;
 import dungeonDemolition.util.Vector2f;
 import dungeonDemolition.util.VectorHelper;
 
@@ -14,16 +15,22 @@ import java.awt.geom.AffineTransform;
 
 public class Enemy extends Entity {
 
-    public Enemy(String movementAnimationName, float speed) {
+    public int damage;
+    public Timer damageBreakTimer;
+
+    public Enemy(String movementAnimationName, float speed, int damage, float damageBreakTime) {
 
         super(movementAnimationName, speed);
+
+        this.damage = damage;
+        this.damageBreakTimer = new Timer(damageBreakTime);
 
         maxHealth = 80;
         health = 80;
 
     }
 
-    public Enemy(String movementAnimationName, String deathAnimationName, float speed) {
+    public Enemy(String movementAnimationName, String deathAnimationName, float speed, int damage, float damageBreakTime) {
 
         super(movementAnimationName, deathAnimationName, speed);
 
@@ -139,6 +146,16 @@ public class Enemy extends Entity {
             movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
 
             position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
+
+            damageBreakTimer.update();
+
+            if (damageBreakTimer.hasFinished())
+                if (Collider.areBoxesColliding(Collider.getBoundingBox(this), Collider.getBoundingBox(ObjectController.entities.get("player")))) {
+
+                    ObjectController.entities.get("player").health -= damage;
+                    damageBreakTimer.restart();
+
+                }
 
         }
 

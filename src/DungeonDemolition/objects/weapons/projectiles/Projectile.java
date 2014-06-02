@@ -23,7 +23,7 @@ public abstract class Projectile {
     public float radius;
     public BufferedImage texture;
     public Animation destructiveAnimation;
-    public boolean texturesFlipped = false;
+    public boolean textureFlippingFactors[] = new boolean[2];
     public boolean alive = true;
 
     public Projectile(Vector2f position, Vector2f speed, float damage, float radius, String animationName, String textureName) {
@@ -36,12 +36,16 @@ public abstract class Projectile {
         if (animationName != null) destructiveAnimation = new Animation(animationName, false);
 
         texture = TextureHelper.loadImage(textureName);
+        
+        if (this instanceof Rocket) textureFlippingFactors[0] = true;
+        
+        else textureFlippingFactors[0] = false;
 
     }
 
     public void update() {
-
-        /*if (!texturesFlipped) {
+        
+        if (textureFlippingFactors[0] && !textureFlippingFactors[1]) {
 
             float angle;
 
@@ -62,9 +66,9 @@ public abstract class Projectile {
                 for (int count = 0; count < destructiveAnimation.frames.size(); count++)
                     destructiveAnimation.frames.set(count, affineTransformOp.filter(destructiveAnimation.frames.get(count), null));
 
-            texturesFlipped = true;
+            textureFlippingFactors[1] = true;
 
-        }*/
+        }
 
         if (alive) {
 
