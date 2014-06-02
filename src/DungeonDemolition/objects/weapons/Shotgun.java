@@ -28,7 +28,7 @@ public class Shotgun extends Weapon {
 
         for (int count = 0; count < shotCount; count++) {
 
-            float angle = (float) Math.toRadians(Randomizer.getRandomInt(-7, 7));
+            float angle = (float) Math.toRadians(Randomizer.getRandomInt(-15, 15));
 
             Matrix2f rotationMatrix = new Matrix2f(
                     new Vector2f((float) Math.cos(angle), (float) -Math.sin(angle)),
