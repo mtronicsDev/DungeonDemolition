@@ -132,8 +132,7 @@ public class Player extends Entity {
 
         if (health > 0) texture = movementAnimation.getCurrentFrame();
 
-        else if (deathAnimation != null)
-            if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
+        else if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
 
         if (texture != null) graphics2D.drawImage(texture, transform, null);
 

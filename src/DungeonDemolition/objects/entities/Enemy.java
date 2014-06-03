@@ -3,10 +3,7 @@ package dungeonDemolition.objects.entities;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.physics.Collider;
-import dungeonDemolition.util.TimeHelper;
-import dungeonDemolition.util.Timer;
-import dungeonDemolition.util.Vector2f;
-import dungeonDemolition.util.VectorHelper;
+import dungeonDemolition.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ public class Enemy extends Entity {
 
     public int damage;
     public Timer damageBreakTimer;
+    private Vector2f playerLessMovement;
 
     public Enemy(String movementAnimationName, float speed, int damage, float damageBreakTime) {
 
@@ -54,12 +52,25 @@ public class Enemy extends Entity {
 
             float speed = super.speed * TimeHelper.deltaTime;
 
-            Vector2f movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
+            Vector2f movementDirection;
+
+            if (ObjectController.entities.get("player").health > 0)
+                movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
+
+            else {
+
+                if (playerLessMovement == null) playerLessMovement = new Vector2f((float) Randomizer.getRandomInt(-1000, 1000) / 1000f, (float) Randomizer.getRandomInt(-1000, 1000) / 1000f);
+
+                movementDirection = playerLessMovement;
+
+            }
 
             boolean blocked = false;
             List<Vector2f> blockerPositions = new ArrayList<Vector2f>();
 
-            Vector2f idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
+            Vector2f idealMovedSpace;
+
+            idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
 
             for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
 

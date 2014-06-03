@@ -21,6 +21,12 @@ public class Collider {
 
     }
 
+    public static Box getBoundingBox(DungeonTile dungeonTile) {
+
+        return new Box(dungeonTile.position, new Vector2f(40, 40));
+
+    }
+
     public static Box getBoundingBox(Entity entity) {
 
         return new Box(entity.position, new Vector2f(40, 40));
@@ -51,14 +57,10 @@ public class Collider {
 
         }
 
-        for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
-
-            if (!dungeonTile.passable && areBoxesColliding(new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())),
-                    new Box(dungeonTile.position, new Vector2f(40, 40))))
-
-                colliding = true;
-
-        }
+        if (!colliding)
+            for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
+                if (!dungeonTile.passable && areBoxesColliding(getBoundingBox(projectile), getBoundingBox(dungeonTile)))
+                    colliding = true;
 
         return new Object[]{colliding, collidingEntities};
 

@@ -35,26 +35,11 @@ public class Main {
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the menu gui panel,"),
                         new GUIText(new Vector2i(10, 75), Color.blue, 15, "where settings and other things will be shown later."),
-                        new GUIButton(new Vector2i(10, 95), new Vector2i(400, 150), Color.orange, Color.black, "Start the game!")
+                        new GUIButton(new Vector2i(435, 200), new Vector2i(200, 100), Color.orange, Color.black, 30, "Play"),
+                        new GUIButton(new Vector2i(435, 350), new Vector2i(200, 100), Color.red, Color.black, 30, "Quit")
                 },
                 true
         ));
-
-        boolean isGameStarted;
-        GUIButton button = (GUIButton)ObjectController.guiPanels.get("menu").guiElements.get(2);
-
-        do {
-
-            InputInformation.update();
-            TimeHelper.update();
-            display.update();
-
-            isGameStarted = button.isPressed();
-
-        }
-        while (!isGameStarted);
-
-        ObjectController.run();
 
         ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
@@ -64,20 +49,27 @@ public class Main {
                         .addWeapon(new MachineGun())
                         .addWeapon(new Shotgun())
                         .addWeapon(new Pistol());
-                //ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
-                ObjectController.setPlayer(player);
                 player.position = new Vector2f(tile.position);
+                ObjectController.setPlayer(player);
             }
 
         for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
             if (tile.id == 11) {
                 Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1);
                 ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
-                ObjectController.addEnemy(enemy);
                 enemy.position = new Vector2f(tile.position);
+                ObjectController.addEnemy(enemy);
             }
 
         while (true) {
+
+            if (!ObjectController.running) {
+
+                if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(2)).isPressed()) ObjectController.run();
+
+                else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(3)).isPressed()) System.exit(0);
+
+            }
 
             if (InputInformation.isKeyDown(KeyEvent.VK_ESCAPE)) {
 
