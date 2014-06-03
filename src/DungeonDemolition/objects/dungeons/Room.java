@@ -99,7 +99,7 @@ public class Room {
 
         switch (nextDirection) {
 
-            case NOTRH:
+            case NORTH:
                 int offset = Randomizer.getRandomInt(1, size.x - 2);
 
 

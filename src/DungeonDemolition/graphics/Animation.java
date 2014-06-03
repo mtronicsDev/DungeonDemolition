@@ -62,13 +62,11 @@ public class Animation {
 
                 if (timer.hasFinished()) {
 
+                    oneLoopPassed = true;
+
                     currentFrame++;
 
-                    if (currentFrame == frames.size()) {
-
-                        currentFrame = 0;
-
-                    }
+                    if (currentFrame == frames.size()) currentFrame = 0;
 
                     timer.endTime = animationFrameTimes.get(currentFrame) * frameTimeModifier;
                     timer.restart();

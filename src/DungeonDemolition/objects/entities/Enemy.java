@@ -34,6 +34,9 @@ public class Enemy extends Entity {
 
         super(movementAnimationName, deathAnimationName, speed);
 
+        this.damage = damage;
+        this.damageBreakTimer = new Timer(damageBreakTime);
+
         maxHealth = 80;
         health = 80;
 
@@ -179,7 +182,9 @@ public class Enemy extends Entity {
             transform.translate(-20, -20);
 
             Graphics2D graphics2D = (Graphics2D) graphics;
-            graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
+            if (health > 0) graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
+            else if (deathAnimation != null) graphics2D.drawImage(deathAnimation.getCurrentFrame(), transform, null);
+
 
         }
 
