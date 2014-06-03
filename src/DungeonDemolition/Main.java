@@ -64,7 +64,7 @@ public class Main {
                         .addWeapon(new MachineGun())
                         .addWeapon(new Shotgun())
                         .addWeapon(new Pistol());
-                ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
+                //ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(player));
                 ObjectController.setPlayer(player);
                 player.position = new Vector2f(tile.position);
             }

@@ -17,6 +17,7 @@ import dungeonDemolition.util.InputListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
@@ -25,7 +26,7 @@ public class Player extends Entity {
 
     public Player() {
 
-        super("playerMovement", 100);
+        super("playerMovement", "explosion", 100);
         maxHealth = 100;
         health = 100;
         weaponContainer = new WeaponContainer(6);
@@ -108,7 +109,7 @@ public class Player extends Entity {
 
         Weapon currentWeapon = weaponContainer.getCurrentWeapon();
 
-        if (currentWeapon != null) {
+        if (currentWeapon != null && health > 0) {
 
             if (!(currentWeapon instanceof RocketLauncher)) graphics2D.drawImage(currentWeapon.texture, transform, null);
 
@@ -127,9 +128,16 @@ public class Player extends Entity {
 
         }
 
-        graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
+        BufferedImage texture = null;
 
-        if (currentWeapon != null)
+        if (health > 0) texture = movementAnimation.getCurrentFrame();
+
+        else if (deathAnimation != null)
+            if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
+
+        if (texture != null) graphics2D.drawImage(texture, transform, null);
+
+        if (currentWeapon != null && health > 0)
             if (currentWeapon instanceof RocketLauncher) graphics2D.drawImage(currentWeapon.texture, transform, null);
 
 
