@@ -23,7 +23,7 @@ public class DungeonTile {
 
         if (textures.size() == 0)
             for (int i = 0; i < 13; i++)
-                textures.add(TextureHelper.loadImage(String.valueOf(i)));
+                textures.add(TextureHelper.loadImage("tiles/" + String.valueOf(i)));
 
         this.position = position;
         this.id = id;

@@ -6,6 +6,7 @@ public class InputListener implements KeyListener, MouseListener, MouseWheelList
 
     private static boolean[] keyStats = new boolean[1024];
     private static boolean[] buttonStats = new boolean[1024];
+    private static int mouseWheelMovedAmount = 0;
 
     public static int getKeyCode(String key) {
 
@@ -64,7 +65,7 @@ public class InputListener implements KeyListener, MouseListener, MouseWheelList
 
     public void mouseWheelMoved(MouseWheelEvent e) {
 
-
+        mouseWheelMovedAmount = e.getScrollAmount();
 
     }
 

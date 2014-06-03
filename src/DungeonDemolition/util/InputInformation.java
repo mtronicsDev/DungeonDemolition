@@ -20,6 +20,7 @@ public class InputInformation {
         InputInformation.mousePosition.x = mousePosition.x;
         InputInformation.mousePosition.y = mousePosition.y;
 
+
     }
 
     public static boolean isKeyPressed(int key) {
