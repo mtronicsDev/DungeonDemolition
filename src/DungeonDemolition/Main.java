@@ -35,31 +35,14 @@ public class Main {
                 new GUIElement[]{
                         new GUIText(new Vector2i(10, 55), Color.blue, 15, "This is the menu gui panel,"),
                         new GUIText(new Vector2i(10, 75), Color.blue, 15, "where settings and other things will be shown later."),
-                        new GUIButton(new Vector2i(435, 200), new Vector2i(200, 100), Color.orange, Color.black, 30, "Play"),
-                        new GUIButton(new Vector2i(435, 350), new Vector2i(200, 100), Color.red, Color.black, 30, "Quit")
+                        new GUIButton(new Vector2i(435, 100), new Vector2i(200, 100), Color.yellow, Color.black, 30, "Play"),
+                        new GUIButton(new Vector2i(435, 250), new Vector2i(200, 100), Color.orange, Color.black, 20, "Generate New Level"),
+                        new GUIButton(new Vector2i(435, 400), new Vector2i(200, 100), Color.red, Color.black, 30, "Quit")
                 },
                 true
         ));
 
-        ObjectController.addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
-        for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
-            if (tile.id == 10) {
-                Player player = new Player();
-                player.weaponContainer.addWeapon(new RocketLauncher())
-                        .addWeapon(new MachineGun())
-                        .addWeapon(new Shotgun())
-                        .addWeapon(new Pistol());
-                player.position = new Vector2f(tile.position);
-                ObjectController.setPlayer(player);
-            }
-
-        for (DungeonTile tile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
-            if (tile.id == 11) {
-                Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1);
-                ObjectController.guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
-                enemy.position = new Vector2f(tile.position);
-                ObjectController.addEnemy(enemy);
-            }
+        ObjectController.generateNewLevel(true);
 
         while (true) {
 
@@ -67,7 +50,14 @@ public class Main {
 
                 if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(2)).isPressed()) ObjectController.run();
 
-                else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(3)).isPressed()) System.exit(0);
+                else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(3)).isPressed()) {
+
+                    ObjectController.removeAll();
+                    ObjectController.generateNewLevel(true);
+
+                }
+
+                else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(4)).isPressed()) System.exit(0);
 
             }
 

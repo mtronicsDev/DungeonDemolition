@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity {
 
     public WeaponContainer weaponContainer;
-    private GUIRectangle[] heartBar;
+    public GUIRectangle[] heartBar;
 
     public Player() {
 
