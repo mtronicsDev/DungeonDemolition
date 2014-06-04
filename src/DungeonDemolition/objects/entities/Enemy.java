@@ -181,14 +181,16 @@ public class Enemy extends Entity {
 
     public void render(Graphics graphics) {
 
-        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
-                || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
-                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
-                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
+        Entity player = ObjectController.entities.get("player");
+
+        if (!(((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20 < -40)
+                || ((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
+                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) < -40
+                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
             AffineTransform transform = new AffineTransform();
-            transform.translate((int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2,
-                    (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2);
+            transform.translate((int) (position.x - player.position.x) + ObjectController.display.size.x / 2,
+                    (int) (position.y - player.position.y) + ObjectController.display.size.y / 2);
             transform.rotate(rotation);
             transform.translate(-20, -20);
 

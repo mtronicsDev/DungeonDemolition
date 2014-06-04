@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.weapons.RocketLauncher;
@@ -94,6 +95,12 @@ public class Player extends Entity {
 
             }
 
+            for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
+                if (dungeonTile.interactable)
+                    if (VectorHelper.getLength(VectorHelper.subtractVectors(position, dungeonTile.position)) <= 70)
+                        if (InputInformation.isKeyDown(KeyEvent.VK_E))
+                            dungeonTile.interactionMethod.interact();
+
         }
 
     }
@@ -115,15 +122,15 @@ public class Player extends Entity {
 
             if (currentWeapon.neededToBeReloaded)
                 new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 50, ObjectController.display.size.y - 100),
-                        Color.blue, 15,
+                        Color.blue, 20,
                         "R: reload").render(graphics);
 
             new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 100),
-                    Color.blue, 15,
+                    Color.blue, 20,
                     currentWeapon.currentAmmoCount + " / " + currentWeapon.maxCurrentAmmoCount).render(graphics);
 
             new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 80),
-                    Color.blue, 15,
+                    Color.blue, 20,
                     currentWeapon.remainingAmmoCount + " / " + currentWeapon.maxRemainingAmmoCount).render(graphics);
 
         }
@@ -139,6 +146,12 @@ public class Player extends Entity {
         if (currentWeapon != null && health > 0)
             if (currentWeapon instanceof RocketLauncher) graphics2D.drawImage(currentWeapon.texture, transform, null);
 
+        for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles)
+            if (dungeonTile.interactable)
+                if (VectorHelper.getLength(VectorHelper.subtractVectors(position, dungeonTile.position)) <= 70)
+                    new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 50, ObjectController.display.size.y - 150),
+                            Color.blue, 20,
+                            "E: interact").render(graphics);
 
         for (int i = heartBar.length - 1; i >= 0; i--) {
 
