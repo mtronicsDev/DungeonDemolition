@@ -1,5 +1,7 @@
 package dungeonDemolition.objects.weapons;
 
+import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.InputListener;
 import dungeonDemolition.util.MathHelper;
 
 import java.util.ArrayList;
@@ -31,6 +33,9 @@ public class WeaponContainer {
     }
 
     public void update() {
+
+        for (int count = 0; count < weapons.size(); count++)
+            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) currentWeapon = count;
 
         getCurrentWeapon().update();
 

@@ -105,15 +105,10 @@ public class Enemy extends Entity {
             }
 
             if (!blocked)
-                for (Entity entity : ObjectController.entities.values()) {
+                for (Entity entity : ObjectController.entities.values())
+                    if (entity instanceof Enemy && entity != this) {
 
-                    if (entity instanceof Enemy) {
-
-                        Enemy enemy = (Enemy) entity;
-
-                        if (enemy != this) {
-
-                            Vector2f middleCollidingEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {enemy.position, new Vector2f(20, 20)});
+                            Vector2f middleCollidingEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {entity.position, new Vector2f(20, 20)});
                             Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
 
                             Vector2f target = VectorHelper.sumVectors(new Vector2f[] {VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)}), idealMovedSpace});
@@ -124,15 +119,11 @@ public class Enemy extends Entity {
                                     && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(30)) {
 
                                 blocked = true;
-                                blockerPositions.add(enemy.position);
+                                blockerPositions.add(entity.position);
 
                             }
 
-                        }
-
                     }
-
-                }
 
             Vector2f movedSpace;
 
@@ -140,11 +131,9 @@ public class Enemy extends Entity {
 
             else {
 
+                Vector2f actualMovedSpace = new Vector2f();
 
-
-                //System.out.println("not able to move forward");
-
-                movedSpace = idealMovedSpace;
+                movedSpace = actualMovedSpace;
 
             }
 
