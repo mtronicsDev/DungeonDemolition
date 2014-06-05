@@ -6,7 +6,7 @@ import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
-import dungeonDemolition.objects.weapons.WeaponContainer;
+import dungeonDemolition.objects.weapons.Inventory;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Player extends Entity {
 
-    public WeaponContainer weaponContainer;
+    public Inventory inventory;
     public GUIRectangle[] heartBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
 
@@ -28,7 +28,7 @@ public class Player extends Entity {
         super("playerMovement", "explosion", 100);
         maxHealth = 100;
         health = 100;
-        weaponContainer = new WeaponContainer(6);
+        inventory = new Inventory(6);
 
         heartBar = new GUIRectangle[10];
 
@@ -50,9 +50,9 @@ public class Player extends Entity {
 
         if (health > 0) {
 
-            weaponContainer.update();
+            inventory.update();
 
-            Weapon currentWeapon = weaponContainer.getCurrentWeapon();
+            Weapon currentWeapon = inventory.getCurrentWeapon();
 
             if (currentWeapon != null) {
 
@@ -120,7 +120,7 @@ public class Player extends Entity {
                                 "E: interact"));
 
                         if (InputInformation.isKeyDown(KeyEvent.VK_E))
-                            dungeonTile.interactionMethod.interact();
+                            dungeonTile.interactionMethod.interact(this);
 
                     }
 
@@ -137,7 +137,7 @@ public class Player extends Entity {
 
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        Weapon currentWeapon = weaponContainer.getCurrentWeapon();
+        Weapon currentWeapon = inventory.getCurrentWeapon();
 
         if (currentWeapon != null && health > 0) {
 

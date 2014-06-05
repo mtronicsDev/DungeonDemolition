@@ -3,12 +3,11 @@ package dungeonDemolition.objects.dungeons;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
-import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.weapons.*;
+import dungeonDemolition.util.MathHelper;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2f;
-import dungeonDemolition.util.VectorHelper;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,14 +24,14 @@ public class DungeonTile {
     public boolean interactable = false;
     public TileInteractionMethod interactionMethod;
 
-    public DungeonTile(byte id, Vector2f position) {
+    public DungeonTile(byte tileId, Vector2f position) {
 
         if (textures.size() == 0)
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 14; i++)
                 textures.add(TextureHelper.loadImage("tiles/" + String.valueOf(i)));
 
         this.position = position;
-        this.id = id;
+        id = tileId;
 
         switch (id) {
 
@@ -65,99 +64,71 @@ public class DungeonTile {
                 interactable = true;
                 interactionMethod = new TileInteractionMethod() {
                     @Override
-                    public void interact() {
+                    public void interact(Player player) {
 
-                        Player player = (Player) ObjectController.entities.get("player");
+                        LootType type = LootType.values()[Randomizer.getRandomInt(0, LootType.values().length - 1)];
+                        boolean isWeaponUnassigned = true;
+                        switch (type) {
 
-                        int contents = Randomizer.getRandomInt(1, 5);
+                            case WEAPON_GUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof Pistol)) isWeaponUnassigned = false;
+                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) player.inventory.addWeapon(new Pistol());
+                                break;
 
-                        for (int count = 0; count < contents; count++) {
+                            case WEAPON_MACHINE_GUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof MachineGun)) isWeaponUnassigned = false;
+                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) player.inventory.addWeapon(new MachineGun());
+                                break;
 
-                            int type = Randomizer.getRandomInt(0, 4);
+                            case WEAPON_RPG:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof RocketLauncher)) isWeaponUnassigned = false;
+                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) player.inventory.addWeapon(new RocketLauncher());
+                                break;
 
-                            switch (type) {
+                            case WEAPON_SHOTGUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof Shotgun)) isWeaponUnassigned = false;
+                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) player.inventory.addWeapon(new Shotgun());
+                                break;
 
-                                case 0:
-                                    int healthIncrease = Randomizer.getRandomInt(5, 80);
+                            case AMMO_GUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof Pistol)) weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+                                break;
 
-                                    if (player.health + healthIncrease <= player.maxHealth) player.health += healthIncrease;
+                            case AMMO_MACHINE_GUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof MachineGun)) weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+                                break;
 
-                                    else player.health = player.maxHealth;
+                            case AMMO_RPG:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof RocketLauncher)) weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+                                break;
 
-                                    break;
-
-                                case 1:
-                                    int rocketIncrease = Randomizer.getRandomInt(1, 3);
-
-                                    for (Weapon weapon : player.weaponContainer.weapons)
-                                        if (weapon instanceof RocketLauncher) {
-
-                                            if (weapon.remainingAmmoCount + rocketIncrease <= weapon.maxRemainingAmmoCount) weapon.remainingAmmoCount += rocketIncrease;
-
-                                            else weapon.remainingAmmoCount = weapon.maxRemainingAmmoCount;
-
-                                        }
-
-                                    break;
-
-                                case 2:
-                                    int mgBulletIncrease = Randomizer.getRandomInt(100, 400);
-
-                                    for (Weapon weapon : player.weaponContainer.weapons)
-                                        if (weapon instanceof MachineGun) {
-
-                                            if (weapon.remainingAmmoCount + mgBulletIncrease <= weapon.maxRemainingAmmoCount) weapon.remainingAmmoCount += mgBulletIncrease;
-
-                                            else weapon.remainingAmmoCount = weapon.maxRemainingAmmoCount;
-
-                                        }
-
-                                    break;
-
-                                case 3:
-                                    int shotIncrease = Randomizer.getRandomInt(7, 30);
-
-                                    for (Weapon weapon : player.weaponContainer.weapons)
-                                        if (weapon instanceof Shotgun) {
-
-                                            if (weapon.remainingAmmoCount + shotIncrease <= weapon.maxRemainingAmmoCount) weapon.remainingAmmoCount += shotIncrease;
-
-                                            else weapon.remainingAmmoCount = weapon.maxRemainingAmmoCount;
-
-                                        }
-
-                                    break;
-
-                                case 4:
-                                    int pistolBulletIncrease = Randomizer.getRandomInt(20, 70);
-
-                                    for (Weapon weapon : player.weaponContainer.weapons)
-                                        if (weapon instanceof Pistol) {
-
-                                            if (weapon.remainingAmmoCount + pistolBulletIncrease <= weapon.maxRemainingAmmoCount) weapon.remainingAmmoCount += pistolBulletIncrease;
-
-                                            else weapon.remainingAmmoCount = weapon.maxRemainingAmmoCount;
-
-                                        }
-
-                                    break;
-
-                            }
+                            case AMMO_SHOTGUN:
+                                for (Weapon weapon : player.inventory.weapons)
+                                    if ((weapon instanceof Shotgun)) weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+                                break;
 
                         }
 
                         interactable = false;
+                        id = 13;
 
                     }
                 };
                 break;
 
-            case 13:
+            case 14:
                 passable = false;
                 interactable = true;
                 interactionMethod = new TileInteractionMethod() {
                     @Override
-                    public void interact() {
+                    public void interact(Player player) {
 
                     }
                 };

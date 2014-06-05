@@ -63,10 +63,6 @@ public class ObjectController {
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
                 if (tile.id == 10) {
                     Player player = new Player();
-                    player.weaponContainer.addWeapon(new RocketLauncher())
-                            .addWeapon(new MachineGun())
-                            .addWeapon(new Shotgun())
-                            .addWeapon(new Pistol());
                     player.position = new Vector2f(tile.position);
                     setPlayer(player);
                 }
