@@ -5,8 +5,6 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -66,7 +64,7 @@ public class Enemy extends Entity {
             }
 
             boolean blocked = false;
-            List<Vector2f> blockerPositions = new ArrayList<Vector2f>();
+            Vector2f blockerPosition = new Vector2f();
 
             Vector2f idealMovedSpace;
 
@@ -94,7 +92,8 @@ public class Enemy extends Entity {
                                 && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(45)) {
 
                             blocked = true;
-                            blockerPositions.add(dungeonTile.position);
+                            blockerPosition = dungeonTile.position;
+                            break;
 
                         }
 
@@ -104,27 +103,6 @@ public class Enemy extends Entity {
 
             }
 
-            if (!blocked)
-                for (Entity entity : ObjectController.entities.values())
-                    if (entity instanceof Enemy && entity != this) {
-
-                            Vector2f middleCollidingEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {entity.position, new Vector2f(20, 20)});
-                            Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
-
-                            Vector2f target = VectorHelper.sumVectors(new Vector2f[] {VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)}), idealMovedSpace});
-
-                            Vector2f difference = VectorHelper.subtractVectors(middleCollidingEnemyPosition, middleEnemyPosition);
-
-                            if (VectorHelper.getLength(VectorHelper.subtractVectors(target, middleCollidingEnemyPosition)) <= 88
-                                    && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(30)) {
-
-                                blocked = true;
-                                blockerPositions.add(entity.position);
-
-                            }
-
-                    }
-
             Vector2f movedSpace;
 
             if (!blocked) movedSpace = idealMovedSpace;
@@ -132,6 +110,33 @@ public class Enemy extends Entity {
             else {
 
                 Vector2f actualMovedSpace = new Vector2f();
+
+                Vector2f middlePosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
+                Vector2f middleCollingObjectPosition = VectorHelper.sumVectors(new Vector2f[] {blockerPosition, new Vector2f(20, 20)});
+                Vector2f middlePlayerPosition = VectorHelper.sumVectors(new Vector2f[] {ObjectController.entities.get("player").position, new Vector2f(20, 20)});
+
+                Vector2f differenceToTarget = VectorHelper.subtractVectors(middlePlayerPosition, middlePosition);
+                Vector2f negatedDifferenceToCollidingObject = VectorHelper.negateVector(VectorHelper.subtractVectors(middleCollingObjectPosition, middlePosition));
+
+                Vector2f[] collidingObjectsCircleEdges = new Vector2f[] {
+                    VectorHelper.sumVectors(new Vector2f[] {
+                            VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(negatedDifferenceToCollidingObject.y, -negatedDifferenceToCollidingObject.x)), 100),
+                            middleCollingObjectPosition
+                    }),
+                        VectorHelper.sumVectors(new Vector2f[]{
+                            VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(-negatedDifferenceToCollidingObject.y, negatedDifferenceToCollidingObject.x)), 100),
+                            middleCollingObjectPosition
+                        }),
+                };
+
+                Vector2f closestCircleEdge = collidingObjectsCircleEdges[0];
+
+                if (Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(collidingObjectsCircleEdges[1], middlePosition), differenceToTarget))
+                        < Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(closestCircleEdge, middlePosition), differenceToTarget)))
+
+                    closestCircleEdge = collidingObjectsCircleEdges[1];
+
+                actualMovedSpace = VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(VectorHelper.subtractVectors(closestCircleEdge, middlePosition)), speed);
 
                 movedSpace = actualMovedSpace;
 
