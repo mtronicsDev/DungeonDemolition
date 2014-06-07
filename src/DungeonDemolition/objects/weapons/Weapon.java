@@ -1,8 +1,8 @@
 package dungeonDemolition.objects.weapons;
 
+import dungeonDemolition.util.InputInformation;
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Timer;
-import dungeonDemolition.util.InputInformation;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -47,7 +47,7 @@ public abstract class Weapon {
 
                 } else {
 
-                   currentAmmoCount += remainingAmmoCount;
+                    currentAmmoCount += remainingAmmoCount;
                     remainingAmmoCount = 0;
 
                 }
@@ -65,7 +65,8 @@ public abstract class Weapon {
 
             }
 
-            if (currentAmmoCount <= (float) (maxCurrentAmmoCount / 4) && remainingAmmoCount != 0) neededToBeReloaded = true;
+            if (currentAmmoCount <= (float) (maxCurrentAmmoCount / 4) && remainingAmmoCount != 0)
+                neededToBeReloaded = true;
 
             else neededToBeReloaded = false;
 

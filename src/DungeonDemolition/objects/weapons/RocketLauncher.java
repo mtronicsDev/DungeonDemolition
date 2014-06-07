@@ -3,7 +3,6 @@ package dungeonDemolition.objects.weapons;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.weapons.projectiles.Rocket;
 import dungeonDemolition.util.Vector2f;
-import dungeonDemolition.util.VectorHelper;
 
 public class RocketLauncher extends Weapon {
 

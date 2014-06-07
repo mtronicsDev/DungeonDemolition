@@ -35,9 +35,10 @@ public class Inventory {
     public void update() {
 
         for (int count = 0; count < weapons.size(); count++)
-            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) currentWeapon = count;
+            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1))))
+                currentWeapon = count;
 
-        if(getCurrentWeapon() != null) getCurrentWeapon().update();
+        if (getCurrentWeapon() != null) getCurrentWeapon().update();
 
     }
 

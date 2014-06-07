@@ -57,7 +57,8 @@ public class Enemy extends Entity {
 
             else {
 
-                if (playerLessMovement == null) playerLessMovement = new Vector2f((float) Randomizer.getRandomInt(-1000, 1000) / 1000f, (float) Randomizer.getRandomInt(-1000, 1000) / 1000f);
+                if (playerLessMovement == null)
+                    playerLessMovement = new Vector2f((float) Randomizer.getRandomInt(-1000, 1000) / 1000f, (float) Randomizer.getRandomInt(-1000, 1000) / 1000f);
 
                 movementDirection = playerLessMovement;
 
@@ -77,14 +78,15 @@ public class Enemy extends Entity {
                     boolean theoreticallyBlocking = false;
 
                     for (Vector2f normal : dungeonTile.normals)
-                        if (VectorHelper.getAngle(idealMovedSpace, normal) < Math.toRadians(45)) theoreticallyBlocking = true;
+                        if (VectorHelper.getAngle(idealMovedSpace, normal) < Math.toRadians(45))
+                            theoreticallyBlocking = true;
 
                     if (theoreticallyBlocking) {
 
-                        Vector2f middleTilePosition = VectorHelper.sumVectors(new Vector2f[] {dungeonTile.position, new Vector2f(20, 20)});
-                        Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
+                        Vector2f middleTilePosition = VectorHelper.sumVectors(new Vector2f[]{dungeonTile.position, new Vector2f(20, 20)});
+                        Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
 
-                        Vector2f target = VectorHelper.sumVectors(new Vector2f[] {VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)}), idealMovedSpace});
+                        Vector2f target = VectorHelper.sumVectors(new Vector2f[]{VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)}), idealMovedSpace});
 
                         Vector2f difference = VectorHelper.subtractVectors(middleTilePosition, middleEnemyPosition);
 
@@ -111,21 +113,21 @@ public class Enemy extends Entity {
 
                 Vector2f actualMovedSpace = new Vector2f();
 
-                Vector2f middlePosition = VectorHelper.sumVectors(new Vector2f[] {position, new Vector2f(20, 20)});
-                Vector2f middleCollingObjectPosition = VectorHelper.sumVectors(new Vector2f[] {blockerPosition, new Vector2f(20, 20)});
-                Vector2f middlePlayerPosition = VectorHelper.sumVectors(new Vector2f[] {ObjectController.entities.get("player").position, new Vector2f(20, 20)});
+                Vector2f middlePosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
+                Vector2f middleCollingObjectPosition = VectorHelper.sumVectors(new Vector2f[]{blockerPosition, new Vector2f(20, 20)});
+                Vector2f middlePlayerPosition = VectorHelper.sumVectors(new Vector2f[]{ObjectController.entities.get("player").position, new Vector2f(20, 20)});
 
                 Vector2f differenceToTarget = VectorHelper.subtractVectors(middlePlayerPosition, middlePosition);
                 Vector2f negatedDifferenceToCollidingObject = VectorHelper.negateVector(VectorHelper.subtractVectors(middleCollingObjectPosition, middlePosition));
 
-                Vector2f[] collidingObjectsCircleEdges = new Vector2f[] {
-                    VectorHelper.sumVectors(new Vector2f[] {
-                            VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(negatedDifferenceToCollidingObject.y, -negatedDifferenceToCollidingObject.x)), 100),
-                            middleCollingObjectPosition
-                    }),
+                Vector2f[] collidingObjectsCircleEdges = new Vector2f[]{
                         VectorHelper.sumVectors(new Vector2f[]{
-                            VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(-negatedDifferenceToCollidingObject.y, negatedDifferenceToCollidingObject.x)), 100),
-                            middleCollingObjectPosition
+                                VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(negatedDifferenceToCollidingObject.y, -negatedDifferenceToCollidingObject.x)), 100),
+                                middleCollingObjectPosition
+                        }),
+                        VectorHelper.sumVectors(new Vector2f[]{
+                                VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(-negatedDifferenceToCollidingObject.y, negatedDifferenceToCollidingObject.x)), 100),
+                                middleCollingObjectPosition
                         }),
                 };
 

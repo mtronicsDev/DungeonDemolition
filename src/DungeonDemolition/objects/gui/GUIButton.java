@@ -1,7 +1,7 @@
 package dungeonDemolition.objects.gui;
 
-import dungeonDemolition.util.Vector2i;
 import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -57,6 +57,8 @@ public class GUIButton extends GUIElement {
 
     }
 
-    public boolean isPressed() { return pressed; }
+    public boolean isPressed() {
+        return pressed;
+    }
 
 }

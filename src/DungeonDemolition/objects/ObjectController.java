@@ -11,10 +11,6 @@ import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIHealthBar;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.gui.GUIRectangle;
-import dungeonDemolition.objects.weapons.MachineGun;
-import dungeonDemolition.objects.weapons.Pistol;
-import dungeonDemolition.objects.weapons.RocketLauncher;
-import dungeonDemolition.objects.weapons.Shotgun;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Vector2f;
 

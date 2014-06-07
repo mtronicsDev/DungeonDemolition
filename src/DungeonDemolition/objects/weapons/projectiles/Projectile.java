@@ -36,15 +36,15 @@ public abstract class Projectile {
         if (animationName != null) destructiveAnimation = new Animation(animationName, false);
 
         texture = TextureHelper.loadImage(textureName);
-        
+
         if (this instanceof Rocket) textureFlippingFactors[0] = true;
-        
+
         else textureFlippingFactors[0] = false;
 
     }
 
     public void update() {
-        
+
         if (textureFlippingFactors[0] && !textureFlippingFactors[1]) {
 
             float angle;

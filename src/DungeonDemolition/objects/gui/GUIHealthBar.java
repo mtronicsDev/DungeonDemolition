@@ -9,14 +9,14 @@ import java.awt.*;
 
 public class GUIHealthBar extends GUIElement {
 
+    public Entity entity;
     private GUIRectangle maxHealthBar;
     private GUIRectangle healthBar;
-    public Entity entity;
 
     public GUIHealthBar(Entity entity) {
-        super(new Vector2i((int)entity.position.x, (int)entity.position.y));
+        super(new Vector2i((int) entity.position.x, (int) entity.position.y));
         maxHealthBar = new GUIRectangle(position, new Vector2i(40, 4), Color.darkGray, true);
-        healthBar = new GUIRectangle(position, new Vector2i((int)(entity.health / entity.maxHealth * 40), 4), Color.green, true);
+        healthBar = new GUIRectangle(position, new Vector2i((int) (entity.health / entity.maxHealth * 40), 4), Color.green, true);
         this.entity = entity;
     }
 
@@ -30,8 +30,8 @@ public class GUIHealthBar extends GUIElement {
 
         healthBar.size.x = MathHelper.clamp((int) (entity.health / entity.maxHealth * 40), 0, 40);
 
-        if(entity.health / entity.maxHealth > 0.75f) healthBar.color = Color.green;
-        else if(entity.health / entity.maxHealth > 0.5f) healthBar.color = Color.yellow;
+        if (entity.health / entity.maxHealth > 0.75f) healthBar.color = Color.green;
+        else if (entity.health / entity.maxHealth > 0.5f) healthBar.color = Color.yellow;
         else if (entity.health / entity.maxHealth > 0.25f) healthBar.color = Color.orange;
         else healthBar.color = Color.red;
 

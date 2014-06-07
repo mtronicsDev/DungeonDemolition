@@ -1,7 +1,6 @@
 package dungeonDemolition.util;
 
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.util.Vector2f;
 
 import javax.swing.*;
 import java.awt.*;

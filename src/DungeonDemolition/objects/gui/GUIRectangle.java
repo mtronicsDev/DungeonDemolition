@@ -3,11 +3,8 @@ package dungeonDemolition.objects.gui;
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2i;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GUIRectangle extends GUIElement {
 

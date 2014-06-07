@@ -72,7 +72,6 @@ public class InputListener implements KeyListener, MouseListener, MouseWheelList
     public void mouseClicked(MouseEvent mouseEvent) {
 
 
-
     }
 
     public void keyTyped(KeyEvent keyEvent) {

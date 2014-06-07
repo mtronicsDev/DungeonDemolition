@@ -25,7 +25,7 @@ public class TimeHelper {
 
         try {
 
-            Thread.sleep((long)(seconds * 1000));
+            Thread.sleep((long) (seconds * 1000));
 
         } catch (InterruptedException e) {
             e.printStackTrace();

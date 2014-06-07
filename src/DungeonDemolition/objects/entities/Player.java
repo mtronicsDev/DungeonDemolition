@@ -4,9 +4,9 @@ import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
+import dungeonDemolition.objects.weapons.Inventory;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
-import dungeonDemolition.objects.weapons.Inventory;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
@@ -37,25 +37,28 @@ public class Player extends Entity {
         inventoryBar = new GUIRectangle[6];
 
         for (int i = 0; i < heartBar.length; i++) {
-            if(i < heartBar.length / 2)
+            if (i < heartBar.length / 2)
                 heartBar[i] = new GUIRectangle(new Vector2i(
                         largeMargin + i * 27 + i * 6,
                         ObjectController.display.size.y - 27 - 20),
-                        "inventory/heart");
+                        "inventory/heart"
+                );
             else
                 heartBar[i] = new GUIRectangle(new Vector2i(
                         largeMargin + (i - heartBar.length / 2) * 27 + (i - heartBar.length / 2) * 6,
                         ObjectController.display.size.y - 54 - largeMargin - 20),
-                        "inventory/heart");
+                        "inventory/heart"
+                );
 
             ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
         }
 
         for (int i = 0; i < inventoryBar.length; i++) {
             inventoryBar[i] = new GUIRectangle(new Vector2i(
-                    (int)(ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 64 + i * smallMargin),
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 64 + i * smallMargin),
                     ObjectController.display.size.y - 64 - 20),
-                    "inventory/slot");
+                    "inventory/slot"
+            );
 
             ObjectController.guiPanels.get("inGame").guiElements.add(inventoryBar[i]);
         }
@@ -161,7 +164,8 @@ public class Player extends Entity {
 
         if (currentWeapon != null && health > 0) {
 
-            if (!(currentWeapon instanceof RocketLauncher)) graphics2D.drawImage(currentWeapon.texture, transform, null);
+            if (!(currentWeapon instanceof RocketLauncher))
+                graphics2D.drawImage(currentWeapon.texture, transform, null);
 
         }
 
@@ -178,14 +182,14 @@ public class Player extends Entity {
 
         for (int i = heartBar.length - 1; i >= 0; i--) {
 
-            if(i * 10 > health) ObjectController.guiPanels.get("inGame").guiElements.remove(heartBar[i]);
-            else if(!ObjectController.guiPanels.get("inGame").guiElements.contains(heartBar[i]))
+            if (i * 10 > health) ObjectController.guiPanels.get("inGame").guiElements.remove(heartBar[i]);
+            else if (!ObjectController.guiPanels.get("inGame").guiElements.contains(heartBar[i]))
                 ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
 
         }
 
         for (int i = 0; i < heartBar.length; i++) {
-            if(i < heartBar.length / 2)
+            if (i < heartBar.length / 2)
                 heartBar[i].position = new Vector2i(
                         largeMargin + i * 27 + i * 6,
                         ObjectController.display.size.y - 54 - largeMargin - 20);
@@ -197,7 +201,7 @@ public class Player extends Entity {
 
         for (int i = 0; i < inventoryBar.length; i++) {
             inventoryBar[i].position = new Vector2i(
-                    (int)(ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
                     ObjectController.display.size.y - 70 - 20);
         }
 

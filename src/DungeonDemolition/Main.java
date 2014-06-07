@@ -2,14 +2,13 @@ package dungeonDemolition;
 
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.dungeons.DungeonGenerator;
-import dungeonDemolition.objects.dungeons.DungeonTile;
-import dungeonDemolition.objects.entities.Enemy;
-import dungeonDemolition.objects.entities.Player;
-import dungeonDemolition.objects.gui.*;
-import dungeonDemolition.objects.weapons.*;
-import dungeonDemolition.util.*;
+import dungeonDemolition.objects.gui.GUIButton;
+import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIPanel;
+import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.TimeHelper;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -48,16 +47,16 @@ public class Main {
 
             if (!ObjectController.running) {
 
-                if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(2)).isPressed()) ObjectController.run();
+                if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(2)).isPressed())
+                    ObjectController.run();
 
                 else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(3)).isPressed()) {
 
                     ObjectController.removeAll();
                     ObjectController.generateNewLevel(true);
 
-                }
-
-                else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(4)).isPressed()) System.exit(0);
+                } else if (((GUIButton) ObjectController.guiPanels.get("menu").guiElements.get(4)).isPressed())
+                    System.exit(0);
 
             }
 
