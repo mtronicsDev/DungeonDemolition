@@ -21,7 +21,10 @@ public class Player extends Entity {
 
     public Inventory inventory;
     public GUIRectangle[] heartBar;
+    public GUIRectangle[] inventoryBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
+    private int largeMargin = 14;
+    private int smallMargin = 7;
 
     public Player() {
 
@@ -31,13 +34,30 @@ public class Player extends Entity {
         inventory = new Inventory(6);
 
         heartBar = new GUIRectangle[10];
+        inventoryBar = new GUIRectangle[6];
 
         for (int i = 0; i < heartBar.length; i++) {
-            heartBar[i] = new GUIRectangle(new Vector2i(
-                    (int)(ObjectController.display.size.x / 2 - 5 * 27 - 4.5 * 6 + i * 27 + i * 6),
-                    ObjectController.display.size.y - 27 - 20),
-                    "heart");
+            if(i < heartBar.length / 2)
+                heartBar[i] = new GUIRectangle(new Vector2i(
+                        largeMargin + i * 27 + i * 6,
+                        ObjectController.display.size.y - 27 - 20),
+                        "inventory/heart");
+            else
+                heartBar[i] = new GUIRectangle(new Vector2i(
+                        largeMargin + (i - heartBar.length / 2) * 27 + (i - heartBar.length / 2) * 6,
+                        ObjectController.display.size.y - 54 - largeMargin - 20),
+                        "inventory/heart");
+
             ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
+        }
+
+        for (int i = 0; i < inventoryBar.length; i++) {
+            inventoryBar[i] = new GUIRectangle(new Vector2i(
+                    (int)(ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 64 + i * smallMargin),
+                    ObjectController.display.size.y - 64 - 20),
+                    "inventory/slot");
+
+            ObjectController.guiPanels.get("inGame").guiElements.add(inventoryBar[i]);
         }
 
     }
@@ -162,6 +182,23 @@ public class Player extends Entity {
             else if(!ObjectController.guiPanels.get("inGame").guiElements.contains(heartBar[i]))
                 ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
 
+        }
+
+        for (int i = 0; i < heartBar.length; i++) {
+            if(i < heartBar.length / 2)
+                heartBar[i].position = new Vector2i(
+                        largeMargin + i * 27 + i * 6,
+                        ObjectController.display.size.y - 54 - largeMargin - 20);
+            else
+                heartBar[i].position = new Vector2i(
+                        largeMargin + (i - heartBar.length / 2) * 27 + (i - heartBar.length / 2) * 6,
+                        ObjectController.display.size.y - 27 - 20);
+        }
+
+        for (int i = 0; i < inventoryBar.length; i++) {
+            inventoryBar[i].position = new Vector2i(
+                    (int)(ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
+                    ObjectController.display.size.y - 70 - 20);
         }
 
         for (GUIText guiText : informationTexts)
