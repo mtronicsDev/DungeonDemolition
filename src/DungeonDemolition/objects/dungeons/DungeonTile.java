@@ -136,7 +136,7 @@ public class DungeonTile {
                 interactionMethod = new TileInteractionMethod() {
                     @Override
                     public void interact(Player player) {
-
+                        passable = !passable;
                     }
                 };
                 break;

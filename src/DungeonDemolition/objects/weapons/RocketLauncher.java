@@ -24,7 +24,8 @@ public class RocketLauncher extends Weapon {
 
         ObjectController.projectiles.add(new Rocket(
                 new Vector2f(ObjectController.entities.get("player").position),
-                ObjectController.entities.get("player").percentRotation
+                ObjectController.entities.get("player").percentRotation,
+                ObjectController.currentDungeonMap
         ));
 
     }

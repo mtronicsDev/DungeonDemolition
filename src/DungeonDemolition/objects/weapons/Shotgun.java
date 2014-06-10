@@ -39,7 +39,8 @@ public class Shotgun extends Weapon {
 
             ObjectController.projectiles.add(new Shot(
                     new Vector2f(ObjectController.entities.get("player").position),
-                    direction
+                    direction,
+                    ObjectController.currentDungeonMap
             ));
 
         }

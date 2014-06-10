@@ -24,7 +24,8 @@ public class MachineGun extends Weapon {
 
         ObjectController.projectiles.add(new Bullet(
                 new Vector2f(ObjectController.entities.get("player").position),
-                ObjectController.entities.get("player").percentRotation
+                ObjectController.entities.get("player").percentRotation,
+                ObjectController.currentDungeonMap
         ));
 
     }

@@ -28,7 +28,7 @@ public class Player extends Entity {
 
     public Player() {
 
-        super("playerMovement", "explosion", 100);
+        super("playerMovement", "explosion", 100, 0);
         maxHealth = 100;
         health = 100;
         inventory = new Inventory(6);

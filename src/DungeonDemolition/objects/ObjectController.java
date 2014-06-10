@@ -65,7 +65,7 @@ public class ObjectController {
 
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
                 if (tile.id == 11) {
-                    Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1);
+                    Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1, currentDungeonMap);
                     guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
                     enemy.position = new Vector2f(tile.position);
                     addEnemy(enemy);

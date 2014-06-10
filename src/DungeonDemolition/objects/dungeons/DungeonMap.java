@@ -9,12 +9,10 @@ import java.util.List;
 public class DungeonMap {
 
     public List<DungeonTile> dungeonTiles;
-    private byte[][] map;
 
     public DungeonMap(byte[][] map) {
 
         dungeonTiles = new ArrayList<DungeonTile>();
-        this.map = map;
         for (int i = 0; i < map.length; i++)
             for (int j = 0; j < map[0].length; j++) {
                 dungeonTiles.add(new DungeonTile(map[i][j], new Vector2f(40 * i, 40 * j)));

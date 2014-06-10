@@ -5,9 +5,9 @@ import dungeonDemolition.util.VectorHelper;
 
 public class Bullet extends Projectile {
 
-    public Bullet(Vector2f position, Vector2f direction) {
+    public Bullet(Vector2f position, Vector2f direction, int level) {
 
-        super(position, VectorHelper.multiplyVectorByFloat(direction, -500), 4, 0, null, "projectiles/bullet");
+        super(position, VectorHelper.multiplyVectorByFloat(direction, -500), 4, 0, null, "projectiles/bullet", level);
 
     }
 

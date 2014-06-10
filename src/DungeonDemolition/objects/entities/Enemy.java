@@ -14,9 +14,9 @@ public class Enemy extends Entity {
     public Timer damageBreakTimer;
     private Vector2f playerLessMovement;
 
-    public Enemy(String movementAnimationName, float speed, int damage, float damageBreakTime) {
+    public Enemy(String movementAnimationName, float speed, int damage, float damageBreakTime, int level) {
 
-        super(movementAnimationName, speed);
+        super(movementAnimationName, speed, level);
 
         this.damage = damage;
         this.damageBreakTimer = new Timer(damageBreakTime);
@@ -26,9 +26,9 @@ public class Enemy extends Entity {
 
     }
 
-    public Enemy(String movementAnimationName, String deathAnimationName, float speed, int damage, float damageBreakTime) {
+    public Enemy(String movementAnimationName, String deathAnimationName, float speed, int damage, float damageBreakTime, int level) {
 
-        super(movementAnimationName, deathAnimationName, speed);
+        super(movementAnimationName, deathAnimationName, speed, level);
 
         this.damage = damage;
         this.damageBreakTimer = new Timer(damageBreakTime);
@@ -42,60 +42,64 @@ public class Enemy extends Entity {
 
         super.update();
 
-        Vector2f differenceToPlayer = VectorHelper.subtractVectors(position, ObjectController.entities.get("player").position);
+        if (level == ObjectController.currentDungeonMap) {
 
-        if (health > 0
-                && Math.abs(differenceToPlayer.x) <= ObjectController.display.size.x / 2 + 100
-                && Math.abs(differenceToPlayer.y) <= ObjectController.display.size.y / 2 + 100) {
+            Vector2f differenceToPlayer = VectorHelper.subtractVectors(position, ObjectController.entities.get("player").position);
 
-            float speed = super.speed * TimeHelper.deltaTime;
+            if (health > 0
+                    && Math.abs(differenceToPlayer.x) <= ObjectController.display.size.x / 2 + 100
+                    && Math.abs(differenceToPlayer.y) <= ObjectController.display.size.y / 2 + 100) {
 
-            Vector2f movementDirection;
+                float speed = super.speed * TimeHelper.deltaTime;
 
-            if (ObjectController.entities.get("player").health > 0)
-                movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
+                Vector2f movementDirection;
 
-            else {
+                if (ObjectController.entities.get("player").health > 0)
+                    movementDirection = VectorHelper.normalizeVector(VectorHelper.subtractVectors(ObjectController.entities.get("player").position, position));
 
-                if (playerLessMovement == null)
-                    playerLessMovement = new Vector2f((float) Randomizer.getRandomInt(-1000, 1000) / 1000f, (float) Randomizer.getRandomInt(-1000, 1000) / 1000f);
+                else {
 
-                movementDirection = playerLessMovement;
+                    if (playerLessMovement == null)
+                        playerLessMovement = new Vector2f((float) Randomizer.getRandomInt(-1000, 1000) / 1000f, (float) Randomizer.getRandomInt(-1000, 1000) / 1000f);
 
-            }
+                    movementDirection = playerLessMovement;
 
-            boolean blocked = false;
-            Vector2f blockerPosition = new Vector2f();
+                }
 
-            Vector2f idealMovedSpace;
+                boolean blocked = false;
+                Vector2f blockerPosition = new Vector2f();
 
-            idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
+                Vector2f idealMovedSpace;
 
-            for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
+                idealMovedSpace = VectorHelper.multiplyVectorByFloat(movementDirection, speed);
 
-                if (!dungeonTile.passable) {
+                for (DungeonTile dungeonTile : ObjectController.dungeonMaps.get(ObjectController.currentDungeonMap).dungeonTiles) {
 
-                    boolean theoreticallyBlocking = false;
+                    if (!dungeonTile.passable) {
 
-                    for (Vector2f normal : dungeonTile.normals)
-                        if (VectorHelper.getAngle(idealMovedSpace, normal) < Math.toRadians(45))
-                            theoreticallyBlocking = true;
+                        boolean theoreticallyBlocking = false;
 
-                    if (theoreticallyBlocking) {
+                        for (Vector2f normal : dungeonTile.normals)
+                            if (VectorHelper.getAngle(idealMovedSpace, normal) < Math.toRadians(45))
+                                theoreticallyBlocking = true;
 
-                        Vector2f middleTilePosition = VectorHelper.sumVectors(new Vector2f[]{dungeonTile.position, new Vector2f(20, 20)});
-                        Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
+                        if (theoreticallyBlocking) {
 
-                        Vector2f target = VectorHelper.sumVectors(new Vector2f[]{VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)}), idealMovedSpace});
+                            Vector2f middleTilePosition = VectorHelper.sumVectors(new Vector2f[]{dungeonTile.position, new Vector2f(20, 20)});
+                            Vector2f middleEnemyPosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
 
-                        Vector2f difference = VectorHelper.subtractVectors(middleTilePosition, middleEnemyPosition);
+                            Vector2f target = VectorHelper.sumVectors(new Vector2f[]{VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)}), idealMovedSpace});
 
-                        if (VectorHelper.getLength(VectorHelper.subtractVectors(target, middleTilePosition)) <= 88
-                                && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(45)) {
+                            Vector2f difference = VectorHelper.subtractVectors(middleTilePosition, middleEnemyPosition);
 
-                            blocked = true;
-                            blockerPosition = dungeonTile.position;
-                            break;
+                            if (VectorHelper.getLength(VectorHelper.subtractVectors(target, middleTilePosition)) <= 88
+                                    && VectorHelper.getAngle(idealMovedSpace, difference) <= Math.toRadians(45)) {
+
+                                blocked = true;
+                                blockerPosition = dungeonTile.position;
+                                break;
+
+                            }
 
                         }
 
@@ -103,73 +107,73 @@ public class Enemy extends Entity {
 
                 }
 
-            }
+                Vector2f movedSpace;
 
-            Vector2f movedSpace;
+                if (!blocked) movedSpace = idealMovedSpace;
 
-            if (!blocked) movedSpace = idealMovedSpace;
+                else {
 
-            else {
+                    Vector2f actualMovedSpace;
 
-                Vector2f actualMovedSpace = new Vector2f();
+                    Vector2f middlePosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
+                    Vector2f middleCollingObjectPosition = VectorHelper.sumVectors(new Vector2f[]{blockerPosition, new Vector2f(20, 20)});
+                    Vector2f middlePlayerPosition = VectorHelper.sumVectors(new Vector2f[]{ObjectController.entities.get("player").position, new Vector2f(20, 20)});
 
-                Vector2f middlePosition = VectorHelper.sumVectors(new Vector2f[]{position, new Vector2f(20, 20)});
-                Vector2f middleCollingObjectPosition = VectorHelper.sumVectors(new Vector2f[]{blockerPosition, new Vector2f(20, 20)});
-                Vector2f middlePlayerPosition = VectorHelper.sumVectors(new Vector2f[]{ObjectController.entities.get("player").position, new Vector2f(20, 20)});
+                    Vector2f differenceToTarget = VectorHelper.subtractVectors(middlePlayerPosition, middlePosition);
+                    Vector2f negatedDifferenceToCollidingObject = VectorHelper.negateVector(VectorHelper.subtractVectors(middleCollingObjectPosition, middlePosition));
 
-                Vector2f differenceToTarget = VectorHelper.subtractVectors(middlePlayerPosition, middlePosition);
-                Vector2f negatedDifferenceToCollidingObject = VectorHelper.negateVector(VectorHelper.subtractVectors(middleCollingObjectPosition, middlePosition));
+                    Vector2f[] collidingObjectsCircleEdges = new Vector2f[]{
+                            VectorHelper.sumVectors(new Vector2f[]{
+                                    VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(negatedDifferenceToCollidingObject.y, -negatedDifferenceToCollidingObject.x)), 100),
+                                    middleCollingObjectPosition
+                            }),
+                            VectorHelper.sumVectors(new Vector2f[]{
+                                    VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(-negatedDifferenceToCollidingObject.y, negatedDifferenceToCollidingObject.x)), 100),
+                                    middleCollingObjectPosition
+                            }),
+                    };
 
-                Vector2f[] collidingObjectsCircleEdges = new Vector2f[]{
-                        VectorHelper.sumVectors(new Vector2f[]{
-                                VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(negatedDifferenceToCollidingObject.y, -negatedDifferenceToCollidingObject.x)), 100),
-                                middleCollingObjectPosition
-                        }),
-                        VectorHelper.sumVectors(new Vector2f[]{
-                                VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(new Vector2f(-negatedDifferenceToCollidingObject.y, negatedDifferenceToCollidingObject.x)), 100),
-                                middleCollingObjectPosition
-                        }),
-                };
+                    Vector2f closestCircleEdge = collidingObjectsCircleEdges[0];
 
-                Vector2f closestCircleEdge = collidingObjectsCircleEdges[0];
+                    if (Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(collidingObjectsCircleEdges[1], middlePosition), differenceToTarget))
+                            < Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(closestCircleEdge, middlePosition), differenceToTarget)))
 
-                if (Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(collidingObjectsCircleEdges[1], middlePosition), differenceToTarget))
-                        < Math.abs(VectorHelper.getAngle(VectorHelper.subtractVectors(closestCircleEdge, middlePosition), differenceToTarget)))
+                        closestCircleEdge = collidingObjectsCircleEdges[1];
 
-                    closestCircleEdge = collidingObjectsCircleEdges[1];
+                    actualMovedSpace = VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(VectorHelper.subtractVectors(closestCircleEdge, middlePosition)), speed);
 
-                actualMovedSpace = VectorHelper.multiplyVectorByFloat(VectorHelper.normalizeVector(VectorHelper.subtractVectors(closestCircleEdge, middlePosition)), speed);
-
-                movedSpace = actualMovedSpace;
-
-            }
-
-            if (!VectorHelper.areEqual(movedSpace, new Vector2f())) {
-
-                Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
-
-                if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0)
-                    rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
-
-                else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
-
-                movedSpace = Collider.getMovedSpace(this, movedSpace);
-
-            }
-
-            movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
-
-            position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
-
-            damageBreakTimer.update();
-
-            if (damageBreakTimer.hasFinished())
-                if (Collider.areBoxesColliding(Collider.getBoundingBox(this), Collider.getBoundingBox(ObjectController.entities.get("player")))) {
-
-                    ObjectController.entities.get("player").health -= damage;
-                    damageBreakTimer.restart();
+                    movedSpace = actualMovedSpace;
 
                 }
+
+                if (!VectorHelper.areEqual(movedSpace, new Vector2f())) {
+
+                    Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
+
+                    if (VectorHelper.getScalarProduct(direction, new Vector2f(1, 0)) <= 0)
+                        rotation = VectorHelper.getAngle(direction, new Vector2f(0, 1));
+
+                    else rotation = -VectorHelper.getAngle(direction, new Vector2f(0, 1));
+
+                    movedSpace = Collider.getMovedSpace(this, movedSpace);
+
+                }
+
+                movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
+
+                position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
+
+                damageBreakTimer.update();
+
+                if (damageBreakTimer.hasFinished())
+                    if (Collider.areBoxesColliding(Collider.getBoundingBox(this), Collider.getBoundingBox(ObjectController.entities.get("player")))) {
+
+                        ObjectController.entities.get("player").health -= damage;
+                        damageBreakTimer.restart();
+
+                    }
+
+            }
 
         }
 

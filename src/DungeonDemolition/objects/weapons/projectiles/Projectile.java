@@ -23,23 +23,23 @@ public abstract class Projectile {
     public float radius;
     public BufferedImage texture;
     public Animation destructiveAnimation;
-    public boolean textureFlippingFactors[] = new boolean[2];
+    public boolean textureFlippingFactors[] = new boolean[] {false, false};
     public boolean alive = true;
+    public int level;
 
-    public Projectile(Vector2f position, Vector2f speed, float damage, float radius, String animationName, String textureName) {
+    public Projectile(Vector2f position, Vector2f speed, float damage, float radius, String animationName, String textureName, int level) {
 
         this.position = position;
         this.speed = speed;
         this.damage = damage;
         this.radius = radius;
+        this.level = level;
 
         if (animationName != null) destructiveAnimation = new Animation(animationName, false);
 
         texture = TextureHelper.loadImage(textureName);
 
         if (this instanceof Rocket) textureFlippingFactors[0] = true;
-
-        else textureFlippingFactors[0] = false;
 
     }
 
@@ -70,49 +70,53 @@ public abstract class Projectile {
 
         }
 
-        if (alive) {
+        if (level == ObjectController.currentDungeonMap) {
 
-            position = VectorHelper.sumVectors(new Vector2f[]{position, VectorHelper.multiplyVectorByFloat(speed, TimeHelper.deltaTime)});
+            if (alive) {
 
-            Object[] collisionData = Collider.getCollisionData(this);
+                position = VectorHelper.sumVectors(new Vector2f[]{position, VectorHelper.multiplyVectorByFloat(speed, TimeHelper.deltaTime)});
 
-            if ((Boolean) collisionData[0]) {
+                Object[] collisionData = Collider.getCollisionData(this);
 
-                for (Entity entity : (List<Entity>) collisionData[1])
-                    entity.health -= damage;
+                if ((Boolean) collisionData[0]) {
 
-                if (radius != 0) {
+                    for (Entity entity : (List<Entity>) collisionData[1])
+                        entity.health -= damage;
 
-                    for (Entity entity : ObjectController.entities.values()) {
+                    if (radius != 0) {
 
-                        boolean alreadyHit = false;
+                        for (Entity entity : ObjectController.entities.values()) {
 
-                        for (Entity alreadyHitEntity : (List<Entity>) collisionData[1]) {
+                            boolean alreadyHit = false;
 
-                            if (entity == alreadyHitEntity) alreadyHit = true;
+                            for (Entity alreadyHitEntity : (List<Entity>) collisionData[1]) {
+
+                                if (entity == alreadyHitEntity) alreadyHit = true;
+
+                            }
+
+                            float difference = VectorHelper.getLength(VectorHelper.subtractVectors(entity.position, position));
+
+                            if (!alreadyHit && difference <= radius) entity.health -= damage / difference * 80;
 
                         }
 
-                        float difference = VectorHelper.getLength(VectorHelper.subtractVectors(entity.position, position));
-
-                        if (!alreadyHit && difference <= radius) entity.health -= damage / difference * 80;
-
                     }
+
+                    onDestroy();
 
                 }
 
-                onDestroy();
+            } else {
+
+                if (destructiveAnimation != null)
+                    if (destructiveAnimation.oneLoopPassed)
+                        ObjectController.projectilesToRemove.add(this);
+                    else destructiveAnimation.update(true);
+
+                else ObjectController.projectilesToRemove.add(this);
 
             }
-
-        } else {
-
-            if (destructiveAnimation != null)
-                if (destructiveAnimation.oneLoopPassed)
-                    ObjectController.projectilesToRemove.add(this);
-                else destructiveAnimation.update(true);
-
-            else ObjectController.projectilesToRemove.add(this);
 
         }
 
@@ -128,28 +132,29 @@ public abstract class Projectile {
 
     public void render(Graphics graphics) {
 
-        if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
+        if (level == ObjectController.currentDungeonMap)
+            if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
                 || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
                 || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
-            if (alive) graphics.drawImage(texture,
-                    (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - texture.getWidth(),
-                    (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - texture.getHeight(),
-                    null);
-
-            else if (destructiveAnimation != null) {
-
-                BufferedImage currentFrame = destructiveAnimation.getCurrentFrame();
-
-                graphics.drawImage(currentFrame,
-                        (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - currentFrame.getWidth(),
-                        (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - currentFrame.getHeight(),
+                if (alive) graphics.drawImage(texture,
+                        (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - texture.getWidth(),
+                        (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - texture.getHeight(),
                         null);
 
-            }
+                else if (destructiveAnimation != null) {
 
-        }
+                    BufferedImage currentFrame = destructiveAnimation.getCurrentFrame();
+
+                    graphics.drawImage(currentFrame,
+                            (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - currentFrame.getWidth(),
+                            (int) (position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - currentFrame.getHeight(),
+                            null);
+
+                }
+
+            }
 
     }
 
