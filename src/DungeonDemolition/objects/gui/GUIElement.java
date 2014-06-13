@@ -7,6 +7,7 @@ import java.awt.*;
 public abstract class GUIElement {
 
     public Vector2i position;
+    public GUIPanel parent;
 
     public GUIElement(Vector2i position) {
 
