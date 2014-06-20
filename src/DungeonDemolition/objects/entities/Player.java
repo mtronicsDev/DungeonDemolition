@@ -176,7 +176,7 @@ public class Player extends Entity {
 
         }
 
-        if (ObjectController.guiPanels.get("inGame").active) inventory.render(graphics);
+        if (ObjectController.guiPanels.get("inGame").active && health > 0) inventory.render(graphics);
 
         for (GUIText guiText : informationTexts)
             guiText.render(graphics);

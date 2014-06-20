@@ -4,7 +4,7 @@ public class Timer {
 
     public float endTime;
     public boolean running;
-    private float currentTime = 0;
+    public float currentTime = 0;
 
     public Timer(float endTime) {
 

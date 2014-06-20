@@ -70,7 +70,7 @@ public abstract class Weapon {
 
             else neededToBeReloaded = false;
 
-            if (InputInformation.isKeyDown(KeyEvent.VK_R)) {
+            if (InputInformation.isKeyDown(KeyEvent.VK_R) && currentAmmoCount < maxCurrentAmmoCount) {
 
                 reload();
                 return;

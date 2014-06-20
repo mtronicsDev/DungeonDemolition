@@ -11,8 +11,9 @@ public class GUIButton extends GUIElement {
     public GUIRectangle rectangle;
     public GUIText text;
     private boolean pressed = false;
+    public ButtonPressingMethod buttonPressingMethod;
 
-    public GUIButton(Vector2i position, Vector2i size, Color color, Color textColor, int textSize, String text) {
+    public GUIButton(Vector2i position, Vector2i size, Color color, Color textColor, int textSize, String text, ButtonPressingMethod buttonPressingMethod) {
 
         super(position);
 
@@ -24,10 +25,11 @@ public class GUIButton extends GUIElement {
         );
 
         this.text = new GUIText(textPosition, textColor, textSize, text);
+        this.buttonPressingMethod = buttonPressingMethod;
 
     }
 
-    public GUIButton(Vector2i position, Vector2i size, String textureName, Color textColor, int textSize, String text) {
+    public GUIButton(Vector2i position, Vector2i size, String textureName, Color textColor, int textSize, String text, ButtonPressingMethod buttonPressingMethod) {
 
         super(position);
 
@@ -39,6 +41,7 @@ public class GUIButton extends GUIElement {
         );
 
         this.text = new GUIText(textPosition, textColor, textSize, text);
+        this.buttonPressingMethod = buttonPressingMethod;
 
     }
 
@@ -53,6 +56,8 @@ public class GUIButton extends GUIElement {
                 InputInformation.mousePosition.y >= position.y &&
                 InputInformation.mousePosition.y <= position.y + rectangle.size.y &&
                 InputInformation.isButtonPressed(MouseEvent.BUTTON1);
+
+        if (pressed) buttonPressingMethod.press();
 
 
     }
