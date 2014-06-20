@@ -146,7 +146,11 @@ public class Enemy extends Entity {
 
                 }
 
-                if (!VectorHelper.areEqual(movedSpace, new Vector2f())) {
+                boolean moved = !VectorHelper.areEqual(movedSpace, new Vector2f());
+
+                movementAnimation.update(moved);
+
+                if (moved) {
 
                     Vector2f direction = VectorHelper.normalizeVector(VectorHelper.negateVector(movedSpace));
 
@@ -158,8 +162,6 @@ public class Enemy extends Entity {
                     movedSpace = Collider.getMovedSpace(this, movedSpace);
 
                 }
-
-                movementAnimation.update(!VectorHelper.areEqual(movedSpace, new Vector2f()));
 
                 position = VectorHelper.sumVectors(new Vector2f[]{position, movedSpace});
 

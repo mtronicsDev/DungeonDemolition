@@ -20,6 +20,7 @@ import java.util.List;
 public class Player extends Entity {
 
     public Inventory inventory;
+
     public GUIRectangle[] heartBar;
     public GUIRectangle[] inventoryBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
@@ -182,27 +183,10 @@ public class Player extends Entity {
 
         for (int i = heartBar.length - 1; i >= 0; i--) {
 
-            if (i * 10 > health) ObjectController.guiPanels.get("inGame").guiElements.remove(heartBar[i]);
+            if (i * 10 >= health) ObjectController.guiPanels.get("inGame").guiElements.remove(heartBar[i]);
             else if (!ObjectController.guiPanels.get("inGame").guiElements.contains(heartBar[i]))
                 ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
 
-        }
-
-        for (int i = 0; i < heartBar.length; i++) {
-            if (i < heartBar.length / 2)
-                heartBar[i].position = new Vector2i(
-                        largeMargin + i * 27 + i * 6,
-                        ObjectController.display.size.y - 54 - largeMargin - 20);
-            else
-                heartBar[i].position = new Vector2i(
-                        largeMargin + (i - heartBar.length / 2) * 27 + (i - heartBar.length / 2) * 6,
-                        ObjectController.display.size.y - 27 - 20);
-        }
-
-        for (int i = 0; i < inventoryBar.length; i++) {
-            inventoryBar[i].position = new Vector2i(
-                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
-                    ObjectController.display.size.y - 70 - 20);
         }
 
         for (GUIText guiText : informationTexts)
