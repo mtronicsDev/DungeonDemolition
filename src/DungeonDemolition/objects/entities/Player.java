@@ -22,20 +22,17 @@ public class Player extends Entity {
     public Inventory inventory;
 
     public GUIRectangle[] heartBar;
-    public GUIRectangle[] inventoryBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
     private int largeMargin = 14;
-    private int smallMargin = 7;
 
     public Player() {
 
         super("playerMovement", "explosion", 100, 0);
         maxHealth = 100;
         health = 100;
-        inventory = new Inventory(6);
+        inventory = new Inventory();
 
         heartBar = new GUIRectangle[10];
-        inventoryBar = new GUIRectangle[6];
 
         for (int i = 0; i < heartBar.length; i++) {
             if (i < heartBar.length / 2)
@@ -52,16 +49,6 @@ public class Player extends Entity {
                 );
 
             ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
-        }
-
-        for (int i = 0; i < inventoryBar.length; i++) {
-            inventoryBar[i] = new GUIRectangle(new Vector2i(
-                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 64 + i * smallMargin),
-                    ObjectController.display.size.y - 64 - 20),
-                    "inventory/slot"
-            );
-
-            ObjectController.guiPanels.get("inGame").guiElements.add(inventoryBar[i]);
         }
 
     }
@@ -188,6 +175,8 @@ public class Player extends Entity {
                 ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
 
         }
+
+        if (ObjectController.guiPanels.get("inGame").active) inventory.render(graphics);
 
         for (GUIText guiText : informationTexts)
             guiText.render(graphics);

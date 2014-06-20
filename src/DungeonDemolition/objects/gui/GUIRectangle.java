@@ -13,6 +13,7 @@ public class GUIRectangle extends GUIElement {
     public Color color;
     public boolean filled;
 
+
     public GUIRectangle(Vector2i position, String textureName) {
 
         this(position, null, textureName);
