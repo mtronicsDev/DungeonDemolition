@@ -3,10 +3,12 @@ package dungeonDemolition.objects.dungeons;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
+import dungeonDemolition.objects.gui.GUITitle;
 import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2f;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -65,61 +67,160 @@ public class DungeonTile {
                     @Override
                     public void interact(Player player) {
 
-                        LootType type = LootType.values()[Randomizer.getRandomInt(0, LootType.values().length - 1)];
-                        boolean isWeaponUnassigned = true;
-                        switch (type) {
+                        int lootCount = Randomizer.getRandomInt(1, 3);
 
-                            case WEAPON_GUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof Pistol)) isWeaponUnassigned = false;
-                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned)
-                                    player.inventory.addWeapon(new Pistol());
-                                break;
+                        boolean oneWeaponPicked = false;
 
-                            case WEAPON_MACHINE_GUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof MachineGun)) isWeaponUnassigned = false;
-                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned)
-                                    player.inventory.addWeapon(new MachineGun());
-                                break;
+                        for (int count = 0; count < lootCount; count++) {
 
-                            case WEAPON_RPG:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof RocketLauncher)) isWeaponUnassigned = false;
-                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned)
-                                    player.inventory.addWeapon(new RocketLauncher());
-                                break;
+                            LootType type = LootType.values()[Randomizer.getRandomInt(0, LootType.values().length - 1)];
+                            boolean isWeaponUnassigned = true;
+                            switch (type) {
 
-                            case WEAPON_SHOTGUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof Shotgun)) isWeaponUnassigned = false;
-                                if (player.inventory.weapons.size() == 0 || isWeaponUnassigned)
-                                    player.inventory.addWeapon(new Shotgun());
-                                break;
+                                case WEAPON_GUN:
+                                    if (!oneWeaponPicked) {
 
-                            case AMMO_GUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof Pistol))
-                                        weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
-                                break;
+                                        for (Weapon weapon : player.inventory.weapons)
+                                            if ((weapon instanceof Pistol)) isWeaponUnassigned = false;
 
-                            case AMMO_MACHINE_GUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof MachineGun))
-                                        weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
-                                break;
+                                        if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) {
 
-                            case AMMO_RPG:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof RocketLauncher))
-                                        weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
-                                break;
+                                            player.inventory.addWeapon(new Pistol());
+                                            oneWeaponPicked = true;
+                                            player.addTitle("Pistol");
 
-                            case AMMO_SHOTGUN:
-                                for (Weapon weapon : player.inventory.weapons)
-                                    if ((weapon instanceof Shotgun))
-                                        weapon.remainingAmmoCount += Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
-                                break;
+                                        }
+
+                                    }
+                                    break;
+
+                                case WEAPON_MACHINE_GUN:
+                                    if (!oneWeaponPicked) {
+
+                                        for (Weapon weapon : player.inventory.weapons)
+                                            if ((weapon instanceof MachineGun)) isWeaponUnassigned = false;
+
+                                        if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) {
+
+                                            player.inventory.addWeapon(new MachineGun());
+                                            oneWeaponPicked = true;
+                                            player.addTitle("Machine Gun");
+
+                                        }
+
+                                    }
+                                    break;
+
+                                case WEAPON_RPG:
+                                    if (!oneWeaponPicked) {
+
+                                        for (Weapon weapon : player.inventory.weapons)
+                                            if ((weapon instanceof RocketLauncher)) isWeaponUnassigned = false;
+
+                                        if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) {
+
+                                            player.inventory.addWeapon(new RocketLauncher());
+                                            oneWeaponPicked = true;
+                                            player.addTitle("Rocket Launcher");
+
+                                        }
+
+                                    }
+                                    break;
+
+                                case WEAPON_SHOTGUN:
+                                    if (!oneWeaponPicked) {
+
+                                        for (Weapon weapon : player.inventory.weapons)
+                                            if ((weapon instanceof Shotgun)) isWeaponUnassigned = false;
+
+                                        if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) {
+
+                                            player.inventory.addWeapon(new Shotgun());
+                                            oneWeaponPicked = true;
+                                            player.addTitle("Shotgun");
+
+                                        }
+
+                                    }
+                                    break;
+
+                                case AMMO_GUN:
+                                    for (Weapon weapon : player.inventory.weapons)
+                                        if ((weapon instanceof Pistol)) {
+
+                                            int ammoIncrease = Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+
+                                            if (ammoIncrease > 0) {
+
+                                                weapon.remainingAmmoCount += ammoIncrease;
+                                                player.addTitle(ammoIncrease + " Pistol Ammo");
+
+                                            }
+
+                                        }
+
+                                    break;
+
+                                case AMMO_MACHINE_GUN:
+                                    for (Weapon weapon : player.inventory.weapons)
+                                        if ((weapon instanceof MachineGun)) {
+
+                                            int ammoIncrease = Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+
+                                            if (ammoIncrease > 0) {
+
+                                                weapon.remainingAmmoCount += ammoIncrease;
+                                                player.addTitle(ammoIncrease + " Machine Gun Ammo");
+
+                                            }
+
+                                        }
+
+                                    break;
+
+                                case AMMO_RPG:
+                                    for (Weapon weapon : player.inventory.weapons)
+                                        if ((weapon instanceof RocketLauncher)) {
+
+                                            int ammoIncrease = Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+
+                                            if (ammoIncrease > 0) {
+
+                                                weapon.remainingAmmoCount += ammoIncrease;
+                                                player.addTitle(ammoIncrease + " Rocket Launcher Ammo");
+
+                                            }
+
+                                        }
+
+                                    break;
+
+                                case AMMO_SHOTGUN:
+                                    for (Weapon weapon : player.inventory.weapons)
+                                        if ((weapon instanceof Shotgun)) {
+
+                                            int ammoIncrease = Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+
+                                            if (ammoIncrease > 0) {
+
+                                                weapon.remainingAmmoCount += ammoIncrease;
+                                                player.addTitle(ammoIncrease + " Shotgun Ammo");
+
+                                            }
+
+                                        }
+
+                                    break;
+
+                                case HEALTH:
+                                    player.healthKits++;
+
+                                    player.addTitle("1 Health Kit");
+
+                                    break;
+
+                            }
 
                         }
 

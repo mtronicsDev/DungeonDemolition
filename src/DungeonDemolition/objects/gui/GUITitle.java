@@ -1,6 +1,7 @@
 package dungeonDemolition.objects.gui;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.util.Timer;
 import dungeonDemolition.util.Vector2i;
 
@@ -24,10 +25,27 @@ public class GUITitle extends GUIElement {
 
     }
 
+    public GUITitle(Vector2i position, Color color, int textSize, String message, float duration) {
+
+        super(position);
+
+        text = new GUIText(position, color, textSize, message);
+        timer = new Timer(duration);
+
+    }
+
     @Override
     public void render(Graphics graphics) {
+
         text.render(graphics);
         timer.update();
-        if (timer.hasFinished()) ObjectController.guiPanels.get("inGame").scheduleDeletion(this);
+
+        if (timer.hasFinished()) {
+
+            ObjectController.guiPanels.get("inGame").scheduleDeletion(this);
+            ((Player)ObjectController.entities.get("player")).deleteTitle(this);
+
+        }
+
     }
 }

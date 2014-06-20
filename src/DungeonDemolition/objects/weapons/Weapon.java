@@ -58,7 +58,7 @@ public abstract class Weapon {
 
         } else {
 
-            if (currentAmmoCount == 0) {
+            if (currentAmmoCount == 0 && remainingAmmoCount > 0) {
 
                 reload();
                 return;
@@ -70,7 +70,7 @@ public abstract class Weapon {
 
             else neededToBeReloaded = false;
 
-            if (InputInformation.isKeyDown(KeyEvent.VK_R) && currentAmmoCount < maxCurrentAmmoCount) {
+            if (InputInformation.isKeyDown(KeyEvent.VK_R) && currentAmmoCount < maxCurrentAmmoCount && remainingAmmoCount > 0) {
 
                 reload();
                 return;

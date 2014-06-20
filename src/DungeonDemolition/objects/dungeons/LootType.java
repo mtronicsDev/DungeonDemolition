@@ -9,5 +9,7 @@ public enum LootType {
     AMMO_GUN,
     AMMO_MACHINE_GUN,
     AMMO_RPG,
-    AMMO_SHOTGUN
+    AMMO_SHOTGUN,
+
+    HEALTH
 }

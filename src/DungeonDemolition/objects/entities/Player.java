@@ -4,6 +4,7 @@ import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
+import dungeonDemolition.objects.gui.GUITitle;
 import dungeonDemolition.objects.weapons.Inventory;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
@@ -23,7 +24,9 @@ public class Player extends Entity {
 
     public GUIRectangle[] heartBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
+    public List<GUITitle> lootSlots = new ArrayList<GUITitle>();
     private int largeMargin = 14;
+    public int healthKits = 0;
 
     public Player() {
 
@@ -33,6 +36,9 @@ public class Player extends Entity {
         inventory = new Inventory();
 
         heartBar = new GUIRectangle[10];
+
+        for (int count = 0; count < 20; count++)
+            lootSlots.add(null);
 
         for (int i = 0; i < heartBar.length; i++) {
             if (i < heartBar.length / 2)
@@ -79,6 +85,22 @@ public class Player extends Entity {
                 informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 80),
                         Color.blue, 20,
                         currentWeapon.remainingAmmoCount + " / " + currentWeapon.maxRemainingAmmoCount));
+
+            }
+
+            if (healthKits > 0) {
+
+                if (health <= 30) informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 35, ObjectController.display.size.y - 200), Color.blue, 20, "Q: Heal"));
+
+                if (health < maxHealth && InputInformation.isKeyDown(KeyEvent.VK_Q)) {
+
+                    if (health + 50 <= maxHealth) health += 50;
+
+                    else health = maxHealth;
+
+                    healthKits--;
+
+                }
 
             }
 
@@ -178,8 +200,33 @@ public class Player extends Entity {
 
         if (ObjectController.guiPanels.get("inGame").active && health > 0) inventory.render(graphics);
 
+        for (GUITitle lootInformation : lootSlots)
+            if (lootInformation != null) lootInformation.render(graphics);
+
         for (GUIText guiText : informationTexts)
             guiText.render(graphics);
+
+    }
+
+    public void addTitle(String message) {
+
+        for (int count = 0; count < lootSlots.size(); count++)
+            if (lootSlots.get(count) == null) {
+
+                lootSlots.set(count, new GUITitle(
+                        new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + count * 20),
+                        Color.blue, 20, message, 3)
+                );
+
+                break;
+
+            }
+
+    }
+
+    public void deleteTitle(GUITitle title) {
+
+        lootSlots.set(lootSlots.indexOf(title), null);
 
     }
 

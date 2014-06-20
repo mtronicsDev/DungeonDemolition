@@ -1,6 +1,7 @@
 package dungeonDemolition.graphics;
 
 import dungeonDemolition.objects.ObjectController;
+import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
@@ -65,7 +66,9 @@ public class Display extends JFrame {
             projectile.render(graphics);
 
         for (Entity entity : ObjectController.entities.values())
-            entity.render(graphics);
+            if (entity instanceof Enemy) entity.render(graphics);
+
+        ObjectController.entities.get("player").render(graphics);
 
         for (GUIPanel panel : ObjectController.guiPanels.values())
             panel.render(graphics);
