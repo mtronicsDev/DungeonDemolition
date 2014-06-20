@@ -1,8 +1,6 @@
 package dungeonDemolition.objects.weapons;
 
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.gui.ButtonPressingMethod;
-import dungeonDemolition.objects.gui.GUIButton;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.util.*;
 
@@ -34,7 +32,7 @@ public class Inventory {
 
         reloadProgress = new GUIRectangle[2];
 
-        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(0, 20), Color.blue, true);
+        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.blue, true);
         reloadProgress[1] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.black, false);
 
     }
@@ -75,8 +73,15 @@ public class Inventory {
     public void update() {
 
         for (int count = 0; count < weapons.size(); count++)
-            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1))))
+            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) {
+
                 currentWeapon = count;
+
+                Weapon currentWeapon = getCurrentWeapon();
+
+                if (!(currentWeapon instanceof Shotgun)) currentWeapon.reloadTimer.restart();
+
+            }
 
         Weapon currentWeapon = getCurrentWeapon();
 
