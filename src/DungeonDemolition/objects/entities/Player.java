@@ -5,9 +5,9 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.gui.GUITitle;
-import dungeonDemolition.objects.weapons.Inventory;
 import dungeonDemolition.objects.weapons.RocketLauncher;
 import dungeonDemolition.objects.weapons.Weapon;
+import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
@@ -23,8 +23,11 @@ public class Player extends Entity {
     public Inventory inventory;
 
     public GUIRectangle[] heartBar;
+    public GUIRectangle[] inventoryBar;
+    public GUIRectangle[] inventoryIconBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
     public List<GUITitle> lootSlots = new ArrayList<GUITitle>();
+    private int smallMargin = 7;
     private int largeMargin = 14;
     public int healthKits = 0;
 
@@ -33,12 +36,14 @@ public class Player extends Entity {
         super("playerMovement", "explosion", 100, 0);
         maxHealth = 100;
         health = 100;
-        inventory = new Inventory();
+        inventory = new Inventory(6);
 
         heartBar = new GUIRectangle[10];
 
         for (int count = 0; count < 20; count++)
             lootSlots.add(null);
+        inventoryBar = new GUIRectangle[6];
+        inventoryIconBar = new GUIRectangle[6];
 
         for (int i = 0; i < heartBar.length; i++) {
             if (i < heartBar.length / 2)
@@ -55,6 +60,26 @@ public class Player extends Entity {
                 );
 
             ObjectController.guiPanels.get("inGame").guiElements.add(heartBar[i]);
+        }
+
+        for (int i = 0; i < inventoryBar.length; i++) {
+            inventoryBar[i] = new GUIRectangle(new Vector2i(
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
+                    ObjectController.display.size.y - 70 - 20),
+                    "inventory/slot"
+            );
+
+            ObjectController.guiPanels.get("inGame").guiElements.add(inventoryBar[i]);
+        }
+
+        for (int i = 0; i < inventoryIconBar.length; i++) {
+            inventoryIconBar[i] = new GUIRectangle(new Vector2i(
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin) + 3,
+                    ObjectController.display.size.y - 67 - 20),
+                    "inventory/empty"
+            );
+
+            ObjectController.guiPanels.get("inGame").guiElements.add(inventoryIconBar[i]);
         }
 
     }
@@ -182,8 +207,14 @@ public class Player extends Entity {
         BufferedImage texture = null;
 
         if (health > 0) texture = movementAnimation.getCurrentFrame();
-
-        else if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
+        else {
+            if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
+            ObjectController.guiPanels.get("inGame").guiElements.add(new GUITitle(
+                    Color.red,
+                    "Game Over",
+                    5
+            ));
+        }
 
         if (texture != null) graphics2D.drawImage(texture, transform, null);
 
@@ -198,10 +229,26 @@ public class Player extends Entity {
 
         }
 
-        if (ObjectController.guiPanels.get("inGame").active && health > 0) inventory.render(graphics);
-
         for (GUITitle lootInformation : lootSlots)
             if (lootInformation != null) lootInformation.render(graphics);
+
+        if(inventory.weapons.size() != 0) {
+            for (int i = 0; i < inventory.weapons.size(); i++) {
+
+                String iconName = "inventory/empty";
+                if (inventory.weapons.get(i) instanceof Pistol) iconName = "inventory/gun";
+                else if (inventory.weapons.get(i) instanceof Shotgun) iconName = "inventory/shotgun";
+                else if (inventory.weapons.get(i) instanceof MachineGun) iconName = "inventory/mg";
+                else if (inventory.weapons.get(i) instanceof RocketLauncher) iconName = "inventory/rpg";
+                inventoryIconBar[i].position = new Vector2i(
+                        (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin) + 3,
+                        ObjectController.display.size.y - 87);
+                inventoryIconBar[i].texture = TextureHelper.loadImage(iconName);
+
+            }
+        }
+
+        inventory.render(graphics);
 
         for (GUIText guiText : informationTexts)
             guiText.render(graphics);
