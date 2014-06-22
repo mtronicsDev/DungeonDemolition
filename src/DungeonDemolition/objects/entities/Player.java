@@ -36,7 +36,7 @@ public class Player extends Entity {
         super("playerMovement", "explosion", 100, 0);
         maxHealth = 100;
         health = 100;
-        inventory = new Inventory(6);
+        inventory = new Inventory();
 
         heartBar = new GUIRectangle[10];
 

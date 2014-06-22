@@ -17,12 +17,13 @@ public class Inventory {
     public int weaponCount = 0;
     public int maxWeaponCount = 6;
     public GUIRectangle[] reloadProgress;
-    public GUIText healthKitCount;
+    public GUIRectangle currentWeaponMarker;
 
+    public GUIText healthKitCount;
     private GUIRectangle healthKitSlot;
     private GUIRectangle healthKitSymbol;
 
-    public Inventory(int size) {
+    public Inventory() {
 
         reloadProgress = new GUIRectangle[2];
 
@@ -68,6 +69,19 @@ public class Inventory {
         Weapon currentWeapon = getCurrentWeapon();
 
         if (currentWeapon != null) {
+
+            if (currentWeaponMarker == null) {
+
+                currentWeaponMarker = new GUIRectangle(((Player) ObjectController.entities.get("player")).inventoryBar[this.currentWeapon].position,
+                        new Vector2i(70, 70),
+                        Color.white,
+                        false);
+
+                ObjectController.guiPanels.get("inGame").guiElements.add(currentWeaponMarker);
+
+            }
+
+            else currentWeaponMarker.position = ((Player) ObjectController.entities.get("player")).inventoryBar[this.currentWeapon].position;
 
             currentWeapon.update();
 
