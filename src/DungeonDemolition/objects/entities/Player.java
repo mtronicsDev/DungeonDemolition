@@ -229,23 +229,41 @@ public class Player extends Entity {
 
         }
 
-        for (GUITitle lootInformation : lootSlots)
-            if (lootInformation != null) lootInformation.render(graphics);
+        for (int i = 0; i < heartBar.length; i++) {
+            if (i < heartBar.length / 2)
+                heartBar[i].position = new Vector2i(
+                        largeMargin + i * 27 + i * 6,
+                        ObjectController.display.size.y - 54 - largeMargin - 20);
+            else
+                heartBar[i].position = new Vector2i(
+                        largeMargin + (i - heartBar.length / 2) * 27 + (i - heartBar.length / 2) * 6,
+                        ObjectController.display.size.y - 27 - 20);
+        }
 
-        if(inventory.weapons.size() != 0) {
-            for (int i = 0; i < inventory.weapons.size(); i++) {
+        for (int i = 0; i < inventoryBar.length; i++) {
+            inventoryBar[i].position = new Vector2i(
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin),
+                    ObjectController.display.size.y - 70 - 20);
+        }
 
-                String iconName = "inventory/empty";
+        for (GUITitle lootSlot : lootSlots) if(lootSlot != null) lootSlot.render(graphics);
+
+        for (int i = 0; i < inventory.maxWeaponCount; i++) {
+
+            String iconName = "inventory/empty";
+            if(inventory.weapons.size() > i) {
                 if (inventory.weapons.get(i) instanceof Pistol) iconName = "inventory/gun";
                 else if (inventory.weapons.get(i) instanceof Shotgun) iconName = "inventory/shotgun";
                 else if (inventory.weapons.get(i) instanceof MachineGun) iconName = "inventory/mg";
                 else if (inventory.weapons.get(i) instanceof RocketLauncher) iconName = "inventory/rpg";
-                inventoryIconBar[i].position = new Vector2i(
-                        (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin) + 3,
-                        ObjectController.display.size.y - 87);
-                inventoryIconBar[i].texture = TextureHelper.loadImage(iconName);
-
             }
+
+            inventoryIconBar[i].position = new Vector2i(
+                    (int) (ObjectController.display.size.x / 2 - 3 * 70 - 2.5 * smallMargin + i * 70 + i * smallMargin) + 3,
+                    ObjectController.display.size.y - 87);
+
+            inventoryIconBar[i].texture = TextureHelper.loadImage(iconName);
+
         }
 
         inventory.render(graphics);
@@ -257,11 +275,11 @@ public class Player extends Entity {
 
     public void addTitle(String message) {
 
-        for (int count = 0; count < lootSlots.size(); count++)
-            if (lootSlots.get(count) == null) {
+        for (int i = 0; i < lootSlots.size(); i++)
+            if (lootSlots.get(i) == null) {
 
-                lootSlots.set(count, new GUITitle(
-                        new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + count * 20),
+                lootSlots.set(i, new GUITitle(
+                        new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + i * 20),
                         Color.blue, 20, message, 3)
                 );
 
