@@ -74,8 +74,7 @@ public class Inventory {
 
                 currentWeaponMarker = new GUIRectangle(((Player) ObjectController.entities.get("player")).inventoryBar[this.currentWeapon].position,
                         new Vector2i(70, 70),
-                        Color.white,
-                        false);
+                        "inventory/slotSelected");
 
                 ObjectController.guiPanels.get("inGame").guiElements.add(currentWeaponMarker);
 
