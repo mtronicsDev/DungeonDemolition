@@ -27,12 +27,12 @@ public class Inventory {
 
         reloadProgress = new GUIRectangle[2];
 
-        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.blue, true);
-        reloadProgress[1] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.black, false);
+        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.lightGray, true);
+        reloadProgress[1] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.darkGray, true);
 
         healthKitSlot = new GUIRectangle(new Vector2i(210, ObjectController.display.size.y - 20 - 70), new Vector2i(70, 70), "inventory/slot");
-        healthKitSymbol = new GUIRectangle(new Vector2i(210, ObjectController.display.size.y - 73), new Vector2i(30, 30), "inventory/healthKit");
-        healthKitCount = new GUIText(new Vector2i(250, ObjectController.display.size.y - 50), Color.red, 20, "");
+        healthKitSymbol = new GUIRectangle(new Vector2i(210, ObjectController.display.size.y - 73), new Vector2i(64, 64), "inventory/healthKit");
+        healthKitCount = new GUIText(new Vector2i(250, ObjectController.display.size.y - 50), Color.lightGray, 20, "");
 
     }
 
@@ -96,10 +96,20 @@ public class Inventory {
 
         if (getCurrentWeapon() != null) {
 
-            reloadProgress[0].render(graphics);
             reloadProgress[1].render(graphics);
+            reloadProgress[0].render(graphics);
 
         }
+
+        int xPos = ObjectController.getPlayer().largeMargin + (10 - ObjectController.getPlayer().heartBar.length / 2) * 27 +
+                (10 - ObjectController.getPlayer().heartBar.length / 2) *
+                        6 + ObjectController.getPlayer().largeMargin;
+
+        int yPos = ObjectController.display.size.y - 70 - 20;
+
+        healthKitSlot.position = new Vector2i(xPos, yPos);
+        healthKitSymbol.position = new Vector2i(xPos + 3, yPos + 3);
+        healthKitCount.position = new Vector2i(xPos + 70 + ObjectController.getPlayer().smallMargin, yPos + 43);
 
         healthKitSlot.render(graphics);
         healthKitSymbol.render(graphics);

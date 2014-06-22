@@ -182,6 +182,12 @@ public class ObjectController {
 
     }
 
+    public static Player getPlayer() {
+
+        return (Player)entities.get("player");
+
+    }
+
     public static void setDisplay(Display display) {
 
         ObjectController.display = display;

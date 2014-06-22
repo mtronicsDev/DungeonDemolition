@@ -27,8 +27,8 @@ public class Player extends Entity {
     public GUIRectangle[] inventoryIconBar;
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
     public List<GUITitle> lootSlots = new ArrayList<GUITitle>();
-    private int smallMargin = 7;
-    private int largeMargin = 14;
+    public int smallMargin = 7;
+    public int largeMargin = 14;
     public int healthKits = 0;
 
     public Player() {
