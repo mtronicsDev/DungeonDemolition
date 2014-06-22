@@ -17,8 +17,8 @@ public class GUITitle extends GUIElement {
         super(new Vector2i());
         int textSize = ObjectController.display.getWidth() / 35;
         Vector2i position = new Vector2i(
-                ObjectController.display.getWidth() / 2,
-                ObjectController.display.getHeight() / 2
+                ObjectController.display.getWidth() / 2 - message.toCharArray().length * textSize / 4,
+                ObjectController.display.getHeight() / 2 + textSize / 3
         );
         text = new GUIText(position, color, textSize, message);
         timer = new Timer(duration);
