@@ -145,6 +145,23 @@ public class DungeonTile {
                                     }
                                     break;
 
+                                case WEAPON_FLAMETHROWER:
+                                    if (!oneWeaponPicked) {
+
+                                        for (Weapon weapon : player.inventory.weapons)
+                                            if ((weapon instanceof FlameThrower)) isWeaponUnassigned = false;
+
+                                        if (player.inventory.weapons.size() == 0 || isWeaponUnassigned) {
+
+                                            player.inventory.addWeapon(new FlameThrower());
+                                            oneWeaponPicked = true;
+                                            player.addTitle("Flamethrower");
+
+                                        }
+
+                                    }
+                                    break;
+
                                 case AMMO_GUN:
                                     for (Weapon weapon : player.inventory.weapons)
                                         if ((weapon instanceof Pistol)) {
@@ -213,7 +230,24 @@ public class DungeonTile {
 
                                     break;
 
-                                case HEALTH:
+                                case AMMO_FLAMETHROWER:
+                                    for (Weapon weapon : player.inventory.weapons)
+                                        if ((weapon instanceof FlameThrower)) {
+
+                                            int ammoIncrease = Randomizer.getRandomInt(0, weapon.maxRemainingAmmoCount - weapon.remainingAmmoCount);
+
+                                            if (ammoIncrease > 0) {
+
+                                                weapon.remainingAmmoCount += ammoIncrease;
+                                                player.addTitle(ammoIncrease + " Flamethrower Ammo");
+
+                                            }
+
+                                        }
+
+                                    break;
+
+                                case HEALTH_KIT:
                                     player.healthKits++;
 
                                     player.addTitle("1 Health Kit");

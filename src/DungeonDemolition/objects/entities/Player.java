@@ -256,6 +256,7 @@ public class Player extends Entity {
                 else if (inventory.weapons.get(i) instanceof Shotgun) iconName = "inventory/shotgun";
                 else if (inventory.weapons.get(i) instanceof MachineGun) iconName = "inventory/mg";
                 else if (inventory.weapons.get(i) instanceof RocketLauncher) iconName = "inventory/rpg";
+                else if (inventory.weapons.get(i) instanceof FlameThrower) iconName = "inventory/flamethrower";
             }
 
             inventoryIconBar[i].position = new Vector2i(
