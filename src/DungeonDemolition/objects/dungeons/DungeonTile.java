@@ -276,14 +276,32 @@ public class DungeonTile {
                 };
                 break;
 
-            case 15 | 16:
+            case 15:
                 passable = false;
+                normals.add(new Vector2f(0, 1));
+                normals.add(new Vector2f(0, -1));
+                normals.add(new Vector2f(1, 0));
+                normals.add(new Vector2f(-1, 0));
                 interactable = true;
                 interactionMethod = new TileInteractionMethod() {
                     @Override
                     public void interact(Player player) {
-                        if(id == 15) ObjectController.goToDungeonMap(ObjectController.currentDungeonMap - 1); //Up
-                        else ObjectController.goToDungeonMap(ObjectController.currentDungeonMap + 1); //Down
+                        ObjectController.goToDungeonMap(ObjectController.currentDungeonMap - 1); //Up
+                    }
+                };
+                break;
+
+            case 16:
+                passable = false;
+                normals.add(new Vector2f(0, 1));
+                normals.add(new Vector2f(0, -1));
+                normals.add(new Vector2f(1, 0));
+                normals.add(new Vector2f(-1, 0));
+                interactable = true;
+                interactionMethod = new TileInteractionMethod() {
+                    @Override
+                    public void interact(Player player) {
+                        ObjectController.goToDungeonMap(ObjectController.currentDungeonMap + 1); //Down
                     }
                 };
                 break;
