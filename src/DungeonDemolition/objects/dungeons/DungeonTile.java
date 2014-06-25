@@ -28,7 +28,7 @@ public class DungeonTile {
     public DungeonTile(byte tileId, Vector2f position) {
 
         if (textures.size() == 0)
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 17; i++)
                 textures.add(TextureHelper.loadImage("tiles/" + String.valueOf(i)));
 
         this.position = position;

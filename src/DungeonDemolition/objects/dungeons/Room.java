@@ -89,6 +89,26 @@ public class Room {
 
         }
 
+        //Generates stairs
+        for (int i = 0; i < 2; i++) {
+            Vector2i stairPoint = new Vector2i(
+                    Randomizer.getRandomInt(1, localMap.length - 2),
+                    Randomizer.getRandomInt(1, localMap[0].length - 2)
+            );
+
+            if (localMap[stairPoint.x][stairPoint.y] != (10 | 15 | 16))
+                localMap[stairPoint.x][stairPoint.y] = (byte) (15 + i);
+            else {
+                while (localMap[stairPoint.x][stairPoint.y] == (10 | 15 | 16)) {
+                    stairPoint = new Vector2i(
+                            Randomizer.getRandomInt(1, localMap.length - 2),
+                            Randomizer.getRandomInt(1, localMap[0].length - 2)
+                    );
+                }
+                localMap[stairPoint.x][stairPoint.y] = (byte) (15 + i);
+            }
+        }
+
         //Generate a new room
         Direction nextDirection = Direction.values()[Randomizer.getRandomInt(0, 3)];
         Vector2i nextSize = new Vector2i(
