@@ -276,6 +276,18 @@ public class DungeonTile {
                 };
                 break;
 
+            case 15 | 16:
+                passable = false;
+                interactable = true;
+                interactionMethod = new TileInteractionMethod() {
+                    @Override
+                    public void interact(Player player) {
+                        if(id == 15) ObjectController.goToDungeonMap(ObjectController.currentDungeonMap - 1); //Up
+                        else ObjectController.goToDungeonMap(ObjectController.currentDungeonMap + 1); //Down
+                    }
+                };
+                break;
+
         }
 
     }

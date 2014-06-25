@@ -149,6 +149,17 @@ public class ObjectController {
 
     }
 
+    public static void goToDungeonMap(int index) {
+
+        if (dungeonMaps.size() > index) {
+            if (dungeonMaps.get(index) != null)
+                currentDungeonMap = index;
+            else
+                addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
+        }
+
+    }
+
     public static void addProjectile(Projectile projectile) {
 
         projectiles.add(projectile);
