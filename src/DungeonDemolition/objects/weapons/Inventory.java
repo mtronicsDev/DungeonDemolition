@@ -27,8 +27,8 @@ public class Inventory {
 
         reloadProgress = new GUIRectangle[2];
 
-        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.lightGray, true);
-        reloadProgress[1] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 60), new Vector2i(60, 20), Color.darkGray, true);
+        reloadProgress[0] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40), new Vector2i(60, 20), Color.lightGray, true);
+        reloadProgress[1] = new GUIRectangle(new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40), new Vector2i(60, 20), Color.darkGray, true);
 
         healthKitSlot = new GUIRectangle(new Vector2i(210, ObjectController.display.size.y - 20 - 70), new Vector2i(70, 70), "inventory/slot");
         healthKitSymbol = new GUIRectangle(new Vector2i(210, ObjectController.display.size.y - 73), new Vector2i(64, 64), "inventory/healthKit");
@@ -95,6 +95,9 @@ public class Inventory {
     public void render(Graphics graphics) {
 
         if (getCurrentWeapon() != null) {
+
+            reloadProgress[1].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
+            reloadProgress[0].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
 
             reloadProgress[1].render(graphics);
             reloadProgress[0].render(graphics);

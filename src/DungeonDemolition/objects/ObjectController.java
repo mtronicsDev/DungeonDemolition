@@ -4,6 +4,7 @@ import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.dungeons.DungeonGenerator;
 import dungeonDemolition.objects.dungeons.DungeonMap;
 import dungeonDemolition.objects.dungeons.DungeonTile;
+import dungeonDemolition.objects.dungeons.Tile;
 import dungeonDemolition.objects.entities.Enemy;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
@@ -11,7 +12,6 @@ import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIHealthBar;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.gui.GUIRectangle;
-import dungeonDemolition.objects.weapons.Shotgun;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Vector2f;
 
@@ -29,8 +29,10 @@ public class ObjectController {
     public static int currentDungeonMap = -1;
     public static Map<String, Entity> entities = new HashMap<String, Entity>();
     public static List<Entity> entitiesToRemove = new ArrayList<Entity>();
+    public static Map<String, Entity> entitiesToAdd = new HashMap<String, Entity>();
     public static int enemyCounter = 0;
     public static Display display;
+    public static boolean gold = false;
 
     public static boolean running = false;
 
@@ -56,23 +58,23 @@ public class ObjectController {
 
         if (start) {
 
-            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
+            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
-                if (tile.id == 10) {
+                if (tile.id == Tile.SPAWN_PLAYER.id()) {
                     Player player = new Player();
                     player.position = new Vector2f(tile.position);
                     setPlayer(player);
                 }
 
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
-                if (tile.id == 11) {
+                if (tile.id == Tile.SPAWN_ENEMY.id()) {
                     Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1, currentDungeonMap);
                     guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
                     enemy.position = new Vector2f(tile.position);
                     addEnemy(enemy);
                 }
 
-        } else addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
+        } else addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
 
     }
 
@@ -88,6 +90,8 @@ public class ObjectController {
 
             for (Projectile projectile : projectilesToRemove)
                 projectiles.remove(projectile);
+
+            entities.putAll(entitiesToAdd);
 
             for (Entity entityToRemove : entitiesToRemove) {
 
@@ -151,12 +155,28 @@ public class ObjectController {
 
     public static void goToDungeonMap(int index) {
 
-        if (dungeonMaps.size() > index)
+        if (dungeonMaps.size() > index) {
             if (dungeonMaps.get(index) != null)
                 currentDungeonMap = index;
+        }
         else
-            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512));
+            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
 
+        for(DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles) {
+
+            if(tile.id == Tile.SPAWN_PLAYER.id())
+                ObjectController.getPlayer().position = tile.position;
+
+            else if (tile.id == Tile.SPAWN_ENEMY.id()) {
+
+                Enemy enemy = new Enemy("alligatorMovement", "explosion", 50, 10, 1, currentDungeonMap);
+                guiPanels.get("inGame").guiElements.add(new GUIHealthBar(enemy));
+                enemy.position = new Vector2f(tile.position);
+                addEnemy(enemy);
+
+            }
+
+        }
     }
 
     public static void addProjectile(Projectile projectile) {
@@ -174,15 +194,13 @@ public class ObjectController {
     public static void addDungeonMap(DungeonMap dungeonMap) {
 
         dungeonMaps.add(dungeonMap);
-
         currentDungeonMap = dungeonMaps.size() - 1;
 
     }
 
     public static void addEnemy(Enemy enemy) {
 
-        entities.put("enemy" + enemyCounter, enemy);
-
+        entitiesToAdd.put("enemy" + enemyCounter, enemy);
         enemyCounter++;
 
     }

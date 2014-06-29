@@ -100,15 +100,15 @@ public class Player extends Entity {
 
                 if (currentWeapon.neededToBeReloaded)
                     informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 50, ObjectController.display.size.y - 100),
-                            Color.blue, 20,
+                            Color.lightGray, 20,
                             "R: reload"));
 
-                informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 100),
-                        Color.blue, 20,
+                informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x - 94 - largeMargin - smallMargin, ObjectController.display.size.y - 40 - smallMargin),
+                        Color.lightGray, 20,
                         currentWeapon.currentAmmoCount + " / " + currentWeapon.maxCurrentAmmoCount));
 
-                informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x - 100, ObjectController.display.size.y - 80),
-                        Color.blue, 20,
+                informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x - 94 - largeMargin - smallMargin, ObjectController.display.size.y - 55 - largeMargin),
+                        Color.lightGray, 20,
                         currentWeapon.remainingAmmoCount + " / " + currentWeapon.maxRemainingAmmoCount));
 
             }

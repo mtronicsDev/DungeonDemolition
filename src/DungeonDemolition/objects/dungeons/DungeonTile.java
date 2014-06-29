@@ -33,30 +33,31 @@ public class DungeonTile {
 
         this.position = position;
         id = tileId;
+        Tile tile = Tile.values()[id];
 
-        switch (id) {
+        switch (tile) {
 
-            case 2:
+            case WALL_NORTH:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
                 break;
 
-            case 3:
+            case WALL_EAST:
                 passable = false;
                 normals.add(new Vector2f(-1, 0));
                 break;
 
-            case 4:
+            case WALL_SOUTH:
                 passable = false;
                 normals.add(new Vector2f(0, -1));
                 break;
 
-            case 5:
+            case WALL_WEST:
                 passable = false;
                 normals.add(new Vector2f(1, 0));
                 break;
 
-            case 12:
+            case CHEST_FULL:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
                 normals.add(new Vector2f(0, -1));
@@ -265,18 +266,26 @@ public class DungeonTile {
                 };
                 break;
 
-            case 14:
+            case CHEST_GOLD:
                 passable = false;
+                normals.add(new Vector2f(0, 1));
+                normals.add(new Vector2f(0, -1));
+                normals.add(new Vector2f(1, 0));
+                normals.add(new Vector2f(-1, 0));
                 interactable = true;
                 interactionMethod = new TileInteractionMethod() {
                     @Override
                     public void interact(Player player) {
-                        passable = !passable;
+
+                        ObjectController.gold = true;
+                        interactable = false;
+                        id = 13;
+
                     }
                 };
                 break;
 
-            case 15:
+            case STAIRS_UP:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
                 normals.add(new Vector2f(0, -1));
@@ -291,7 +300,7 @@ public class DungeonTile {
                 };
                 break;
 
-            case 16:
+            case STAIRS_DOWN:
                 passable = false;
                 normals.add(new Vector2f(0, 1));
                 normals.add(new Vector2f(0, -1));

@@ -1,15 +1,23 @@
 package dungeonDemolition.objects.dungeons;
 
+import dungeonDemolition.util.PreferenceHelper;
+import dungeonDemolition.util.Randomizer;
+
 public class DungeonGenerator {
 
-    public static byte[][] map;
+    static byte[][] map;
+    private static int maxDungeonLevel =
+            Randomizer.getRandomInt(
+                    PreferenceHelper.getInteger("minLevels"),
+                    PreferenceHelper.getInteger("maxLevels")
+            );
 
-    public static DungeonMap generateDungeonMap(int sizeX, int sizeY) {
+    public static DungeonMap generateDungeonMap(int sizeX, int sizeY, byte level) {
 
         map = new byte[sizeX][sizeY];
-        new Room().generate();
+        new Room().generate(level, maxDungeonLevel);
 
-        return new DungeonMap(map);
+        return new DungeonMap(map, level);
 
     }
 

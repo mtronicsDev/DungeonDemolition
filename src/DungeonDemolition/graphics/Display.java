@@ -6,11 +6,14 @@ import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.InputListener;
+import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2i;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.*;
 
 public class Display extends JFrame {
 
@@ -37,6 +40,13 @@ public class Display extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        java.util.List<BufferedImage> iconImages = new ArrayList<BufferedImage>();
+        iconImages.add(TextureHelper.loadImage("icons/icon16x16"));
+        iconImages.add(TextureHelper.loadImage("icons/icon20x20"));
+        iconImages.add(TextureHelper.loadImage("icons/icon32x32"));
+        iconImages.add(TextureHelper.loadImage("icons/icon64x64"));
+
+        setIconImages(iconImages);
         setEnabled(true);
         setVisible(true);
 

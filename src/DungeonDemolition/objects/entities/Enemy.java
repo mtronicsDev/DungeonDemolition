@@ -182,27 +182,26 @@ public class Enemy extends Entity {
     }
 
     public void render(Graphics graphics) {
+        if (level == ObjectController.currentDungeonMap) {
+            Entity player = ObjectController.entities.get("player");
 
-        Entity player = ObjectController.entities.get("player");
+            if (!(((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20 < -40)
+                    || ((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
+                    || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) < -40
+                    || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
-        if (!(((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20 < -40)
-                || ((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
-                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) < -40
-                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
+                AffineTransform transform = new AffineTransform();
+                transform.translate((int) (position.x - player.position.x) + ObjectController.display.size.x / 2,
+                        (int) (position.y - player.position.y) + ObjectController.display.size.y / 2);
+                transform.rotate(rotation);
+                transform.translate(-20, -20);
 
-            AffineTransform transform = new AffineTransform();
-            transform.translate((int) (position.x - player.position.x) + ObjectController.display.size.x / 2,
-                    (int) (position.y - player.position.y) + ObjectController.display.size.y / 2);
-            transform.rotate(rotation);
-            transform.translate(-20, -20);
-
-            Graphics2D graphics2D = (Graphics2D) graphics;
-            if (health > 0) graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
-            else if (deathAnimation != null) graphics2D.drawImage(deathAnimation.getCurrentFrame(), transform, null);
-
-
+                Graphics2D graphics2D = (Graphics2D) graphics;
+                if (health > 0) graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
+                else if (deathAnimation != null)
+                    graphics2D.drawImage(deathAnimation.getCurrentFrame(), transform, null);
+            }
         }
-
     }
 
 }

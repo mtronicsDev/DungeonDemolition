@@ -9,8 +9,9 @@ import java.util.List;
 public class DungeonMap {
 
     public List<DungeonTile> dungeonTiles;
+    byte level;
 
-    public DungeonMap(byte[][] map) {
+    public DungeonMap(byte[][] map, byte level) {
 
         dungeonTiles = new ArrayList<DungeonTile>();
         for (int i = 0; i < map.length; i++)

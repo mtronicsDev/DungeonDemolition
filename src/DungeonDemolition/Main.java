@@ -4,6 +4,7 @@ import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.gui.*;
 import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.PreferenceHelper;
 import dungeonDemolition.util.TimeHelper;
 import dungeonDemolition.util.Vector2i;
 
@@ -14,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        PreferenceHelper.loadPreferences();
         Display display = new Display("Dungeon Demolition", 1070, 600);
         ObjectController.setDisplay(display);
 
