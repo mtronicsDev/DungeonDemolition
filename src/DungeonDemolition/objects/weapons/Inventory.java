@@ -4,7 +4,9 @@ import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Player;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
-import dungeonDemolition.util.*;
+import dungeonDemolition.util.InputInformation;
+import dungeonDemolition.util.InputListener;
+import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -78,13 +80,13 @@ public class Inventory {
 
                 ObjectController.guiPanels.get("inGame").guiElements.add(currentWeaponMarker);
 
-            }
-
-            else currentWeaponMarker.position = ((Player) ObjectController.entities.get("player")).inventoryBar[this.currentWeapon].position;
+            } else
+                currentWeaponMarker.position = ((Player) ObjectController.entities.get("player")).inventoryBar[this.currentWeapon].position;
 
             currentWeapon.update();
 
-            if (currentWeapon.reloading) reloadProgress[0].size.x = (int) (currentWeapon.reloadTimer.currentTime / currentWeapon.reloadTimer.endTime * 60);
+            if (currentWeapon.reloading)
+                reloadProgress[0].size.x = (int) (currentWeapon.reloadTimer.currentTime / currentWeapon.reloadTimer.endTime * 60);
 
             else reloadProgress[0].size.x = 60;
 

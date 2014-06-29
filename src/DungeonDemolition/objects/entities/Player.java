@@ -5,8 +5,6 @@ import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.gui.GUITitle;
-import dungeonDemolition.objects.weapons.RocketLauncher;
-import dungeonDemolition.objects.weapons.Weapon;
 import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
@@ -115,7 +113,8 @@ public class Player extends Entity {
 
             if (healthKits > 0) {
 
-                if (health <= 30) informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 35, ObjectController.display.size.y - 200), Color.blue, 20, "Q: Heal"));
+                if (health <= 30)
+                    informationTexts.add(new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 35, ObjectController.display.size.y - 200), Color.blue, 20, "Q: Heal"));
 
                 if (health < maxHealth && InputInformation.isKeyDown(KeyEvent.VK_Q)) {
 
@@ -246,12 +245,12 @@ public class Player extends Entity {
                     ObjectController.display.size.y - 70 - 20);
         }
 
-        for (GUITitle lootSlot : lootSlots) if(lootSlot != null) lootSlot.render(graphics);
+        for (GUITitle lootSlot : lootSlots) if (lootSlot != null) lootSlot.render(graphics);
 
         for (int i = 0; i < inventory.maxWeaponCount; i++) {
 
             String iconName = "inventory/empty";
-            if(inventory.weapons.size() > i) {
+            if (inventory.weapons.size() > i) {
                 if (inventory.weapons.get(i) instanceof Pistol) iconName = "inventory/gun";
                 else if (inventory.weapons.get(i) instanceof Shotgun) iconName = "inventory/shotgun";
                 else if (inventory.weapons.get(i) instanceof MachineGun) iconName = "inventory/mg";
@@ -280,8 +279,8 @@ public class Player extends Entity {
             if (lootSlots.get(i) == null) {
 
                 lootSlots.set(i, new GUITitle(
-                        new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + i * 20),
-                        Color.blue, 20, message, 3)
+                                new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + i * 20),
+                                Color.blue, 20, message, 3)
                 );
 
                 break;

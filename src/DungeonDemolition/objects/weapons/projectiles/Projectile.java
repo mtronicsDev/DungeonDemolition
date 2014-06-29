@@ -23,7 +23,7 @@ public abstract class Projectile {
     public float radius;
     public BufferedImage texture;
     public Animation destructiveAnimation;
-    public boolean textureFlippingFactors[] = new boolean[] {false, false};
+    public boolean textureFlippingFactors[] = new boolean[]{false, false};
     public boolean alive = true;
     public int level;
 
@@ -134,9 +134,9 @@ public abstract class Projectile {
 
         if (level == ObjectController.currentDungeonMap)
             if (!(((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20 < -40)
-                || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
-                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
-                || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
+                    || ((position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
+                    || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) < -40
+                    || ((position.y - ObjectController.entities.get("player").position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
                 if (alive) graphics.drawImage(texture,
                         (int) (position.x - ObjectController.entities.get("player").position.x) + ObjectController.display.size.x / 2 - texture.getWidth(),

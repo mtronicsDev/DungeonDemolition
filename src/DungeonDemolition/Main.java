@@ -2,7 +2,10 @@ package dungeonDemolition;
 
 import dungeonDemolition.graphics.Display;
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.gui.*;
+import dungeonDemolition.objects.gui.ButtonPressingMethod;
+import dungeonDemolition.objects.gui.GUIButton;
+import dungeonDemolition.objects.gui.GUIElement;
+import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.util.InputInformation;
 import dungeonDemolition.util.PreferenceHelper;
 import dungeonDemolition.util.TimeHelper;

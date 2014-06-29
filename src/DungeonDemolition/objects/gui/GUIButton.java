@@ -10,8 +10,8 @@ public class GUIButton extends GUIElement {
 
     public GUIRectangle rectangle;
     public GUIText text;
-    private boolean pressed = false;
     public ButtonPressingMethod buttonPressingMethod;
+    private boolean pressed = false;
 
     public GUIButton(Vector2i position, Vector2i size, Color color, Color textColor, int textSize, String text, ButtonPressingMethod buttonPressingMethod) {
 

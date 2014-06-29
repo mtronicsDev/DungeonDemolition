@@ -58,7 +58,7 @@ public class ObjectController {
 
         if (start) {
 
-            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
+            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte) (ObjectController.currentDungeonMap + 1)));
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
                 if (tile.id == Tile.SPAWN_PLAYER.id()) {
                     Player player = new Player();
@@ -74,7 +74,8 @@ public class ObjectController {
                     addEnemy(enemy);
                 }
 
-        } else addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
+        } else
+            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte) (ObjectController.currentDungeonMap + 1)));
 
     }
 
@@ -158,13 +159,12 @@ public class ObjectController {
         if (dungeonMaps.size() > index) {
             if (dungeonMaps.get(index) != null)
                 currentDungeonMap = index;
-        }
-        else
-            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte)(ObjectController.currentDungeonMap + 1)));
+        } else
+            addDungeonMap(DungeonGenerator.generateDungeonMap(512, 512, (byte) (ObjectController.currentDungeonMap + 1)));
 
-        for(DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles) {
+        for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles) {
 
-            if(tile.id == Tile.SPAWN_PLAYER.id())
+            if (tile.id == Tile.SPAWN_PLAYER.id())
                 ObjectController.getPlayer().position = tile.position;
 
             else if (tile.id == Tile.SPAWN_ENEMY.id()) {
@@ -205,15 +205,15 @@ public class ObjectController {
 
     }
 
-    public static void setPlayer(Player player) {
+    public static Player getPlayer() {
 
-        entities.put("player", player);
+        return (Player) entities.get("player");
 
     }
 
-    public static Player getPlayer() {
+    public static void setPlayer(Player player) {
 
-        return (Player)entities.get("player");
+        entities.put("player", player);
 
     }
 

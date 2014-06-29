@@ -7,8 +7,8 @@ import java.util.List;
 public class GUIPanel {
 
     public List<GUIElement> guiElements = new ArrayList<GUIElement>();
-    private List<GUIElement> scheduledDeletions = new ArrayList<GUIElement>();
     public boolean active;
+    private List<GUIElement> scheduledDeletions = new ArrayList<GUIElement>();
 
     public GUIPanel(GUIElement[] elements, boolean active) {
 

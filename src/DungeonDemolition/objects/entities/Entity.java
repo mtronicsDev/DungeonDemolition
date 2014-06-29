@@ -2,7 +2,6 @@ package dungeonDemolition.objects.entities;
 
 import dungeonDemolition.graphics.Animation;
 import dungeonDemolition.objects.ObjectController;
-import dungeonDemolition.objects.dungeons.DungeonTile;
 import dungeonDemolition.util.Vector2f;
 
 import java.awt.*;

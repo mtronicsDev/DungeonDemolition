@@ -95,12 +95,10 @@ public class Room {
         if (level == 0) {
             k = 1;
             j = 2;
-        }
-        else if (level == maxLevel) {
+        } else if (level == maxLevel) {
             k = 0;
             j = 1;
-        }
-        else {
+        } else {
             k = 0;
             j = 2;
         }
@@ -125,7 +123,7 @@ public class Room {
         }
 
         //Gold on the last level
-        if(level == maxLevel) {
+        if (level == maxLevel) {
             Vector2i featurePoint = new Vector2i(
                     Randomizer.getRandomInt(1, localMap.length - 2),
                     Randomizer.getRandomInt(1, localMap[0].length - 2)

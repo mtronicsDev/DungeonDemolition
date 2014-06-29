@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Display extends JFrame {
 

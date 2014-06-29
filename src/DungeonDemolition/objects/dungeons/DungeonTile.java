@@ -3,12 +3,10 @@ package dungeonDemolition.objects.dungeons;
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.entities.Entity;
 import dungeonDemolition.objects.entities.Player;
-import dungeonDemolition.objects.gui.GUITitle;
 import dungeonDemolition.objects.weapons.*;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.TextureHelper;
 import dungeonDemolition.util.Vector2f;
-import dungeonDemolition.util.Vector2i;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

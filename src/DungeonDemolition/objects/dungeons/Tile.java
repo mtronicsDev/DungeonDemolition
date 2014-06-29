@@ -25,6 +25,6 @@ public enum Tile {
     STAIRS_DOWN;
 
     public byte id() {
-        return (byte)this.ordinal();
+        return (byte) this.ordinal();
     }
 }

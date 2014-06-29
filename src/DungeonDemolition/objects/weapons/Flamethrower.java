@@ -2,7 +2,6 @@ package dungeonDemolition.objects.weapons;
 
 import dungeonDemolition.objects.ObjectController;
 import dungeonDemolition.objects.weapons.projectiles.Flame;
-import dungeonDemolition.objects.weapons.projectiles.Shot;
 import dungeonDemolition.util.Matrix2f;
 import dungeonDemolition.util.Randomizer;
 import dungeonDemolition.util.Vector2f;
