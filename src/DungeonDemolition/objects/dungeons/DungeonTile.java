@@ -154,7 +154,7 @@ public class DungeonTile {
 
                                             player.inventory.addWeapon(new FlameThrower());
                                             oneWeaponPicked = true;
-                                            player.addTitle("Flamethrower");
+                                            player.addTitle("FlameThrower");
 
                                         }
 
@@ -238,7 +238,7 @@ public class DungeonTile {
                                             if (ammoIncrease > 0) {
 
                                                 weapon.remainingAmmoCount += ammoIncrease;
-                                                player.addTitle(ammoIncrease + " Flamethrower Ammo");
+                                                player.addTitle(ammoIncrease + " FlameThrower Ammo");
 
                                             }
 

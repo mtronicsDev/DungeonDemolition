@@ -6,6 +6,7 @@ import dungeonDemolition.objects.gui.GUIRectangle;
 import dungeonDemolition.objects.gui.GUIText;
 import dungeonDemolition.objects.gui.GUITitle;
 import dungeonDemolition.objects.weapons.*;
+import dungeonDemolition.objects.weapons.projectiles.Flame;
 import dungeonDemolition.physics.Collider;
 import dungeonDemolition.util.*;
 
@@ -198,8 +199,28 @@ public class Player extends Entity {
 
         if (currentWeapon != null && health > 0) {
 
-            if (!(currentWeapon instanceof RocketLauncher))
+            if (!(currentWeapon instanceof RocketLauncher)) {
+
                 graphics2D.drawImage(currentWeapon.texture, transform, null);
+
+                if (currentWeapon instanceof FlameThrower) {
+
+                    Flame flame = ((FlameThrower) currentWeapon).flame;
+
+                    if (flame.active) {
+
+                        AffineTransform flameTransform = new AffineTransform();
+                        flameTransform.translate(ObjectController.display.size.x / 2, ObjectController.display.size.y / 2);
+                        flameTransform.rotate(rotation);
+                        flameTransform.translate(0, -flame.texture.getHeight());
+
+                        graphics2D.drawImage(flame.texture, flameTransform, null);
+
+                    }
+
+                }
+
+            }
 
         }
 
