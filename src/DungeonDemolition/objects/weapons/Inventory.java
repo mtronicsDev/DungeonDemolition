@@ -58,7 +58,7 @@ public class Inventory {
         healthKitCount.text = String.valueOf(((Player) ObjectController.entities.get("player")).healthKits);
 
         for (int count = 0; count < weapons.size(); count++)
-            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1)))) {
+            if (InputInformation.isKeyPressed(InputListener.getKeyCode(String.valueOf(count + 1))) && currentWeapon != count) {
 
                 currentWeapon = count;
 

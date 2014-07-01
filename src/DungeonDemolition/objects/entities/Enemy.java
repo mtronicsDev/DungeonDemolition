@@ -7,6 +7,7 @@ import dungeonDemolition.util.*;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class Enemy extends Entity {
 
@@ -183,6 +184,7 @@ public class Enemy extends Entity {
 
     public void render(Graphics graphics) {
         if (level == ObjectController.currentDungeonMap) {
+
             Entity player = ObjectController.entities.get("player");
 
             if (!(((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20 < -40)
@@ -197,11 +199,16 @@ public class Enemy extends Entity {
                 transform.translate(-20, -20);
 
                 Graphics2D graphics2D = (Graphics2D) graphics;
+
                 if (health > 0) graphics2D.drawImage(movementAnimation.getCurrentFrame(), transform, null);
                 else if (deathAnimation != null)
-                    graphics2D.drawImage(deathAnimation.getCurrentFrame(), transform, null);
+                    if (!deathAnimation.oneLoopPassed)
+                        graphics2D.drawImage(deathAnimation.getCurrentFrame(), transform, null);
+
             }
+
         }
+
     }
 
 }
