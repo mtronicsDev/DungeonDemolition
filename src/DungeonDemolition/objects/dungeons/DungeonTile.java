@@ -275,6 +275,7 @@ public class DungeonTile {
                     @Override
                     public void interact(Player player) {
 
+                        ObjectController.getPlayer().addTitle("You Win!", new Color(28, 138, 0));
                         ObjectController.gold = true;
                         interactable = false;
                         id = 13;

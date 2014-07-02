@@ -31,6 +31,7 @@ public class Player extends Entity {
     public int largeMargin = 14;
     public int healthKits = 0;
 
+    private  boolean dead = false;
     private GUIText timerText;
 
     public Player() {
@@ -97,7 +98,7 @@ public class Player extends Entity {
 
         if(ObjectController.gold) {
             stopWatch.stop();
-            timerText.color = Color.getHSBColor(46.3f, 100, 78.8f);
+            timerText.color = new Color(227, 175, 0);
         }
         stopWatch.update();
         timerText.position = new Vector2i(ObjectController.display.size.x / 2 - 50, 100);
@@ -245,11 +246,8 @@ public class Player extends Entity {
         if (health > 0) texture = movementAnimation.getCurrentFrame();
         else {
             if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
-            ObjectController.guiPanels.get("inGame").guiElements.add(new GUITitle(
-                    Color.red,
-                    "Game Over",
-                    5
-            ));
+            if(!dead) addTitle("Game Over!", new Color(199, 0, 0));
+            dead = true;
         }
 
         if (texture != null) graphics2D.drawImage(texture, transform, null);
@@ -310,19 +308,25 @@ public class Player extends Entity {
 
     }
 
-    public void addTitle(String message) {
+    public void addTitle(String message, Color color) {
 
         for (int i = 0; i < lootSlots.size(); i++)
             if (lootSlots.get(i) == null) {
 
                 lootSlots.set(i, new GUITitle(
-                                new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 5, ObjectController.display.size.y / 2 + i * 20),
-                                Color.blue, 20, message, 3)
+                                new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 8, ObjectController.display.size.y / 2 + i * 20),
+                                color, 32, message, 3)
                 );
 
                 break;
 
             }
+
+    }
+
+    public void addTitle(String message) {
+
+        addTitle(message, Color.lightGray);
 
     }
 
