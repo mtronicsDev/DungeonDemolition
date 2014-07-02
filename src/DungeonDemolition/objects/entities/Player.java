@@ -319,7 +319,7 @@ public class Player extends Entity {
             if (lootSlots.get(i) == null) {
 
                 lootSlots.set(i, new GUITitle(
-                                new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 8, ObjectController.display.size.y / 2 + i * 20),
+                                new Vector2i(ObjectController.display.size.x / 2 - message.toCharArray().length * 8, ObjectController.display.size.y / 2 + i * 30),
                                 color, 32, message, 3)
                 );
 

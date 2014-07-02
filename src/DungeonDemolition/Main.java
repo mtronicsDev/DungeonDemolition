@@ -31,20 +31,20 @@ public class Main {
 
         ObjectController.addGUIPanel("menu", new GUIPanel(
                 new GUIElement[]{
-                        new GUIButton(new Vector2i(435, 100), new Vector2i(200, 100), Color.yellow, Color.black, 30, "Play", new ButtonPressingMethod() {
+                        new GUIButton(new Vector2i(435, 100), new Vector2i(200, 100), Color.lightGray, Color.black, 30, "Play", new ButtonPressingMethod() {
                             @Override
                             public void press() {
                                 ObjectController.run();
                             }
                         }),
-                        new GUIButton(new Vector2i(435, 250), new Vector2i(200, 100), Color.orange, Color.black, 20, "Generate New Level", new ButtonPressingMethod() {
+                        new GUIButton(new Vector2i(435, 250), new Vector2i(200, 100), Color.lightGray, Color.black, 20, "Generate New Level", new ButtonPressingMethod() {
                             @Override
                             public void press() {
                                 ObjectController.removeAll();
                                 ObjectController.generateNewLevel(true);
                             }
                         }),
-                        new GUIButton(new Vector2i(435, 400), new Vector2i(200, 100), Color.red, Color.black, 30, "Quit", new ButtonPressingMethod() {
+                        new GUIButton(new Vector2i(435, 400), new Vector2i(200, 100), new Color(147, 25, 28), Color.black, 30, "Quit", new ButtonPressingMethod() {
                             @Override
                             public void press() {
                                 System.exit(0);
