@@ -24,11 +24,14 @@ public class Player extends Entity {
     public GUIRectangle[] heartBar;
     public GUIRectangle[] inventoryBar;
     public GUIRectangle[] inventoryIconBar;
+    public StopWatch stopWatch = new StopWatch();
     public List<GUIText> informationTexts = new ArrayList<GUIText>();
     public List<GUITitle> lootSlots = new ArrayList<GUITitle>();
     public int smallMargin = 7;
     public int largeMargin = 14;
     public int healthKits = 0;
+
+    private GUIText timerText;
 
     public Player() {
 
@@ -81,11 +84,22 @@ public class Player extends Entity {
             ObjectController.guiPanels.get("inGame").guiElements.add(inventoryIconBar[i]);
         }
 
+        timerText = new GUIText(new Vector2i(ObjectController.display.size.x / 2 - 50, 100),
+                Color.lightGray, 20,
+                "Timer");
+        ObjectController.guiPanels.get("inGame").guiElements.add(timerText);
+
     }
 
     public void update() {
 
         super.update();
+        if(ObjectController.gold) {
+            stopWatch.stop();
+            timerText.color = Color.getHSBColor(46.3f, 100, 78.8f);
+        }
+        stopWatch.update();
+        timerText.text = stopWatch.getFormattedPassedTime();
 
         informationTexts.clear();
 

@@ -21,6 +21,10 @@ public class TimeHelper {
 
     }
 
+    static long getCurrentTime() {
+        return System.currentTimeMillis();
+    }
+
     public static void wait(float seconds) {
 
         try {

@@ -52,6 +52,8 @@ public class ObjectController {
         guiPanels.get("inGame").active = true;
         guiPanels.get("menu").active = false;
 
+        getPlayer().stopWatch.start();
+
     }
 
     public static void generateNewLevel(boolean start) {
