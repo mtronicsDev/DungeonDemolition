@@ -290,7 +290,8 @@ public class Player extends Entity {
 
             String iconName = "inventory/empty";
             if (inventory.weapons.size() > i) {
-                if (inventory.weapons.get(i) instanceof Pistol) iconName = "inventory/gun";
+                if (inventory.weapons.get(i) instanceof Knife) iconName = "inventory/knife";
+                else if (inventory.weapons.get(i) instanceof Pistol) iconName = "inventory/gun";
                 else if (inventory.weapons.get(i) instanceof Shotgun) iconName = "inventory/shotgun";
                 else if (inventory.weapons.get(i) instanceof MachineGun) iconName = "inventory/mg";
                 else if (inventory.weapons.get(i) instanceof RocketLauncher) iconName = "inventory/rpg";

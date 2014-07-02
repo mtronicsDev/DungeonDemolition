@@ -10,7 +10,7 @@ public class Knife extends Weapon {
 
     public Knife() {
 
-        super("weapons/gun", 1, 0);
+        super("weapons/knife", 1, 0);
 
         automaticallyShooting = false;
 

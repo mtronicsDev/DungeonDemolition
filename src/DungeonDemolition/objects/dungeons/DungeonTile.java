@@ -66,7 +66,7 @@ public class DungeonTile {
                     @Override
                     public void interact(Player player) {
 
-                        int lootCount = Randomizer.getRandomInt(1, 3);
+                        int lootCount = Randomizer.getRandomInt(1, ObjectController.currentDungeonMap / 2 + 1);
 
                         boolean oneWeaponPicked = false;
 
