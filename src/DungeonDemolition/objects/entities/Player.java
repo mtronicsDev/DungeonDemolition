@@ -212,7 +212,7 @@ public class Player extends Entity {
                         AffineTransform flameTransform = new AffineTransform();
                         flameTransform.translate(ObjectController.display.size.x / 2, ObjectController.display.size.y / 2);
                         flameTransform.rotate(rotation);
-                        flameTransform.translate(0, -flame.texture.getHeight());
+                        flameTransform.translate(-9, -flame.texture.getHeight() - 5);
 
                         graphics2D.drawImage(flame.texture, flameTransform, null);
 
