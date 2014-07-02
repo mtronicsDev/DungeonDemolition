@@ -94,11 +94,13 @@ public class Player extends Entity {
     public void update() {
 
         super.update();
+
         if(ObjectController.gold) {
             stopWatch.stop();
             timerText.color = Color.getHSBColor(46.3f, 100, 78.8f);
         }
         stopWatch.update();
+        timerText.position = new Vector2i(ObjectController.display.size.x / 2 - 50, 100);
         timerText.text = stopWatch.getFormattedPassedTime();
 
         informationTexts.clear();
