@@ -58,22 +58,26 @@ public abstract class Weapon {
 
         } else {
 
-            if (currentAmmoCount == 0 && remainingAmmoCount > 0) {
+            if (!(this instanceof Knife)) {
 
-                reload();
-                return;
+                if (currentAmmoCount == 0 && remainingAmmoCount > 0) {
 
-            }
+                    reload();
+                    return;
 
-            if (currentAmmoCount <= (float) (maxCurrentAmmoCount / 4) && remainingAmmoCount != 0)
-                neededToBeReloaded = true;
+                }
 
-            else neededToBeReloaded = false;
+                if (currentAmmoCount <= (float) (maxCurrentAmmoCount / 4) && remainingAmmoCount != 0)
+                    neededToBeReloaded = true;
 
-            if (InputInformation.isKeyDown(KeyEvent.VK_R) && currentAmmoCount < maxCurrentAmmoCount && remainingAmmoCount > 0) {
+                else neededToBeReloaded = false;
 
-                reload();
-                return;
+                if (InputInformation.isKeyDown(KeyEvent.VK_R) && currentAmmoCount < maxCurrentAmmoCount && remainingAmmoCount > 0) {
+
+                    reload();
+                    return;
+
+                }
 
             }
 
@@ -109,7 +113,7 @@ public abstract class Weapon {
 
     public void shoot() {
 
-        currentAmmoCount--;
+        if (!(this instanceof Knife)) currentAmmoCount--;
 
     }
 

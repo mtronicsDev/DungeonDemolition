@@ -96,13 +96,19 @@ public class Inventory {
 
     public void render(Graphics graphics) {
 
-        if (getCurrentWeapon() != null) {
+        Weapon weapon = getCurrentWeapon();
 
-            reloadProgress[1].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
-            reloadProgress[0].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
+        if (weapon != null) {
 
-            reloadProgress[1].render(graphics);
-            reloadProgress[0].render(graphics);
+            if (!(weapon instanceof Knife)) {
+
+                reloadProgress[1].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
+                reloadProgress[0].position = new Vector2i(ObjectController.display.size.x - 114, ObjectController.display.size.y - 40);
+
+                reloadProgress[1].render(graphics);
+                reloadProgress[0].render(graphics);
+
+            }
 
         }
 
