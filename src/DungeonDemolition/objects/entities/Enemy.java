@@ -7,7 +7,6 @@ import dungeonDemolition.util.*;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 public class Enemy extends Entity {
 

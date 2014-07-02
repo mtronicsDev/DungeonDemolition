@@ -46,7 +46,7 @@ public class Collider {
 
         for (Entity entity : ObjectController.entities.values()) {
 
-            if (!(entity instanceof Player))
+            if (!(entity instanceof Player) && entity.level == ObjectController.currentDungeonMap)
                 if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)),
                         new Box(projectile.position, new Vector2f(projectile.texture.getWidth(), projectile.texture.getHeight())))) {
 
@@ -161,7 +161,7 @@ public class Collider {
 
             for (Entity collisionEntity : ObjectController.entities.values()) {
 
-                if (collisionEntity != entity) {
+                if (collisionEntity != entity && entity.level == ObjectController.currentDungeonMap) {
 
                     if (areBoxesColliding(new Box(entity.position, new Vector2f(40, 40)), new Box(collisionEntity.position, new Vector2f(40, 40)))) {
 
