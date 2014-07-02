@@ -15,7 +15,7 @@ public class GUITitle extends GUIElement {
     public GUITitle(Color color, String message, float duration) {
 
         super(new Vector2i());
-        int textSize = ObjectController.display.getWidth() / 35;
+        int textSize = ObjectController.display.getWidth() / 30;
         Vector2i position = new Vector2i(
                 ObjectController.display.getWidth() / 2 - message.toCharArray().length * textSize / 4,
                 ObjectController.display.getHeight() / 2 + textSize / 3

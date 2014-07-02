@@ -12,6 +12,7 @@ import dungeonDemolition.objects.gui.GUIElement;
 import dungeonDemolition.objects.gui.GUIHealthBar;
 import dungeonDemolition.objects.gui.GUIPanel;
 import dungeonDemolition.objects.gui.GUIRectangle;
+import dungeonDemolition.objects.weapons.Knife;
 import dungeonDemolition.objects.weapons.projectiles.Projectile;
 import dungeonDemolition.util.Vector2f;
 
@@ -64,6 +65,7 @@ public class ObjectController {
             for (DungeonTile tile : dungeonMaps.get(currentDungeonMap).dungeonTiles)
                 if (tile.id == Tile.SPAWN_PLAYER.id()) {
                     Player player = new Player();
+                    player.inventory.addWeapon(new Knife());
                     player.position = new Vector2f(tile.position);
                     setPlayer(player);
                 }
