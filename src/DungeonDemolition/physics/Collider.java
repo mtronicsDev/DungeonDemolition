@@ -141,10 +141,10 @@ public class Collider {
 
                     if (ableToRespond) {
 
-                        if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))
+                        if (idealNormal.y == 1 || idealNormal.y == -1)
                             movedSpace.y = 0;
 
-                        else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0)))
+                        else if (idealNormal.x == 1 || idealNormal.x == -1)
                             movedSpace.x = 0;
 
                     }
@@ -241,10 +241,10 @@ public class Collider {
 
                         if (ableToRespond) {
 
-                            if (VectorHelper.areEqual(idealNormal, new Vector2f(0, -1)) || VectorHelper.areEqual(idealNormal, new Vector2f(0, 1)))
+                            if (idealNormal.y == 1 || idealNormal.y == -1)
                                 movedSpace.y = 0;
 
-                            else if (VectorHelper.areEqual(idealNormal, new Vector2f(1, 0)) || VectorHelper.areEqual(idealNormal, new Vector2f(-1, 0)))
+                            else if (idealNormal.x == 1 || idealNormal.x == -1)
                                 movedSpace.x = 0;
 
                         }
