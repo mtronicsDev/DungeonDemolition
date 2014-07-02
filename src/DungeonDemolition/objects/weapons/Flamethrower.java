@@ -5,7 +5,7 @@ import dungeonDemolition.objects.weapons.projectiles.Flame;
 
 public class FlameThrower extends Weapon {
 
-    public Flame flame = new Flame(ObjectController.entities.get("player").position, ObjectController.entities.get("player").percentRotation, "tiles/0", 2);
+    public Flame flame = new Flame(ObjectController.entities.get("player").position, ObjectController.entities.get("player").percentRotation, "projectiles/flame", 2);
 
     public FlameThrower() {
 
