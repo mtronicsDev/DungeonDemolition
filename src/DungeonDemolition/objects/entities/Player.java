@@ -250,7 +250,7 @@ public class Player extends Entity {
         if (health > 0) texture = movementAnimation.getCurrentFrame();
         else {
             if (!deathAnimation.oneLoopPassed) texture = deathAnimation.getCurrentFrame();
-            if(!dead) addTitle("Game Over!", new Color(199, 0, 0));
+            if (!dead) ObjectController.guiPanels.get("inGame").guiElements.add(new GUITitle(new Color(199, 0, 0), "Game Over!", 5));
             dead = true;
         }
 

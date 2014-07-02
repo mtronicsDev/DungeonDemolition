@@ -44,6 +44,8 @@ public class ObjectController {
         guiPanels.get("inGame").active = false;
         guiPanels.get("menu").active = true;
 
+        getPlayer().stopWatch.stop();
+
     }
 
     public static void run() {
@@ -181,12 +183,6 @@ public class ObjectController {
             }
 
         }
-    }
-
-    public static void addProjectile(Projectile projectile) {
-
-        projectiles.add(projectile);
-
     }
 
     public static void addGUIPanel(String key, GUIPanel panel) {

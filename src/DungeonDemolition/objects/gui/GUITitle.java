@@ -43,7 +43,10 @@ public class GUITitle extends GUIElement {
         if (timer.hasFinished()) {
 
             ObjectController.guiPanels.get("inGame").scheduleDeletion(this);
-            ((Player) ObjectController.entities.get("player")).deleteTitle(this);
+
+            Player player = ObjectController.getPlayer();
+
+            if (player.lootSlots.contains(this)) player.deleteTitle(this);
 
         }
 

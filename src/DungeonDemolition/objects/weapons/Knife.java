@@ -26,7 +26,7 @@ public class Knife extends Weapon {
                 Vector2f difference = VectorHelper.subtractVectors(VectorHelper.sumVectors(new Vector2f[] {player.position, new Vector2f(20, 20)}),
                         VectorHelper.sumVectors(new Vector2f[] {entity.position, new Vector2f(20, 20)}));
 
-                if (VectorHelper.getLength(difference) <= 60 && VectorHelper.getAngle(difference, player.percentRotation) <= Math.toRadians(15))
+                if (VectorHelper.getLength(difference) <= 65 && VectorHelper.getAngle(difference, player.percentRotation) <= Math.toRadians(30))
                     entity.health -= 30;
 
             }

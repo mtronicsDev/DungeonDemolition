@@ -6,30 +6,40 @@ import java.util.Date;
 
 public class StopWatch {
 
-    private long startTime;
-    private long passedTime;
+    private long passedTime = 0;
     private boolean running = false;
 
     public void start() {
+
         running = true;
-        startTime = TimeHelper.getCurrentTime();
+
     }
 
     public void update() {
-        if(running) passedTime = TimeHelper.getCurrentTime() - startTime;
+
+        if (running) passedTime += (TimeHelper.deltaTime * 1000);
+
     }
 
     public void stop() { running = false; }
+
+    public void restart() {
+
+        passedTime = 0;
+
+    }
 
     public long getPassedTime() {
         return passedTime;
     }
 
     public String getFormattedPassedTime() {
+
         DateFormat formatter = new SimpleDateFormat("mm:ss:S");
         Date date = new Date(passedTime);
 
         return formatter.format(date);
+
     }
 
 }
