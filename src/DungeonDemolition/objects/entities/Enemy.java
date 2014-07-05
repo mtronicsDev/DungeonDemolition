@@ -42,6 +42,7 @@ public class Enemy extends Entity {
 
         super.update();
 
+        if(ObjectController.gold) health = 0;
         if (level == ObjectController.currentDungeonMap) {
 
             Vector2f differenceToPlayer = VectorHelper.subtractVectors(position, ObjectController.entities.get("player").position);

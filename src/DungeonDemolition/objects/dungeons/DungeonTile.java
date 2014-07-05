@@ -25,9 +25,12 @@ public class DungeonTile {
 
     public DungeonTile(byte tileId, Vector2f position) {
 
-        if (textures.size() == 0)
+        if (textures.size() == 0) {
             for (int i = 0; i < 17; i++)
                 textures.add(TextureHelper.loadImage("tiles/" + String.valueOf(i)));
+            for (int i = 0; i < 17; i++)
+                textures.add(TextureHelper.loadImage("tiles/_" + String.valueOf(i)));
+        }
 
         this.position = position;
         id = tileId;
@@ -325,12 +328,19 @@ public class DungeonTile {
         if (!(((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20 < -40)
                 || ((position.x - player.position.x) + ObjectController.display.size.x / 2 - 20) >= ObjectController.display.size.x
                 || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) < -40
-                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y))
+                || ((position.y - player.position.y) + ObjectController.display.size.y / 2 - 20) >= ObjectController.display.size.y)) {
 
-            graphics.drawImage(textures.get(id),
+            int renderId;
+
+            if(ObjectController.currentDungeonMap == 0) renderId = id;
+            else renderId = 17 + id;
+
+            graphics.drawImage(textures.get(renderId),
                     (int) (position.x - player.position.x) + ObjectController.display.size.x / 2 - 20,
                     (int) (position.y - player.position.y) + ObjectController.display.size.y / 2 - 20,
                     40, 40, null);
+
+        }
 
     }
 
